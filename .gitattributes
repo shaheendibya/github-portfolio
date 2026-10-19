@@ -1,0 +1,6 @@
+# Preserve original project documents and native design files byte for byte.
+*.pdf binary
+*.docx binary
+*.dwg binary
+*.pdsprj binary
+*.webp binary

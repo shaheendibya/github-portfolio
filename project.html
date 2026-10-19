@@ -40,7 +40,7 @@
       <div class="project-detail-breadcrumb"><a href="index.html#work"><span aria-hidden="true">←</span> All selected work</a><span>THE PROJECT, IN FOCUS</span></div>
 
       <section class="project-detail-hero" aria-labelledby="project-title">
-        <div class="project-detail-introduction"><p class="eyebrow" id="project-category"></p><h1 class="project-detail-title" id="project-title" tabindex="-1"></h1><p class="project-detail-lead" id="project-lead"></p><a class="text-link project-detail-jump" href="#project-overview-section">Explore the project <span aria-hidden="true">↘</span></a></div>
+        <div class="project-detail-introduction"><p class="eyebrow" id="project-category"></p><h1 class="project-detail-title" id="project-title" tabindex="-1"></h1><p class="project-detail-lead" id="project-lead"></p><div class="project-detail-actions" id="project-actions"><a class="text-link" href="#project-overview-section">Explore the project <span aria-hidden="true">↘</span></a></div></div>
         <div class="project-visual project-detail-art" id="project-art" aria-hidden="true"></div>
       </section>
 
@@ -58,14 +58,17 @@
         </div>
 
         <aside class="project-detail-sidebar" aria-label="Project notes and sources">
-          <section class="project-detail-evidence" aria-labelledby="project-evidence-title"><p class="section-label">Source &amp; context</p><h2 id="project-evidence-title">In the record.</h2><p>Read the source material and related achievements.</p><div class="project-detail-evidence-links" id="project-evidence"></div></section>
+          <section class="project-detail-evidence" aria-labelledby="project-evidence-title"><p class="section-label">Source &amp; context</p><h2 id="project-evidence-title">In the record.</h2><p>Read the source material behind the project.</p><div class="project-detail-evidence-links" id="project-evidence"></div></section>
           <section class="project-detail-facts" aria-labelledby="project-facts-title"><h2 class="section-label" id="project-facts-title">Project notes</h2><div class="project-detail-highlights" id="project-highlights"></div></section>
+          <section class="project-detail-credits" id="project-credits-section" aria-labelledby="project-credits-title" hidden><h2 class="section-label" id="project-credits-title">Project team</h2><ul id="project-credits"></ul></section>
         </aside>
       </div>
 
       <section class="project-detail-resources" id="project-resources-section" aria-labelledby="project-resources-title" hidden><div class="project-detail-section-heading"><div><p class="section-label">Explore the work</p><h2 id="project-resources-title">Files, links &amp; further reading.</h2></div></div><div class="project-detail-resource-grid" id="project-resources"></div></section>
 
-      <section class="project-detail-gallery-section" id="project-gallery-section" aria-labelledby="project-gallery-title" hidden><div class="project-detail-section-heading"><div><p class="section-label">A closer look</p><h2 id="project-gallery-title">From the project.</h2></div></div><div class="project-detail-gallery" id="project-gallery"></div></section>
+      <section class="project-detail-launch" id="project-launch-section" aria-labelledby="project-launch-title" hidden><div class="project-detail-section-heading"><div><p class="section-label">Open the original</p><h2 id="project-launch-title"></h2></div></div><p id="project-launch-instructions"></p><div class="project-command" id="project-command" hidden><code id="project-launch-command"></code><button id="project-copy-command" type="button">Copy command</button></div><p class="project-copy-status" id="project-copy-status" role="status"></p><p class="project-launch-requirements" id="project-launch-requirements"></p></section>
+
+      <section class="project-detail-gallery-section" id="project-gallery-section" aria-labelledby="project-gallery-title" hidden><div class="project-detail-section-heading"><div><p class="section-label">A closer look</p><h2 id="project-gallery-title">From the project.</h2></div><p>Select an image to enlarge.</p></div><div class="project-detail-gallery" id="project-gallery"></div></section>
 
       <section class="project-detail-more" aria-labelledby="project-more-title"><div class="project-detail-more-heading"><div><p class="section-label">Keep exploring</p><h2 id="project-more-title">Another idea to explore.</h2></div><a class="text-link" href="index.html#work">All selected work <span aria-hidden="true">↗</span></a></div><nav class="project-detail-navigation" id="project-nav" aria-label="More projects"></nav></section>
     </div>
@@ -74,6 +77,13 @@
 
     <noscript><div class="project-detail-noscript"><h1>Explore my engineering work.</h1><p>Enable JavaScript to open individual project pages, or read the project summaries in my CV.</p><a class="button button-dark" href="assets/documents/cv.pdf">Read my CV <span aria-hidden="true">↗</span></a><a class="text-link" href="index.html#work">Back to selected work <span aria-hidden="true">↗</span></a></div></noscript>
   </main>
+
+  <dialog class="project-image-dialog" id="project-image-dialog" aria-labelledby="project-image-title" aria-describedby="project-image-caption">
+    <div class="project-image-heading"><h2 id="project-image-title">Project image</h2><button class="project-image-close" type="button" aria-label="Close image preview" autofocus>Close <span aria-hidden="true">×</span></button></div>
+    <div class="project-image-preview" id="project-image-preview"><img alt=""></div>
+    <p id="project-image-caption"></p>
+    <div class="project-image-controls"><button id="project-image-previous" type="button" aria-label="Previous image">← Previous</button><span id="project-image-count" aria-live="polite"></span><button id="project-image-next" type="button" aria-label="Next image">Next →</button><a id="project-image-original" target="_blank" rel="noopener">Open full-size image ↗</a></div>
+  </dialog>
 
   <footer class="site-footer container"><a class="brand footer-brand" href="index.html"><span class="brand-mark" aria-hidden="true">d.</span><span>Shaheen Rahman Dibya</span></a><p>Engineering, with curiosity. <span>© <span id="current-year">2026</span></span></p><a class="text-link" href="#top">Back to top <span aria-hidden="true">↑</span></a></footer>
 </body>

@@ -1,0 +1,230 @@
+{
+  "description": "Provenance for original project files and authentic previews imported into this portfolio. Native project code was not executed. The EV review PDF is a browser reading copy; its unchanged DOCX is provided.",
+  "projects": {
+    "sap-1-computer": {
+      "repo": "https://github.com/shaheendibya/SAP-1-Architecture-based-8-bit-Computer-Design-and-Implementation-",
+      "commit": "6c2b1087783cf1fd027b13dccdd773d2c507bb44",
+      "originalFiles": [
+        {
+          "original": "Silicon-6_SAP-1.pdf",
+          "published": "assets/projects/sap-1-computer/project-report.pdf",
+          "sha256": "edc654728b3c36ae1a0be417ec0e7f7464e4188d9f5d4d86d1957c992b52acf2",
+          "bytes": 6393203
+        },
+        {
+          "original": "Final_Project_Silicon6^-^ (2).pdsprj",
+          "published": "assets/projects/sap-1-computer/proteus-project.pdsprj",
+          "sha256": "c7298df576b7e3a77685e988d910f1e6428e216359af656a5997520b82c1b79f",
+          "bytes": 129756
+        }
+      ],
+      "pageCount": 24,
+      "figures": [
+        {
+          "file": "bus-integration.webp",
+          "document": "Silicon-6_SAP-1.pdf",
+          "page": 18,
+          "xref": 68,
+          "width": 1233,
+          "height": 821,
+          "processing": "Original embedded report figure converted to WebP; no content changes."
+        },
+        {
+          "file": "alu.webp",
+          "document": "Silicon-6_SAP-1.pdf",
+          "page": 12,
+          "xref": 74,
+          "width": 1167,
+          "height": 717,
+          "processing": "Original embedded report figure converted to WebP; no content changes."
+        },
+        {
+          "file": "multiplier.webp",
+          "document": "Silicon-6_SAP-1.pdf",
+          "page": 17,
+          "xref": 96,
+          "width": 1629,
+          "height": 711,
+          "processing": "Original embedded report figure converted to WebP; no content changes."
+        },
+        {
+          "file": "bcd-converter.webp",
+          "document": "Silicon-6_SAP-1.pdf",
+          "page": 20,
+          "xref": 111,
+          "width": 1199,
+          "height": 455,
+          "processing": "Original embedded report figure converted to WebP; no content changes."
+        }
+      ],
+      "notes": [
+        "Report page 1 credits Team Silicon 6 and six named students; no individual module ownership is specified.",
+        "Report and README support Proteus simulation; physical construction or hardware testing has not been established.",
+        "The integrated-system figure is embedded identically on report pages 11 and 18; the gallery cites page 18 where it is labeled Bus Integration.",
+        "The multiplier illustration is the embedded internal-circuit screenshot from page 17, whose lower edge is clipped in the source image.",
+        "Open-ended lab files in the same repository are separate course material and are not represented as part of this SAP-1 report.",
+        "Native Proteus project is byte-identical to the supplied repository file. It was inspected as an archive but not opened or executed in Proteus."
+      ]
+    },
+    "residential-electrical-services": {
+      "repo": "https://github.com/shaheendibya/Electrical-Layout-Design-of-A-Four-Storied-Residential-Building-",
+      "commit": "f1974a3bcdfc5d0237315fa41f2fe6346200969e",
+      "originalFiles": [
+        {
+          "original": "Group-4_C1_Project_Report.pdf",
+          "published": "assets/projects/residential-electrical-services/project-report.pdf",
+          "sha256": "91688b4b2c1c466839231d51441149f3401489f916cb7c5017cf66658fb667f5",
+          "bytes": 6184231
+        },
+        {
+          "original": "AutoCAD_Electrical_Project.pdf",
+          "published": "assets/projects/residential-electrical-services/presentation.pdf",
+          "sha256": "f68d34d39008f9f3bf38accb6ff3732d63d92e7c94426697413f3940be0722ac",
+          "bytes": 4174999
+        },
+        {
+          "original": "donedonedone (1).dwg",
+          "published": "assets/projects/residential-electrical-services/electrical-layout.dwg",
+          "sha256": "57ccf0f3ab1bb5f33ea026a23ceb560ce5053cd0644aab09eda09628ef0c89f2",
+          "bytes": 273343
+        }
+      ],
+      "pageCounts": {
+        "project-report.pdf": 31,
+        "presentation.pdf": 33
+      },
+      "imageExtraction": [
+        {
+          "file": "typical-floor-plan.webp",
+          "source": "Group-4_C1_Project_Report.pdf",
+          "page": 4,
+          "figure": 1,
+          "method": "Embedded image extracted unchanged in content and encoded losslessly as WebP"
+        },
+        {
+          "file": "fixture-layout.webp",
+          "source": "Group-4_C1_Project_Report.pdf",
+          "page": 8,
+          "figure": 5,
+          "method": "Embedded image extracted unchanged in content and encoded losslessly as WebP"
+        },
+        {
+          "file": "wiring-layout.webp",
+          "source": "AutoCAD_Electrical_Project.pdf",
+          "page": 9,
+          "method": "Embedded image extracted unchanged in content and encoded losslessly as WebP"
+        },
+        {
+          "file": "main-distribution-diagram.webp",
+          "source": "Group-4_C1_Project_Report.pdf",
+          "page": 25,
+          "figure": 17,
+          "method": "Embedded image extracted unchanged in content and encoded losslessly as WebP"
+        }
+      ]
+    },
+    "golf-streak": {
+      "repo": "https://github.com/shaheendibya/MATLAB-GUI-Mini-Project-Golf-Streak",
+      "commit": "abbe65a653f37053597b56f10160670b06d06c8a",
+      "originalFiles": [
+        {
+          "original": "Golf_Streak_Mini-Project_Report.pdf",
+          "published": "assets/projects/golf-streak/project-report.pdf",
+          "sha256": "d5b62ca8c4b9c0ef3c4c282aed69107003d7da56b886bc2ff19721f16503619f",
+          "bytes": 1279550
+        }
+      ],
+      "pageCount": 12,
+      "figures": [
+        {
+          "file": "opening.webp",
+          "page": 8,
+          "figure": 5
+        },
+        {
+          "file": "sand-trap.webp",
+          "page": 9,
+          "figure": 7
+        },
+        {
+          "file": "hole-in-one.webp",
+          "page": 10,
+          "figure": 8
+        },
+        {
+          "file": "victory.webp",
+          "page": 11,
+          "figure": 10
+        }
+      ]
+    },
+    "ev-literature-review": {
+      "repo": "https://github.com/shaheendibya/MCE-4391-Review-Paper-Assignment",
+      "commit": "f4197b92c050c04fa44ebdc6dc1b23944e015174",
+      "originalFiles": [
+        {
+          "original": "A-Comprehensive-Review-of-Electric-Vehicles-EVs-Plug-in-Hybrid-Electric-Vehicles-PHEVs-and-Hybrid.docx",
+          "published": "assets/projects/ev-literature-review/literature-review.docx",
+          "sha256": "893c40f2921b875e54f2bb50373f0a747d5368748a7081cc0fcc3be7ba4be8d1",
+          "bytes": 10243948
+        }
+      ],
+      "originalDocumentSha256": "893c40f2921b875e54f2bb50373f0a747d5368748a7081cc0fcc3be7ba4be8d1",
+      "generatedPDF": {
+        "path": "assets/projects/ev-literature-review/literature-review.pdf",
+        "source": "A-Comprehensive-Review-of-Electric-Vehicles-EVs-Plug-in-Hybrid-Electric-Vehicles-PHEVs-and-Hybrid.docx",
+        "method": "LibreOffice Writer PDF export from the source DOCX, using a temporary layout-only copy with table rows allowed to grow and kept together to prevent clipped text. All source text and figures retained.",
+        "label": "Browser reading copy",
+        "pages": 112,
+        "verification": "All 650 substantial source paragraphs and all 393 substantive table cells matched after text normalization; all 35 source figures retained; final reference [203] present; no blank pages or extracted words beyond physical page bounds.",
+        "dateBasis": "The research timeline year 2025 and 14/15 highest-team-mark result come from the CV. The supplied first-draft document includes some 2026 references; no publication date is inferred.",
+        "sha256": "c8bf77e5b9f6cea43af5b42a0928f5a8277b51b836b3146928eb71c438027a5f",
+        "tableLayoutAdjustment": {
+          "rows": 161,
+          "operation": "Set table-row height to atLeast and add cantSplit; original source DOCX unchanged."
+        }
+      },
+      "figures": [
+        {
+          "file": "battery-architecture.webp",
+          "page": 21
+        },
+        {
+          "file": "lithium-ion-cell.webp",
+          "page": 20
+        },
+        {
+          "file": "battery-chemistry-comparison.webp",
+          "page": 23
+        }
+      ]
+    },
+    "stock-market-crash-simulator": {
+      "repo": "https://github.com/shaheendibya/Stock-Market-Crash-Simulator",
+      "commit": "897ddd8d0465ab46b70abb07c08ccb92d8c7b81c",
+      "originalFiles": [
+        {
+          "original": "EEE 4408_Project_Report.pdf",
+          "published": "assets/projects/stock-market-crash-simulator/project-report.pdf",
+          "sha256": "7d9033c9a9342b3a464883819ec68fc83253c39e1f3d16d724804893adfb6cb5",
+          "bytes": 1370238
+        }
+      ],
+      "pageCount": 13,
+      "figures": [
+        {
+          "file": "dashboard.webp",
+          "page": 6
+        },
+        {
+          "file": "history.webp",
+          "page": 6
+        },
+        {
+          "file": "settings.webp",
+          "page": 7
+        }
+      ]
+    }
+  }
+}

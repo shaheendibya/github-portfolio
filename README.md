@@ -1,6 +1,6 @@
 # Shaheen Rahman Dibya — Engineering portfolio
 
-A responsive, static portfolio based on the supplied CV and achievement documents. Built with HTML, CSS, and JavaScript; no framework, build step, external font, API key, or backend is required.
+A responsive, static portfolio based on the supplied CV, achievement documents, and original project repositories. Built with HTML, CSS, and JavaScript; no framework, build step, external font, API key, or backend is required.
 
 ## Run locally
 
@@ -10,37 +10,64 @@ From this checkout:
 python3 -m http.server 8000 --bind 127.0.0.1
 ```
 
-The main page is `index.html`; the complete searchable archive is `archive.html`. Each project opens a dedicated URL such as `project.html?project=stock-market-crash-simulator`. Relative asset paths support deployment under a GitHub Pages repository path.
+Open http://127.0.0.1:8000/. The main page is `index.html`; the searchable achievement archive is `archive.html`. Each project opens a dedicated URL such as `project.html?project=stock-market-crash-simulator`. Relative asset paths support deployment under a GitHub Pages repository path.
+
+## Featured project work
+
+The homepage features five projects with original reports, repository links, authentic covers, and image galleries:
+
+| Project | Available material and attribution |
+| --- | --- |
+| Stock Market Crash Simulator | Co-developed with Ishrak Samin. Original 13-page report, MATLAB source, and dashboard/history/settings screenshots. |
+| SAP-1 8-bit Computer | Six-member Team Silicon 6 project simulated in Proteus. Original 24-page report, editable `.pdsprj` project, and circuit figures. |
+| Residential Electrical Services | Group 4(C1) design. Original 31-page report, 33-page presentation, editable AutoCAD `.dwg`, and drawing extracts. |
+| Golf Streak | Individual EEE 4416 mini-project. Original 12-page report, MATLAB source, and gameplay screenshots from the 10-level game. |
+| EV, PHEV & HEV Literature Review | Eleven-co-author MCE 4391 review. Shaheen contributed the Battery & Energy Storage Systems section. Includes a 112-page browser reading PDF, unchanged original `.docx`, and battery-section figures. |
+
+Project pages provide **Read report** and **View on GitHub** hero actions, team credits, documented contributions, source references, and opening/running instructions where applicable. Native `.dwg`, `.pdsprj`, and `.docx` resources download directly. Gallery images open in an accessible native dialog with enlarged previews, previous/next controls, keyboard navigation, and original-image links.
+
+The EV review PDF was generated from the source DOCX for browser reading. Its table layout was adjusted in a temporary conversion copy to preserve text; the downloadable DOCX remains unchanged. Conversion details, repository commits, original filenames, and available checksums are recorded in [project provenance](docs/PROJECT-SOURCES.json).
+
+EV Longitudinal Dynamics and RC Racing & Soccerbot retain their original project URLs and CV-based summaries with `featured: false`. Their Formula IUT models and robotics source files/photos can be added later, then `featured` can be set to `true`. They currently stay outside the homepage cards and featured-project navigation.
 
 ## Content
 
 - `index.html`: biography, featured achievements, research experience, education, and contact information.
-- `projects.js`: shared content for all five projects, conceptual illustrations, optional files/repository links, and image galleries.
+- `projects.js`: shared content for five featured projects and two preserved legacy pages, including credits, resources, covers, galleries, and optional launch instructions.
 - `app.js`: clickable project cards, project filters, mobile navigation, and email copying.
-- `project.html`, `project.js`, and `project.css`: individual project pages with overview, contribution, technical focus, source material, and previous/next navigation.
-- `achievements.js`: the archive’s structured content, including 32 distinct records and their original-document references.
+- `project.html`, `project.js`, and `project.css`: individual project pages, report/repository actions, native downloads, launch-command copying, enlarged-image dialogs, and featured previous/next navigation.
+- `achievements.js`: the archive's structured content, including 32 distinct records and original-document references.
 - `archive.js` and `archive.css`: search, category/year/type filters, accessible certificate previews, source switching, and responsive archive layouts.
 - `style.css`: shared visual design and portfolio layouts.
 - `assets/documents/`: the original CV, 29-page achievement collection, and Insignia certificate.
 - `assets/certificates/`: optimized WebP certificate previews and thumbnails. Originals remain available as PDFs.
+- `assets/projects/`: project reports, authentic previews, CAD and Proteus source files, and the original review DOCX with its browser reading PDF.
+- `docs/PROJECT-SOURCES.json`: repository and document provenance for the five featured projects.
+- `tests/smoke.py`: browser checks for the portfolio, archive, and project pages.
 
-The archive includes 27 certificate-backed achievements and five CV-only distinctions/qualifications. Every certificate page is preserved. Three pairs of certificates document the same achievements and are grouped as multiple sources: the University Physics Competition, ACCELERATE RC Car, and BrandEdge. Participation, service, training, qualifications, and awards remain separately labeled. BrandEdge has no stated year and appears as undated.
+The archive includes 27 certificate-backed achievements and five CV-only distinctions/qualifications. Every certificate page is preserved. Three pairs document the same achievements and are grouped as multiple sources: the University Physics Competition, ACCELERATE RC Car, and BrandEdge. Participation, service, training, qualifications, and awards remain separately labeled. BrandEdge has no stated year and appears as undated.
 
 To add an achievement, append a record in `achievements.js` with a unique `id`, `title`, `result`, `category`, `year` (or `null`), `kind`, `description`, and `sources`. Each source specifies `label`, `url`, `page`, and optional `image`, `thumbnail`, and `tabLabel`. Use original-document evidence for results and dates. Add files under `assets/` and keep URLs relative. Category and year options are derived from the records.
 
-The Stock Market Crash Simulator page includes its [public project repository](https://github.com/shaheendibya/Stock-Market-Crash-Simulator), a direct MATLAB source link, the original 13-page report, and three genuine dashboard/history/settings screenshots extracted from report pages 6–7. The report and previews were imported from commit `897ddd8d0465ab46b70abb07c08ccb92d8c7b81c`; the project is credited to Shaheen Rahman Dibya and Ishrak Samin. Report copies/previews live under `assets/projects/stock-market-crash-simulator/` and should be refreshed if the original report changes.
-
-Projects without original images use explicitly labeled conceptual diagrams. Their summaries describe the work documented in the CV; optional resource/gallery sections appear when real material is added. See [Adding project work](docs/ADDING-PROJECT-WORK.md) for GitHub repository creation and file-upload instructions.
+See [Adding project work](docs/ADDING-PROJECT-WORK.md) for GitHub repository creation, browser file uploads, the project-content schema, and instructions for adding the remaining Formula IUT and robotics material.
 
 ## Browser verification
 
-With the server running, the cloud environment’s existing Python Playwright and Chromium can run:
+With the server running, the cloud environment's existing Python Playwright and Chromium can run:
 
 ```sh
 python3 tests/smoke.py
 ```
 
-The test checks asset/PDF availability, project filters, all five project pages, whole-card and previous/next navigation, optional media/resources, missing-project states, clipboard success/fallback, all archive source-page references, category/year/type/search filters, multi-source certificate previews, CV-only records, empty states, mobile navigation, and layout at five viewport widths on the portfolio, archive, and project pages. Override `--base-url` or `--chromium` for another local setup. Playwright is a development check; the website itself needs no Python or browser automation dependencies.
+The test checks:
+
+- Five featured categories/pages, whole-card links, featured previous/next navigation, and both preserved legacy URLs.
+- Actual covers and gallery images, report/repository hero actions, team credits, launch instructions, MATLAB-command copying, and local PDF/native-file availability.
+- Download attributes for `.dwg`, `.pdsprj`, and `.docx`; enlarged-image dialogs, source captions, previous/next controls, Escape closing, and focus restoration.
+- Resource filtering, missing-project states, email clipboard success/fallback, all 32 archive records and original document pages, archive filters, certificate source switching, and CV-only records.
+- Portfolio/archive layouts at 1440, 1024, 768, 390, and 320px; all five featured project pages at 1440 and 320px; mobile navigation and JavaScript/resource errors.
+
+Override `--base-url` or `--chromium` for another local setup, for example `python3 tests/smoke.py --base-url http://127.0.0.1:8002/`. These checks exercise the website in Chromium; they do not execute the MATLAB, Proteus, or AutoCAD projects. Playwright is a development check; the website itself needs no Python or browser automation dependencies.
 
 ## GitHub Pages
 

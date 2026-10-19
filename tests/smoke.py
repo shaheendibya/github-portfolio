@@ -2,6 +2,7 @@
 import argparse
 import json
 from pathlib import Path
+from urllib.parse import urljoin, urlsplit
 from urllib.request import Request, urlopen
 
 from playwright.sync_api import expect, sync_playwright
@@ -20,8 +21,6 @@ for path in ['index.html', 'style.css', 'app.js', 'archive.html', 'archive.css',
 for path in ['cv.pdf', 'lifelong-achievements.pdf', 'insignia-competition.pdf']:
     with urlopen(Request(base + 'assets/documents/' + path, method='HEAD'), timeout=10) as response:
         assert response.status == 200 and response.headers.get_content_type() == 'application/pdf', path
-with urlopen(Request(base + 'assets/projects/stock-market-crash-simulator/project-report.pdf', method='HEAD'), timeout=10) as response:
-    assert response.status == 200 and response.headers.get_content_type() == 'application/pdf'
 print('PASS: pages, assets, and three original PDF downloads')
 
 with sync_playwright() as playwright:
@@ -36,54 +35,144 @@ with sync_playwright() as playwright:
     expect(page).to_have_title('Shaheen Rahman Dibya — Engineering Portfolio')
     expect(page.locator('.project-card:visible')).to_have_count(5)
     assert page.locator('.portrait-frame img').evaluate('(image) => image.complete && image.naturalWidth > 0')
-    for category, count in [('simulation', 2), ('hardware', 2), ('design', 1), ('all', 5)]:
+    for category, count in [('simulation', 1), ('hardware', 1), ('design', 1),
+                            ('software', 1), ('research', 1), ('all', 5)]:
         button = page.locator(f'[data-project-filter="{category}"]')
         button.click()
         expect(page.locator('.project-card:visible')).to_have_count(count)
         expect(button).to_have_attribute('aria-pressed', 'true')
         expect(page.locator('#project-count')).to_have_text(f'Showing {count} project' + ('' if count == 1 else 's'))
     projects = page.evaluate('window.portfolioProjects')
-    assert len(projects) == len({project['slug'] for project in projects}) == 5
+    assert len(projects) == len({project['slug'] for project in projects}) == 7
+    featured = [project for project in projects if project.get('featured', True)]
+    legacy = [project for project in projects if project.get('featured') is False]
+    expected_slugs = ['stock-market-crash-simulator', 'sap-1-computer',
+                      'residential-electrical-services', 'golf-streak',
+                      'ev-literature-review']
+    assert [project['slug'] for project in featured] == expected_slugs
+    assert {project['slug'] for project in legacy} == {'ev-longitudinal-dynamics', 'rc-racing-soccerbot'}
+    assert page.locator('#project-list .project-open').evaluate_all('(links) => links.map(link => link.getAttribute("href"))') == [
+        f'project.html?project={slug}' for slug in expected_slugs]
+    expect(page.locator('#project-list .project-visual img')).to_have_count(len(featured))
+    for index, project in enumerate(featured):
+        cover = page.locator('#project-list .project-card').nth(index).locator('.project-visual img')
+        expect(cover).to_have_attribute('src', project['cover']['src'])
+        expect(cover).to_have_attribute('alt', project['cover']['alt'])
+        cover.scroll_into_view_if_needed()
+        cover.evaluate('(image) => image.decode()')
+        assert cover.evaluate('(image) => image.complete && image.naturalWidth > 0'), project['slug']
     # Clicking a card's illustration must work as well as its title/arrow links.
     page.locator('.project-card').first.click(position={'x': 100, 'y': 80})
-    expect(page.locator('#project-title')).to_have_text(projects[0]['title'])
+    expect(page.locator('#project-title')).to_have_text(featured[0]['title'])
     page.locator('.project-pagination-next').click()
-    expect(page.locator('#project-title')).to_have_text(projects[1]['title'])
-    for project in projects:
+    expect(page.locator('#project-title')).to_have_text(featured[1]['title'])
+
+    def expect_gallery_image(image):
+        preview = page.locator('#project-image-preview img')
+        expect(preview).to_have_attribute('src', image['src'])
+        expect(preview).to_have_attribute('alt', image['alt'])
+        preview.evaluate('(image) => image.decode()')
+        assert preview.evaluate('(image) => image.naturalWidth > 0')
+        expect(page.locator('#project-image-caption')).to_have_text(image['caption'])
+        expect(page.locator('#project-image-original')).to_have_attribute('href', image['src'])
+
+    native_downloads = set()
+    for index, project in enumerate(featured):
         page.goto(base, wait_until='networkidle')
         page.locator(f'.project-open[href="project.html?project={project["slug"]}"]').click()
         expect(page.locator('#project-title')).to_have_text(project['title'])
         expect(page).to_have_title(f'{project["title"]} — Shaheen Rahman Dibya')
         assert page.locator('#project-contribution').inner_text().strip()
         expect(page.locator('#project-tools span')).to_have_count(len(project['tags']))
-        if project.get('cover'):
-            expect(page.locator('#project-art img')).to_be_visible()
-            page.locator('#project-art img').evaluate('(image) => image.decode()')
-            assert page.locator('#project-art img').evaluate('(image) => image.naturalWidth > 0')
-        else:
-            expect(page.locator('#project-art svg')).to_be_visible()
+        assert project.get('cover'), project['slug']
+        expect(page.locator('#project-art img')).to_be_visible()
+        expect(page.locator('#project-art img')).to_have_attribute('src', project['cover']['src'])
+        page.locator('#project-art img').evaluate('(image) => image.decode()')
+        assert page.locator('#project-art img').evaluate('(image) => image.naturalWidth > 0')
         expect(page.locator('#project-nav a')).to_have_count(2)
-        if project['resources']:
-            expect(page.locator('#project-resources-section')).to_be_visible()
-            expect(page.locator('#project-resources a')).to_have_count(len(project['resources']))
-            for resource in project['resources']:
-                expect(page.locator('#project-resources').get_by_role('link', name=resource['label'], exact=False)).to_have_attribute('href', resource['url'])
+        previous_href = f'project.html?project={featured[index - 1]["slug"]}' if index else 'index.html#work'
+        next_href = f'project.html?project={featured[index + 1]["slug"]}' if index < len(featured) - 1 else 'index.html#work'
+        expect(page.locator('.project-pagination-previous')).to_have_attribute('href', previous_href)
+        expect(page.locator('.project-pagination-next')).to_have_attribute('href', next_href)
+
+        expect(page.locator('#project-resources-section')).to_be_visible()
+        expect(page.locator('#project-resources a')).to_have_count(len(project['resources']))
+        for resource_index, resource in enumerate(project['resources']):
+            link = page.locator('#project-resources a').nth(resource_index)
+            expect(link).to_contain_text(resource['label'])
+            expect(link).to_have_attribute('href', resource['url'])
+            url = urlsplit(resource['url'])
+            if not url.scheme and not url.netloc:
+                with urlopen(Request(urljoin(base, resource['url']).split('#')[0], method='HEAD'), timeout=10) as response:
+                    assert response.status == 200, resource['url']
+                    if url.path.lower().endswith('.pdf'):
+                        assert response.headers.get_content_type() == 'application/pdf', resource['url']
+                extension = Path(url.path).suffix.lower()
+                if extension in {'.dwg', '.pdsprj', '.docx'}:
+                    assert link.get_attribute('download') is not None, resource['url']
+                    native_downloads.add(extension)
+        report = next(resource for resource in project['resources'] if resource['kind'] == 'report')
+        repository = next(resource for resource in project['resources']
+                          if urlsplit(resource['url']).netloc == 'github.com'
+                          and len(urlsplit(resource['url']).path.strip('/').split('/')) == 2)
+        expect(page.locator('#project-actions a')).to_have_count(2)
+        expect(page.locator('#project-actions').get_by_role('link', name='Read report', exact=False)).to_have_attribute('href', report['url'])
+        expect(page.locator('#project-actions').get_by_role('link', name='View on GitHub', exact=False)).to_have_attribute('href', repository['url'])
+
+        assert project['credits'], project['slug']
+        expect(page.locator('#project-credits-section')).to_be_visible()
+        expect(page.locator('#project-credits li')).to_have_text(project['credits'])
+        if project['slug'] != 'ev-literature-review':
+            assert project.get('launch'), project['slug']
+            expect(page.locator('#project-launch-section')).to_be_visible()
+            expect(page.locator('#project-launch-section')).to_contain_text(project['launch']['instructions'])
+            expect(page.locator('#project-launch-section')).to_contain_text(project['launch']['requirements'])
+            if project['launch'].get('command'):
+                expect(page.locator('#project-launch-command')).to_have_text(project['launch']['command'])
+                page.locator('#project-copy-command').click()
+                assert page.evaluate('navigator.clipboard.readText()') == project['launch']['command']
         else:
-            expect(page.locator('#project-resources-section')).not_to_be_visible()
-        if project['gallery']:
-            expect(page.locator('#project-gallery-section')).to_be_visible()
-            expect(page.locator('#project-gallery img')).to_have_count(len(project['gallery']))
-            for image in page.locator('#project-gallery img').all():
-                image.scroll_into_view_if_needed()
-                image.evaluate('(image) => image.decode()')
-                assert image.evaluate('(image) => image.naturalWidth > 0')
-        else:
-            expect(page.locator('#project-gallery-section')).not_to_be_visible()
-        expect(page.locator('#project-evidence a[href="assets/documents/cv.pdf#page=1"]')).to_have_count(1)
+            expect(page.locator('#project-launch-section')).not_to_be_visible()
+
+        expect(page.locator('#project-gallery-section')).to_be_visible()
+        assert len(project['gallery']) >= 2, project['slug']
+        expect(page.locator('#project-gallery img')).to_have_count(len(project['gallery']))
+        expect(page.locator('#project-gallery button')).to_have_count(len(project['gallery']))
+        for image in page.locator('#project-gallery img').all():
+            image.scroll_into_view_if_needed()
+            image.evaluate('(image) => image.decode()')
+            assert image.evaluate('(image) => image.naturalWidth > 0')
+        opener = page.locator('#project-gallery button').first
+        opener.click()
+        expect(page.locator('#project-image-dialog')).to_be_visible()
+        assert page.locator('#project-image-dialog').evaluate('(dialog) => dialog instanceof HTMLDialogElement && dialog.open')
+        expect_gallery_image(project['gallery'][0])
+        page.locator('#project-image-next').click()
+        expect_gallery_image(project['gallery'][1])
+        page.locator('#project-image-previous').click()
+        expect_gallery_image(project['gallery'][0])
+        page.keyboard.press('Escape')
+        expect(page.locator('#project-image-dialog')).not_to_be_visible()
+        expect(opener).to_be_focused()
+        last_opener = page.locator('#project-gallery button').last
+        last_opener.click()
+        expect_gallery_image(project['gallery'][-1])
+        page.locator('.project-image-close').click()
+        expect(page.locator('#project-image-dialog')).not_to_be_visible()
+        expect(last_opener).to_be_focused()
+
+        expect(page.locator('#project-evidence a')).to_have_count(len(project['evidence']))
+        assert page.locator('#project-evidence a').evaluate_all('(links) => links.map(link => link.getAttribute("href"))') == [
+            source['url'] for source in project['evidence']]
         if project['slug'] == 'stock-market-crash-simulator':
             expect(page.locator('#project-contribution')).to_contain_text('Ishrak Samin')
-            expect(page.locator('#project-resources a')).to_have_count(3)
-            expect(page.locator('#project-resources a').nth(1)).to_have_attribute('href', 'https://github.com/shaheendibya/Stock-Market-Crash-Simulator/blob/main/Market_Crash_Dashboard.m')
+    assert native_downloads == {'.dwg', '.pdsprj', '.docx'}
+
+    for project in legacy:
+        page.goto(base + f'project.html?project={project["slug"]}', wait_until='networkidle')
+        expect(page.locator('#project-title')).to_have_text(project['title'])
+        expect(page.locator('.project-pagination-previous')).to_have_attribute('href', 'index.html#work')
+        expect(page.locator('.project-pagination-next')).to_have_attribute('href', f'project.html?project={featured[0]["slug"]}')
     page.goto(base + 'project.html?project=unknown-project', wait_until='networkidle')
     expect(page.locator('#project-not-found')).to_be_visible()
     expect(page.locator('#project-content')).not_to_be_visible()
@@ -99,7 +188,7 @@ with sync_playwright() as playwright:
                       {'label': 'Invalid resource', 'url': 'javascript:void(0)'}],
         'gallery': [{'src': 'assets/portrait.png', 'alt': 'Fixture image', 'caption': 'Test media caption'}]
     }
-    fixture += '\nObject.assign(window.portfolioProjects[2], ' + json.dumps(media) + ');'
+    fixture += '\nObject.assign(window.portfolioProjects.find(project => project.slug === "stock-market-crash-simulator"), ' + json.dumps(media) + ');'
     page.route('**/projects.js', lambda route: route.fulfill(status=200, content_type='application/javascript', body=fixture))
     page.goto(base + 'project.html?project=stock-market-crash-simulator', wait_until='networkidle')
     expect(page.locator('#project-resources a')).to_have_count(1)
@@ -118,7 +207,7 @@ with sync_playwright() as playwright:
     page.evaluate("() => { navigator.clipboard.writeText = async () => { throw new Error('Permission denied'); }; }")
     page.locator('#copy-email').click()
     expect(page.locator('#copy-status')).to_contain_text('Please select and copy')
-    print('PASS: project filters, whole-card navigation, five detail pages, previous/next links, supplied media/resources, missing project states, and clipboard')
+    print('PASS: five project categories/pages, featured pagination, legacy URLs, report/repository actions, credits, launch instructions, native downloads, full-size gallery navigation, resource filtering, missing states, and clipboard')
 
     page.goto(base + 'archive.html', wait_until='networkidle')
     records = page.evaluate('window.portfolioAchievements')
@@ -163,11 +252,26 @@ with sync_playwright() as playwright:
     page.locator('.certificate-close').click()
     print('PASS: all 32 records, all document pages, categories, year/type/search filters, certificate sources, empty state, and CV-only record')
 
-    for path in ['index.html', 'archive.html', 'project.html?project=stock-market-crash-simulator',
-                 'project.html?project=rc-racing-soccerbot']:
+    for path in ['index.html', 'archive.html']:
         for width in [1440, 1024, 768, 390, 320]:
             page.set_viewport_size({'width': width, 'height': 900})
             page.goto(base + path, wait_until='networkidle')
+            assert page.evaluate('document.documentElement.scrollWidth <= window.innerWidth'), f'Horizontal overflow: {path} at {width}px'
+        button = page.locator('.mobile-toggle')
+        expect(button).to_be_visible()
+        expect(page.locator('.desktop-nav')).not_to_be_visible()
+        button.click()
+        expect(button).to_have_attribute('aria-expanded', 'true')
+        expect(page.locator('.desktop-nav')).to_be_visible()
+        page.keyboard.press('Escape')
+        expect(button).to_have_attribute('aria-expanded', 'false')
+        expect(button).to_be_focused()
+    for project in featured:
+        path = f'project.html?project={project["slug"]}'
+        for width in [1440, 320]:
+            page.set_viewport_size({'width': width, 'height': 900})
+            page.goto(base + path, wait_until='networkidle')
+            expect(page.locator('#project-title')).to_be_visible()
             assert page.evaluate('document.documentElement.scrollWidth <= window.innerWidth'), f'Horizontal overflow: {path} at {width}px'
         button = page.locator('.mobile-toggle')
         expect(button).to_be_visible()
@@ -184,5 +288,5 @@ with sync_playwright() as playwright:
     assert not errors, errors
     assert not failed_requests, failed_requests
     assert not http_errors, http_errors
-    print('PASS: five desktop/mobile widths on portfolio/archive/project pages, mobile navigation, achievement deep link, no JavaScript or resource errors')
+    print('PASS: five viewport widths on portfolio/archive, all five details at 320px/1440px, mobile navigation, achievement deep link, no JavaScript or resource errors')
     browser.close()

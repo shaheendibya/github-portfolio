@@ -56,9 +56,13 @@
   }
 
   const project = projects[index];
+  const featured = projects.filter(item => item.featured !== false);
+  const featuredIndex = featured.findIndex(item => item.slug === slug);
   document.title = `${project.title} — Shaheen Rahman Dibya`;
   document.querySelector('meta[name="description"]')?.setAttribute('content', project.detail);
-  document.getElementById('project-category').textContent = `${String(index + 1).padStart(2, '0')} / ${project.label}`;
+  document.querySelector('meta[property="og:title"]')?.setAttribute('content', document.title);
+  document.querySelector('meta[property="og:description"]')?.setAttribute('content', project.detail);
+  document.getElementById('project-category').textContent = featuredIndex < 0 ? project.label : `${String(featuredIndex + 1).padStart(2, '0')} / ${project.label}`;
   document.getElementById('project-title').textContent = project.title;
   document.getElementById('project-lead').textContent = project.description;
   document.getElementById('project-role').textContent = project.role;
@@ -90,7 +94,40 @@
     return fact;
   }));
 
-  const resourceTypes = {code: 'Source code', report: 'Project report', demo: 'Demo', video: 'Video', files: 'Project files'};
+  const report = project.resources?.find(resource => resource.kind === 'report' && safeUrl(resource.url));
+  const repository = project.resources?.find(resource => resource.kind === 'repository' && safeUrl(resource.url));
+  const actions = [
+    report && link('Read report', report.url, 'button button-dark'),
+    repository && link('View on GitHub', repository.url, 'text-link')
+  ].filter(Boolean);
+  if (actions.length) document.getElementById('project-actions').replaceChildren(...actions);
+
+  const credits = project.credits || [];
+  document.getElementById('project-credits-title').textContent = credits.length === 1 ? 'Project author' : 'Project team';
+  document.getElementById('project-credits').replaceChildren(...credits.map(name => node('li', '', name)));
+  document.getElementById('project-credits-section').hidden = !credits.length;
+
+  if (project.launch?.instructions) {
+    document.getElementById('project-launch-title').textContent = project.launch.label;
+    document.getElementById('project-launch-instructions').textContent = project.launch.instructions;
+    document.getElementById('project-launch-requirements').textContent = project.launch.requirements || '';
+    document.getElementById('project-launch-section').hidden = false;
+    if (project.launch.command) {
+      document.getElementById('project-command').hidden = false;
+      document.getElementById('project-launch-command').textContent = project.launch.command;
+      document.getElementById('project-copy-command').addEventListener('click', async () => {
+        const status = document.getElementById('project-copy-status');
+        try {
+          await navigator.clipboard.writeText(project.launch.command);
+          status.textContent = 'Command copied. Paste it into MATLAB.';
+        } catch {
+          status.textContent = 'Please select and copy the command above.';
+        }
+      });
+    }
+  }
+
+  const resourceTypes = {code: 'Source code', repository: 'GitHub repository', report: 'Project report', presentation: 'Presentation', demo: 'Demo', video: 'Video', files: 'Project files'};
   const resources = (project.resources || []).map(resource => {
     const anchor = link(resource.label, resource.url, 'project-resource');
     if (!anchor) return null;
@@ -100,20 +137,65 @@
       node('strong', '', resource.label)
     );
     if (resource.description) copy.append(node('small', '', resource.description));
+    const url = safeUrl(resource.url);
+    if (url.origin === window.location.origin && /\.(dwg|pdsprj|docx)$/i.test(url.pathname)) {
+      anchor.download = url.pathname.split('/').pop();
+      anchor.lastElementChild.textContent = '↓';
+    }
     return anchor;
   }).filter(Boolean);
   document.getElementById('project-resources').replaceChildren(...resources);
   document.getElementById('project-resources-section').hidden = !resources.length;
 
-  const gallery = (project.gallery || []).map((image, imageIndex) => {
-    if (!safeUrl(image.src)) return null;
+  const images = (project.gallery || []).filter(image => safeUrl(image.src));
+  const dialog = document.getElementById('project-image-dialog');
+  let activeImage = 0;
+  let imageOpener;
+  function showImage(imageIndex) {
+    activeImage = imageIndex;
+    const image = images[activeImage];
+    const preview = document.querySelector('#project-image-preview img');
+    preview.src = image.src;
+    preview.alt = image.alt || project.title;
+    document.getElementById('project-image-title').textContent = project.title;
+    document.getElementById('project-image-caption').textContent = image.caption || preview.alt;
+    document.getElementById('project-image-count').textContent = `${activeImage + 1} / ${images.length}`;
+    document.getElementById('project-image-original').href = image.src;
+    document.getElementById('project-image-previous').disabled = activeImage === 0;
+    document.getElementById('project-image-next').disabled = activeImage === images.length - 1;
+  }
+  document.getElementById('project-image-previous').addEventListener('click', () => showImage(Math.max(0, activeImage - 1)));
+  document.getElementById('project-image-next').addEventListener('click', () => showImage(Math.min(images.length - 1, activeImage + 1)));
+  dialog.querySelector('.project-image-close').addEventListener('click', () => dialog.close());
+  dialog.addEventListener('click', event => { if (event.target === dialog) dialog.close(); });
+  dialog.addEventListener('close', () => imageOpener?.focus({preventScroll: true}));
+  dialog.addEventListener('keydown', event => {
+    if (event.key === 'ArrowLeft' && activeImage > 0) {
+      event.preventDefault();
+      showImage(activeImage - 1);
+    } else if (event.key === 'ArrowRight' && activeImage < images.length - 1) {
+      event.preventDefault();
+      showImage(activeImage + 1);
+    }
+  });
+  const gallery = images.map((image, imageIndex) => {
     const figure = node('figure', 'project-gallery-item');
+    const button = node('button', 'project-gallery-open');
+    button.type = 'button';
+    button.setAttribute('aria-label', `Enlarge image ${imageIndex + 1}: ${image.alt || project.title}`);
+    button.setAttribute('aria-haspopup', 'dialog');
     const img = node('img');
     img.src = image.src;
     img.alt = image.alt || `${project.title}, image ${imageIndex + 1}`;
     img.loading = 'lazy';
     img.decoding = 'async';
-    figure.append(img);
+    button.append(img);
+    button.addEventListener('click', () => {
+      imageOpener = button;
+      showImage(imageIndex);
+      dialog.showModal();
+    });
+    figure.append(button);
     if (image.caption) figure.append(node('figcaption', '', image.caption));
     return figure;
   }).filter(Boolean);
@@ -123,8 +205,8 @@
   const evidence = (project.evidence || []).map(source => link(source.label, source.url, 'project-evidence-link')).filter(Boolean);
   document.getElementById('project-evidence').replaceChildren(...evidence);
 
-  const previous = index > 0 ? projects[index - 1] : null;
-  const next = index < projects.length - 1 ? projects[index + 1] : null;
+  const previous = featuredIndex > 0 ? featured[featuredIndex - 1] : null;
+  const next = featuredIndex < featured.length - 1 ? featured[featuredIndex + 1] : null;
   const navigation = document.getElementById('project-nav');
   [
     {project: previous, label: 'Previous project', direction: 'previous'},
