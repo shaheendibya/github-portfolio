@@ -1,5 +1,7 @@
-"""Exercise the portfolio and archive through a real browser; no build required."""
+"""Exercise the portfolio, project pages, and archive in a real browser."""
 import argparse
+import json
+from pathlib import Path
 from urllib.request import Request, urlopen
 
 from playwright.sync_api import expect, sync_playwright
@@ -11,7 +13,8 @@ args = parser.parse_args()
 base = args.base_url.rstrip('/') + '/'
 
 for path in ['index.html', 'style.css', 'app.js', 'archive.html', 'archive.css',
-             'archive.js', 'achievements.js', 'assets/favicon.svg', 'assets/portrait.png']:
+             'archive.js', 'achievements.js', 'projects.js', 'project.html',
+             'project.js', 'project.css', 'assets/favicon.svg', 'assets/portrait.png']:
     with urlopen(base + path, timeout=10) as response:
         assert response.status == 200 and response.read(), path
 for path in ['cv.pdf', 'lifelong-achievements.pdf', 'insignia-competition.pdf']:
@@ -37,21 +40,60 @@ with sync_playwright() as playwright:
         expect(page.locator('.project-card:visible')).to_have_count(count)
         expect(button).to_have_attribute('aria-pressed', 'true')
         expect(page.locator('#project-count')).to_have_text(f'Showing {count} project' + ('' if count == 1 else 's'))
-    for button in page.locator('.project-open').all():
-        title = button.inner_text()
-        button.click()
-        expect(page.locator('#dialog-title')).to_have_text(title)
-        expect(page.locator('#dialog-tags span')).to_have_count(3)
-        assert page.locator('#dialog-contribution').inner_text().strip()
-        page.keyboard.press('Escape')
-        expect(page.locator('#project-dialog')).not_to_be_visible()
+    projects = page.evaluate('window.portfolioProjects')
+    assert len(projects) == len({project['slug'] for project in projects}) == 5
+    # Clicking a card's illustration must work as well as its title/arrow links.
+    page.locator('.project-card').first.click(position={'x': 100, 'y': 80})
+    expect(page.locator('#project-title')).to_have_text(projects[0]['title'])
+    page.locator('.project-pagination-next').click()
+    expect(page.locator('#project-title')).to_have_text(projects[1]['title'])
+    for project in projects:
+        page.goto(base, wait_until='networkidle')
+        page.locator(f'.project-open[href="project.html?project={project["slug"]}"]').click()
+        expect(page.locator('#project-title')).to_have_text(project['title'])
+        expect(page).to_have_title(f'{project["title"]} — Shaheen Rahman Dibya')
+        assert page.locator('#project-contribution').inner_text().strip()
+        expect(page.locator('#project-tools span')).to_have_count(len(project['tags']))
+        expect(page.locator('#project-art svg')).to_be_visible()
+        expect(page.locator('#project-nav a')).to_have_count(2)
+        expect(page.locator('#project-resources-section')).not_to_be_visible()
+        expect(page.locator('#project-gallery-section')).not_to_be_visible()
+        expect(page.locator('#project-evidence a').first).to_have_attribute('href', 'assets/documents/cv.pdf#page=1')
+    page.goto(base + 'project.html?project=unknown-project', wait_until='networkidle')
+    expect(page.locator('#project-not-found')).to_be_visible()
+    expect(page.locator('#project-content')).not_to_be_visible()
+    page.goto(base + 'project.html', wait_until='networkidle')
+    expect(page.locator('#project-not-found')).to_be_visible()
+    expect(page.locator('#project-not-found h1')).to_have_text('Choose a project.')
+
+    # Supplied project files/media are tested with local fixtures, without
+    # publishing those fixtures as actual project work.
+    fixture = (Path(__file__).resolve().parents[1] / 'projects.js').read_text()
+    media = {
+        'resources': [{'label': 'Fixture report', 'kind': 'report', 'url': 'assets/documents/cv.pdf'},
+                      {'label': 'Invalid resource', 'url': 'javascript:void(0)'}],
+        'gallery': [{'src': 'assets/portrait.png', 'alt': 'Fixture image', 'caption': 'Test media caption'}]
+    }
+    fixture += '\nObject.assign(window.portfolioProjects[2], ' + json.dumps(media) + ');'
+    page.route('**/projects.js', lambda route: route.fulfill(status=200, content_type='application/javascript', body=fixture))
+    page.goto(base + 'project.html?project=stock-market-crash-simulator', wait_until='networkidle')
+    expect(page.locator('#project-resources a')).to_have_count(1)
+    expect(page.locator('#project-resources a')).to_have_attribute('href', 'assets/documents/cv.pdf')
+    expect(page.locator('#project-resources a')).to_have_attribute('target', '_blank')
+    expect(page.locator('#project-gallery figcaption')).to_have_text('Test media caption')
+    page.locator('#project-gallery img').scroll_into_view_if_needed()
+    page.locator('#project-gallery img').evaluate('(image) => image.decode()')
+    assert page.locator('#project-gallery img').evaluate('(image) => image.naturalWidth > 0')
+    page.unroute('**/projects.js')
+
+    page.goto(base, wait_until='networkidle')
     page.locator('#copy-email').click()
     expect(page.locator('#copy-status')).to_contain_text('Email copied')
     assert page.evaluate('navigator.clipboard.readText()') == 'shaheen.dibya17@gmail.com'
     page.evaluate("() => { navigator.clipboard.writeText = async () => { throw new Error('Permission denied'); }; }")
     page.locator('#copy-email').click()
     expect(page.locator('#copy-status')).to_contain_text('Please select and copy')
-    print('PASS: project filters, all five project dialogs, clipboard copy and fallback')
+    print('PASS: project filters, whole-card navigation, five detail pages, previous/next links, supplied media/resources, missing project states, and clipboard')
 
     page.goto(base + 'archive.html', wait_until='networkidle')
     records = page.evaluate('window.portfolioAchievements')
@@ -96,7 +138,8 @@ with sync_playwright() as playwright:
     page.locator('.certificate-close').click()
     print('PASS: all 32 records, all document pages, categories, year/type/search filters, certificate sources, empty state, and CV-only record')
 
-    for path in ['index.html', 'archive.html']:
+    for path in ['index.html', 'archive.html', 'project.html?project=stock-market-crash-simulator',
+                 'project.html?project=rc-racing-soccerbot']:
         for width in [1440, 1024, 768, 390, 320]:
             page.set_viewport_size({'width': width, 'height': 900})
             page.goto(base + path, wait_until='networkidle')
@@ -116,5 +159,5 @@ with sync_playwright() as playwright:
     assert not errors, errors
     assert not failed_requests, failed_requests
     assert not http_errors, http_errors
-    print('PASS: five desktop/mobile widths on both pages, mobile navigation, achievement deep link, no JavaScript or resource errors')
+    print('PASS: five desktop/mobile widths on portfolio/archive/project pages, mobile navigation, achievement deep link, no JavaScript or resource errors')
     browser.close()

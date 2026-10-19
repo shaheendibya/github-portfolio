@@ -973,6 +973,7 @@ body:has(dialog[open]) {
 }
 
 .project-card {
+  position: relative;
   min-width: 0;
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -1099,6 +1100,19 @@ body:has(dialog[open]) {
   color: var(--green);
 }
 
+/* The title link makes the entire project card clickable. */
+.project-open::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.project-card:focus-within {
+  outline: 3px solid var(--accent);
+  outline-offset: 4px;
+}
+
 .project-description {
   font-size: 11px;
   line-height: 1.9;
@@ -1133,6 +1147,8 @@ body:has(dialog[open]) {
 }
 
 .project-open-arrow {
+  position: relative;
+  z-index: 2;
   width: 31px;
   height: 31px;
   flex-shrink: 0;
