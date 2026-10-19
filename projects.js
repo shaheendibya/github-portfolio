@@ -100,44 +100,93 @@ window.portfolioProjects = [
     "category": "simulation",
     "label": "COMPUTATIONAL MODELING",
     "art": "market",
-    "description": "Exploring uncertainty through stochastic models and statistical crash detection.",
-    "detail": "A MATLAB-based stock-market simulator exploring stochastic price behavior and statistical crash detection.",
-    "contribution": "Developed the simulator using Markov chains, Geometric Brownian Motion, and statistical crash detection.",
+    "description": "An interactive MATLAB dashboard for simulated market regimes and crash detection.",
+    "detail": "A MATLAB dashboard combining a three-state Markov chain, Geometric Brownian Motion, and rolling-window crash alerts, co-developed for an EEE 4408 group project.",
+    "contribution": "Co-developed the MATLAB simulator with Ishrak Samin, combining Markov chains, Geometric Brownian Motion, and crash-detection logic in an interactive dashboard.",
     "tags": [
       "MATLAB",
       "Markov chains",
       "Stochastic modeling"
     ],
     "slug": "stock-market-crash-simulator",
-    "role": "Simulator development",
-    "context": "Computational modeling · MATLAB",
+    "role": "Co-developer · Two-person project team",
+    "context": "IUT · EEE 4408 group project",
     "overview": [
-      "A MATLAB-based simulator exploring stochastic stock-market behavior and statistical crash detection. The project brings together Markov chains and Geometric Brownian Motion as part of the modeling work."
+      "An interactive MATLAB dashboard that simulates bull, bear, and crash regimes. A three-state Markov chain governs regime changes, Geometric Brownian Motion generates price paths, and rolling-window checks flag potential crashes in simulated data.",
+      "Developed with Ishrak Samin for an EEE 4408 group project at the Islamic University of Technology. The application includes live parameter controls, simulation history, and CSV/Excel export."
     ],
     "focus": [
-      "Markov chains",
-      "Geometric Brownian Motion",
-      "Statistical crash detection",
-      "MATLAB-based simulation"
+      "Three-state Markov chain: Bull, Bear, and Crash",
+      "Geometric Brownian Motion price simulation",
+      "Rolling variance, drawdown, and simulated-regime crash alerts",
+      "Interactive MATLAB dashboard and parameter presets",
+      "Simulation history and CSV/Excel export"
     ],
     "highlights": [
       {
-        "value": "Stochastic models",
-        "label": "Markov chains & Geometric Brownian Motion"
+        "value": "3 regimes",
+        "label": "Bull, Bear & Crash"
       },
       {
-        "value": "Crash detection",
-        "label": "Statistical analysis"
+        "value": "2-person team",
+        "label": "EEE 4408 group project"
+      },
+      {
+        "value": "13-page report",
+        "label": "Theory, implementation & discussion"
       }
     ],
-    "resources": [],
-    "gallery": [],
+    "resources": [
+      {
+        "label": "Read the project report",
+        "kind": "report",
+        "url": "assets/projects/stock-market-crash-simulator/project-report.pdf",
+        "description": "Original 13-page report, including the model, dashboard, and discussion."
+      },
+      {
+        "label": "View the MATLAB source",
+        "kind": "code",
+        "url": "https://github.com/shaheendibya/Stock-Market-Crash-Simulator/blob/main/Market_Crash_Dashboard.m",
+        "description": "Open the app source file on GitHub."
+      },
+      {
+        "label": "View the GitHub repository",
+        "kind": "code",
+        "url": "https://github.com/shaheendibya/Stock-Market-Crash-Simulator",
+        "description": "Browse the project files and README."
+      }
+    ],
+    "gallery": [
+      {
+        "src": "assets/projects/stock-market-crash-simulator/dashboard.webp",
+        "alt": "MATLAB dashboard showing a simulated price path and crash flags",
+        "caption": "Dashboard with simulated price path and crash flags. Original project report, page 6."
+      },
+      {
+        "src": "assets/projects/stock-market-crash-simulator/history.webp",
+        "alt": "MATLAB simulation history log and inspector",
+        "caption": "Simulation history log and inspector. Original project report, page 6."
+      },
+      {
+        "src": "assets/projects/stock-market-crash-simulator/settings.webp",
+        "alt": "MATLAB model configuration with parameters and presets",
+        "caption": "Interactive model parameters and presets. Original project report, page 7."
+      }
+    ],
     "evidence": [
+      {
+        "label": "Read the original project report",
+        "url": "assets/projects/stock-market-crash-simulator/project-report.pdf"
+      },
       {
         "label": "Read the project summary in my CV",
         "url": "assets/documents/cv.pdf#page=1"
       }
-    ]
+    ],
+    "cover": {
+      "src": "assets/projects/stock-market-crash-simulator/dashboard.webp",
+      "alt": "The MATLAB stock market simulator dashboard from the project report"
+    }
   },
   {
     "title": "Residential Electrical Services",

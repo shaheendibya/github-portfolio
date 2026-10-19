@@ -52,6 +52,18 @@
     card.className = 'project-card';
     card.dataset.category = project.category;
     card.innerHTML = `<div class="project-visual project-visual-${project.art}" aria-hidden="true"><svg viewBox="0 0 480 280" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round">${illustrations[project.art]}</svg><span class="project-visual-label">CONCEPT ILLUSTRATION / ${String(index + 1).padStart(2, '0')}</span></div><div class="project-body"><div class="project-category"><span>${project.label}</span><span class="project-number">0${index + 1}</span></div><h3 class="project-title"><a class="project-open" href="project.html?project=${encodeURIComponent(project.slug)}">${project.title}</a></h3><p class="project-description">${project.description}</p><div class="project-card-bottom"><div class="tool-tags">${project.tags.map(tag => `<span>${tag}</span>`).join('')}</div><a class="project-open-arrow" href="project.html?project=${encodeURIComponent(project.slug)}" aria-label="View ${project.title} project page">↗</a></div></div>`;
+    if (project.cover?.src) {
+      const visual = card.querySelector('.project-visual');
+      const image = document.createElement('img');
+      image.className = 'project-cover';
+      image.src = project.cover.src;
+      image.alt = project.cover.alt || project.title;
+      image.loading = 'lazy';
+      image.decoding = 'async';
+      visual.removeAttribute('aria-hidden');
+      visual.classList.add('has-project-cover');
+      visual.replaceChildren(image);
+    }
     list.append(card);
   });
 

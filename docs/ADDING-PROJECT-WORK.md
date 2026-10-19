@@ -1,6 +1,6 @@
 # Add actual work to a project page
 
-Each selected work now opens an individual project page. Project summaries currently use the supplied CV; the robotics page also links to the achievement archive. Actual code, reports, screenshots, and demos can be added separately. A GitHub repository is optional for reports and pictures.
+Each selected work opens an individual project page. The Stock Market Crash Simulator already has its repository, MATLAB source, report, and original report screenshots attached. Other project summaries use the supplied CV; the robotics page also links to the achievement archive. More code, reports, screenshots, and demos can be added separately. A GitHub repository is optional for reports and pictures.
 
 ## Option 1: Create a repository for source files
 
@@ -55,5 +55,7 @@ gallery: [
 ```
 
 This is an example configuration. Add the actual files first, and replace example URLs with real links before saving them in `projects.js`. Available resource kinds are `code`, `report`, `demo`, `video`, and `files`. Empty arrays keep those sections hidden. The CV remains a source for the summary, and conceptual project diagrams remain explicitly labeled as illustrations.
+
+An optional `cover` object with `src` and `alt` uses an actual project image on the homepage card and at the top of its detail page. Without a cover, the project keeps its labeled conceptual illustration.
 
 The portfolio homepage links to all five project pages automatically. Commit and push the updated files to `main`; GitHub Pages will publish them if branch deployment is enabled.

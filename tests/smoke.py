@@ -20,6 +20,8 @@ for path in ['index.html', 'style.css', 'app.js', 'archive.html', 'archive.css',
 for path in ['cv.pdf', 'lifelong-achievements.pdf', 'insignia-competition.pdf']:
     with urlopen(Request(base + 'assets/documents/' + path, method='HEAD'), timeout=10) as response:
         assert response.status == 200 and response.headers.get_content_type() == 'application/pdf', path
+with urlopen(Request(base + 'assets/projects/stock-market-crash-simulator/project-report.pdf', method='HEAD'), timeout=10) as response:
+    assert response.status == 200 and response.headers.get_content_type() == 'application/pdf'
 print('PASS: pages, assets, and three original PDF downloads')
 
 with sync_playwright() as playwright:
@@ -54,11 +56,34 @@ with sync_playwright() as playwright:
         expect(page).to_have_title(f'{project["title"]} — Shaheen Rahman Dibya')
         assert page.locator('#project-contribution').inner_text().strip()
         expect(page.locator('#project-tools span')).to_have_count(len(project['tags']))
-        expect(page.locator('#project-art svg')).to_be_visible()
+        if project.get('cover'):
+            expect(page.locator('#project-art img')).to_be_visible()
+            page.locator('#project-art img').evaluate('(image) => image.decode()')
+            assert page.locator('#project-art img').evaluate('(image) => image.naturalWidth > 0')
+        else:
+            expect(page.locator('#project-art svg')).to_be_visible()
         expect(page.locator('#project-nav a')).to_have_count(2)
-        expect(page.locator('#project-resources-section')).not_to_be_visible()
-        expect(page.locator('#project-gallery-section')).not_to_be_visible()
-        expect(page.locator('#project-evidence a').first).to_have_attribute('href', 'assets/documents/cv.pdf#page=1')
+        if project['resources']:
+            expect(page.locator('#project-resources-section')).to_be_visible()
+            expect(page.locator('#project-resources a')).to_have_count(len(project['resources']))
+            for resource in project['resources']:
+                expect(page.locator('#project-resources').get_by_role('link', name=resource['label'], exact=False)).to_have_attribute('href', resource['url'])
+        else:
+            expect(page.locator('#project-resources-section')).not_to_be_visible()
+        if project['gallery']:
+            expect(page.locator('#project-gallery-section')).to_be_visible()
+            expect(page.locator('#project-gallery img')).to_have_count(len(project['gallery']))
+            for image in page.locator('#project-gallery img').all():
+                image.scroll_into_view_if_needed()
+                image.evaluate('(image) => image.decode()')
+                assert image.evaluate('(image) => image.naturalWidth > 0')
+        else:
+            expect(page.locator('#project-gallery-section')).not_to_be_visible()
+        expect(page.locator('#project-evidence a[href="assets/documents/cv.pdf#page=1"]')).to_have_count(1)
+        if project['slug'] == 'stock-market-crash-simulator':
+            expect(page.locator('#project-contribution')).to_contain_text('Ishrak Samin')
+            expect(page.locator('#project-resources a')).to_have_count(3)
+            expect(page.locator('#project-resources a').nth(1)).to_have_attribute('href', 'https://github.com/shaheendibya/Stock-Market-Crash-Simulator/blob/main/Market_Crash_Dashboard.m')
     page.goto(base + 'project.html?project=unknown-project', wait_until='networkidle')
     expect(page.locator('#project-not-found')).to_be_visible()
     expect(page.locator('#project-content')).not_to_be_visible()

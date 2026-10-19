@@ -28,7 +28,9 @@ The archive includes 27 certificate-backed achievements and five CV-only distinc
 
 To add an achievement, append a record in `achievements.js` with a unique `id`, `title`, `result`, `category`, `year` (or `null`), `kind`, `description`, and `sources`. Each source specifies `label`, `url`, `page`, and optional `image`, `thumbnail`, and `tabLabel`. Use original-document evidence for results and dates. Add files under `assets/` and keep URLs relative. Category and year options are derived from the records.
 
-Project illustrations are conceptual diagrams, not photographs or measured project outputs. Project summaries describe the work documented in the CV. No actual project source files or reports have been supplied yet; their optional sections appear when real files/links are added. See [Adding project work](docs/ADDING-PROJECT-WORK.md) for GitHub repository creation and file-upload instructions.
+The Stock Market Crash Simulator page includes its [public project repository](https://github.com/shaheendibya/Stock-Market-Crash-Simulator), a direct MATLAB source link, the original 13-page report, and three genuine dashboard/history/settings screenshots extracted from report pages 6–7. The report and previews were imported from commit `897ddd8d0465ab46b70abb07c08ccb92d8c7b81c`; the project is credited to Shaheen Rahman Dibya and Ishrak Samin. Report copies/previews live under `assets/projects/stock-market-crash-simulator/` and should be refreshed if the original report changes.
+
+Projects without original images use explicitly labeled conceptual diagrams. Their summaries describe the work documented in the CV; optional resource/gallery sections appear when real material is added. See [Adding project work](docs/ADDING-PROJECT-WORK.md) for GitHub repository creation and file-upload instructions.
 
 ## Browser verification
 

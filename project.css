@@ -115,6 +115,12 @@
   max-height: 320px;
 }
 
+.project-detail-art.has-project-cover {
+  align-self: center;
+  aspect-ratio: 1.7;
+  min-height: 0;
+}
+
 .project-detail-art .project-visual-label {
   top: 20px;
   left: 22px;

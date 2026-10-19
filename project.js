@@ -71,7 +71,15 @@
   const art = document.getElementById('project-art');
   art.classList.add(`project-visual-${project.art}`);
   const illustration = window.portfolioProjectIllustrations?.[project.art];
-  if (illustration) {
+  if (project.cover?.src && safeUrl(project.cover.src)) {
+    const image = node('img', 'project-cover');
+    image.src = project.cover.src;
+    image.alt = project.cover.alt || project.title;
+    image.decoding = 'async';
+    art.removeAttribute('aria-hidden');
+    art.classList.add('has-project-cover');
+    art.replaceChildren(image);
+  } else if (illustration) {
     art.innerHTML = `<svg viewBox="0 0 480 280" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">${illustration}</svg>`;
     art.append(node('span', 'project-visual-label', 'CONCEPT ILLUSTRATION'));
   } else art.hidden = true;
