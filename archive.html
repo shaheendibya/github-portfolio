@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="The complete achievement archive of Shaheen Rahman Dibya: engineering competitions, academic distinctions, science, sport, service, and creative pursuits, with original documents.">
+  <meta name="theme-color" content="#f7f7f2">
+  <title>Achievement archive — Shaheen Rahman Dibya</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="archive.css">
+  <script src="achievements.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="archive.js" defer></script>
+</head>
+<body class="archive-page" id="top">
+  <a class="skip-link" href="#archive-main">Skip to archive</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Dibya, home"><span class="brand-mark" aria-hidden="true">d.</span><span class="brand-name">Dibya<span> / engineering &amp; curiosity</span></span></a>
+      <button class="mobile-toggle" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Open navigation"><span></span><span></span></button>
+      <nav class="desktop-nav" id="site-nav" aria-label="Main navigation">
+        <a class="nav-link" href="index.html#about">About</a>
+        <a class="nav-link" href="index.html#work">Selected work</a>
+        <a class="nav-link" href="index.html#experience">Experience</a>
+        <a class="nav-link active" aria-current="page" href="archive.html">Achievement archive <span aria-hidden="true">↗</span></a>
+      </nav>
+      <a class="header-cv" href="assets/documents/cv.pdf" target="_blank" rel="noopener">View CV <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main id="archive-main" class="archive-main">
+    <section class="archive-intro" aria-labelledby="archive-title">
+      <div class="archive-intro-top"><a href="index.html" class="archive-back"><span aria-hidden="true">←</span> Back to portfolio</a><p class="eyebrow">The complete collection</p></div>
+      <div class="archive-intro-grid">
+        <h1 id="archive-title">Milestones,<br><em>in full.</em></h1>
+        <div class="archive-intro-copy"><p>A growing record of building, competing, learning, and showing up.</p><p>Explore the achievements behind the portfolio, from engineering competitions and academic distinctions to sport, service, and creative pursuits. Original documents accompany each record.</p></div>
+      </div>
+      <div class="archive-stats" aria-label="About the archive">
+        <div><strong id="archive-total">—</strong><span>achievement records</span></div>
+        <div><strong id="archive-years">—</strong><span>years represented</span></div>
+        <div><strong>03</strong><span>original source documents</span></div>
+        <a href="#document-library">Browse source documents <span aria-hidden="true">↘</span></a>
+      </div>
+    </section>
+
+    <section class="archive-collection" aria-labelledby="collection-title">
+      <div class="archive-section-heading"><div><p class="section-label">01 / The archive</p><h2 id="collection-title">Every chapter counts.</h2></div><p>Explore by interest. Follow the evidence.</p></div>
+      <form class="archive-filters" id="archive-filters" role="search" aria-label="Filter achievement archive">
+        <div class="archive-categories" id="archive-categories" role="group" aria-label="Achievement category"></div>
+        <div class="archive-filter-fields">
+          <div class="archive-search-field"><label for="archive-search">Search the collection</label><div class="archive-input-wrap"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg><input id="archive-search" name="search" type="search" placeholder="Try robotics, scholarship, relay…" autocomplete="off"></div></div>
+          <div><label for="archive-year">Year</label><select id="archive-year" name="year"><option value="all">All years</option></select></div>
+          <div><label for="archive-kind">Record type</label><select id="archive-kind" name="kind"><option value="all">All record types</option></select></div>
+        </div>
+      </form>
+      <div class="archive-results-meta"><p id="archive-count" role="status" aria-live="polite" aria-atomic="true">Loading achievement records…</p><div><span class="archive-sort-label">Newest first</span><button id="archive-clear" type="button" hidden>Clear filters <span aria-hidden="true">×</span></button></div></div>
+      <div class="archive-grid" id="archive-grid"></div>
+      <div class="archive-empty" id="archive-empty" hidden><span aria-hidden="true">↗</span><h3>No matching records.</h3><p>Try a different search or clear the filters to explore the full collection.</p><button class="button button-dark" type="button" id="archive-empty-clear">View all achievements</button></div>
+      <noscript><p class="archive-noscript">Enable JavaScript to browse and filter the archive. All original records are also available in the source documents below.</p></noscript>
+      <p class="archive-evidence-note"><span aria-hidden="true">↗</span> Award results, participation, and qualifications are labeled separately. Dates follow the original documents; records without a verified year appear last.</p>
+    </section>
+
+    <section class="archive-library" id="document-library" aria-labelledby="library-title">
+      <div><p class="section-label">02 / The source material</p><h2 id="library-title">The original documents.</h2><p>Read the full collection, verify a record, or download a copy for reference.</p></div>
+      <div class="archive-documents">
+        <a href="assets/documents/lifelong-achievements.pdf" target="_blank" rel="noopener"><span class="archive-document-icon" aria-hidden="true">PDF</span><span><strong>Lifelong Achievements</strong><small>Complete certificate collection · 22.4 MB</small></span><span class="archive-document-arrow" aria-hidden="true">↗</span></a>
+        <a href="assets/documents/insignia-competition.pdf" target="_blank" rel="noopener"><span class="archive-document-icon" aria-hidden="true">PDF</span><span><strong>Insignia competition</strong><small>Competition certificate · 127 KB</small></span><span class="archive-document-arrow" aria-hidden="true">↗</span></a>
+        <a href="assets/documents/cv.pdf" download="Shaheen-Rahman-Dibya-CV.pdf"><span class="archive-document-icon" aria-hidden="true">CV</span><span><strong>Curriculum vitae</strong><small>Education, experience &amp; selected work · 478 KB</small></span><span class="archive-document-arrow" aria-hidden="true">↓</span></a>
+      </div>
+    </section>
+    <div class="archive-closing"><p>There’s more to the story.</p><a class="button button-dark" href="index.html">Explore the portfolio <span aria-hidden="true">↗</span></a></div>
+  </main>
+
+  <footer class="site-footer container"><a class="brand footer-brand" href="index.html"><span class="brand-mark" aria-hidden="true">d.</span><span>Shaheen Rahman Dibya</span></a><p>Engineering, with curiosity. <span>© <span id="current-year">2026</span></span></p><a class="text-link" href="#top">Back to top <span aria-hidden="true">↑</span></a></footer>
+
+  <dialog id="certificate-dialog" class="certificate-dialog" aria-labelledby="certificate-title">
+    <div class="certificate-dialog-heading"><p class="eyebrow">From the archive</p><button type="button" class="certificate-close" aria-label="Close certificate preview">Close <span aria-hidden="true">×</span></button></div>
+    <div class="certificate-dialog-content"><div class="certificate-preview" id="certificate-preview"></div><div class="certificate-detail"><p id="certificate-category" class="eyebrow"></p><h2 id="certificate-title"></h2><p class="certificate-result" id="certificate-result"></p><p id="certificate-description"></p><p id="certificate-note" class="certificate-note" hidden></p><div class="certificate-source-nav" id="certificate-source-nav" role="group" aria-label="Choose source document"></div><p class="certificate-citation" id="certificate-citation"></p><a class="button button-dark" id="certificate-original" href="#" target="_blank" rel="noopener">Open original document <span aria-hidden="true">↗</span></a><p class="certificate-read-note">Open the original PDF for full resolution and surrounding context.</p></div></div>
+  </dialog>
+</body>
+</html>
