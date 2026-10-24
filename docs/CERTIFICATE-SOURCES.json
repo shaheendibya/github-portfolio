@@ -1,0 +1,89 @@
+{
+  "source_filename": "Scanned iut certificates.pdf",
+  "source_sha256": "42f010e976b8bd89a421ec4586fb49dedd37b0932bd73c6d054c8172d4ba5555",
+  "source_page_count": 11,
+  "collection_path": "assets/documents/lifelong-achievements.pdf",
+  "collection_page_count": 29,
+  "previous_collection_commit": "c3b8e352b83398808bb52dd6e01e64d0d495428d",
+  "previous_collection_sha256": "ba84e0d781108b8d217eb28d203e05bfd1acfacf52a1e9bfc880e97671d4ddfb",
+  "updated_collection_sha256": "efc666048ed12433420ea7dd7bb0d4f505be708a28176cc0ba632ef4f972a9aa",
+  "processing": "Lossless PDF page rotations only. Original embedded scan images retained without retouching, cropping, or resampling. Replaced matched pages in the existing collection; all other pages kept in their original order. WebP previews rendered from the updated PDF at 1500 px wide; thumbnails at 600 px.",
+  "replacements": [
+    {
+      "scan_page": 1,
+      "collection_page": 28,
+      "clockwise_rotation_degrees": 270,
+      "preview": "assets/certificates/achievement-28.webp",
+      "thumbnail": "assets/certificates/achievement-28-thumb.webp"
+    },
+    {
+      "scan_page": 2,
+      "collection_page": 27,
+      "clockwise_rotation_degrees": 270,
+      "preview": "assets/certificates/achievement-27.webp",
+      "thumbnail": "assets/certificates/achievement-27-thumb.webp"
+    },
+    {
+      "scan_page": 3,
+      "collection_page": 10,
+      "clockwise_rotation_degrees": 270,
+      "preview": "assets/certificates/achievement-10.webp",
+      "thumbnail": "assets/certificates/achievement-10-thumb.webp"
+    },
+    {
+      "scan_page": 4,
+      "collection_page": 3,
+      "clockwise_rotation_degrees": 270,
+      "preview": "assets/certificates/achievement-03.webp",
+      "thumbnail": "assets/certificates/achievement-03-thumb.webp"
+    },
+    {
+      "scan_page": 5,
+      "collection_page": 8,
+      "clockwise_rotation_degrees": 270,
+      "preview": "assets/certificates/achievement-08.webp",
+      "thumbnail": "assets/certificates/achievement-08-thumb.webp"
+    },
+    {
+      "scan_page": 6,
+      "collection_page": 7,
+      "clockwise_rotation_degrees": 270,
+      "preview": "assets/certificates/achievement-07.webp",
+      "thumbnail": "assets/certificates/achievement-07-thumb.webp"
+    },
+    {
+      "scan_page": 7,
+      "collection_page": 6,
+      "clockwise_rotation_degrees": 270,
+      "preview": "assets/certificates/achievement-06.webp",
+      "thumbnail": "assets/certificates/achievement-06-thumb.webp"
+    },
+    {
+      "scan_page": 8,
+      "collection_page": 5,
+      "clockwise_rotation_degrees": 270,
+      "preview": "assets/certificates/achievement-05.webp",
+      "thumbnail": "assets/certificates/achievement-05-thumb.webp"
+    },
+    {
+      "scan_page": 9,
+      "collection_page": 4,
+      "clockwise_rotation_degrees": 270,
+      "preview": "assets/certificates/achievement-04.webp",
+      "thumbnail": "assets/certificates/achievement-04-thumb.webp"
+    },
+    {
+      "scan_page": 11,
+      "collection_page": 9,
+      "clockwise_rotation_degrees": 90,
+      "preview": "assets/certificates/achievement-09.webp",
+      "thumbnail": "assets/certificates/achievement-09-thumb.webp"
+    }
+  ],
+  "excluded_scan_pages": [
+    {
+      "page": 10,
+      "reason": "Duplicate CaseMotion certificate with blank recipient line. Used the named certificate from scan page 3 instead."
+    }
+  ]
+}

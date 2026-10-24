@@ -43,9 +43,12 @@ EV Longitudinal Dynamics and RC Racing & Soccerbot retain their original project
 - `assets/certificates/`: optimized WebP certificate previews and thumbnails. Originals remain available as PDFs.
 - `assets/projects/`: project reports, authentic previews, CAD and Proteus source files, and the original review DOCX with its browser reading PDF.
 - `docs/PROJECT-SOURCES.json`: repository and document provenance for the five featured projects.
+- `docs/CERTIFICATE-SOURCES.json`: scan checksums, page replacements, and orientation corrections for the updated IUT certificates.
 - `tests/smoke.py`: browser checks for the portfolio, archive, and project pages.
 
 The archive includes 27 certificate-backed achievements and five CV-only distinctions/qualifications. Every certificate page is preserved. Three pairs document the same achievements and are grouped as multiple sources: the University Physics Competition, ACCELERATE RC Car, and BrandEdge. Participation, service, training, qualifications, and awards remain separately labeled. BrandEdge has no stated year and appears as undated.
+
+Ten certificate pages in `lifelong-achievements.pdf` now use the replacement scans supplied in `Scanned iut certificates.pdf`, rotated upright without cropping or retouching. Their full-size previews and thumbnails were regenerated from the updated PDF. The collection retains its 29-page order and existing links; the other 19 pages are unchanged. The uploaded scan also contained a duplicate CaseMotion certificate with a blank recipient line; the named copy was used instead. Exact source-page mappings and checksums are recorded in [certificate provenance](docs/CERTIFICATE-SOURCES.json).
 
 To add an achievement, append a record in `achievements.js` with a unique `id`, `title`, `result`, `category`, `year` (or `null`), `kind`, `description`, and `sources`. Each source specifies `label`, `url`, `page`, and optional `image`, `thumbnail`, and `tabLabel`. Use original-document evidence for results and dates. Add files under `assets/` and keep URLs relative. Category and year options are derived from the records.
 
