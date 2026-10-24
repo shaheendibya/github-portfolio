@@ -200,7 +200,7 @@ window.portfolioAchievements = [
     "result": "Finalist",
     "year": 2025,
     "description": "Recognized as a CaseMotion finalist at AutoMech 2025, held on 8–9 August and organized by IUT Department of Mechanical & Production Engineering and IUT Automobile Society.",
-    "category": "engineering",
+    "category": "case-competitions",
     "kind": "award",
     "sources": [
       {
