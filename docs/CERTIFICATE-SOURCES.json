@@ -85,5 +85,11 @@
       "page": 10,
       "reason": "Duplicate CaseMotion certificate with blank recipient line. Used the named certificate from scan page 3 instead."
     }
-  ]
+  ],
+  "standalone_scan": {
+    "path": "assets/documents/scanned-iut-certificates.pdf",
+    "sha256": "9675499371191f0e68e2a38f0b52badc37007c421374034601a194ba18b69771",
+    "page_count": 11,
+    "note": "Complete uploaded scan with every page rotated upright. Includes the blank-recipient duplicate on page 10 to preserve the uploaded page order."
+  }
 }

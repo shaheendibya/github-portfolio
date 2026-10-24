@@ -39,7 +39,7 @@ EV Longitudinal Dynamics and RC Racing & Soccerbot retain their original project
 - `achievements.js`: the archive's structured content, including 32 distinct records and original-document references.
 - `archive.js` and `archive.css`: search, category/year/type filters, accessible certificate previews, source switching, and responsive archive layouts.
 - `style.css`: shared visual design and portfolio layouts.
-- `assets/documents/`: the original CV, 29-page achievement collection, and Insignia certificate.
+- `assets/documents/`: the original CV, 29-page achievement collection, Insignia certificate, and complete 11-page IUT scan rotated upright.
 - `assets/certificates/`: optimized WebP certificate previews and thumbnails. Originals remain available as PDFs.
 - `assets/projects/`: project reports, authentic previews, CAD and Proteus source files, and the original review DOCX with its browser reading PDF.
 - `docs/PROJECT-SOURCES.json`: repository and document provenance for the five featured projects.
@@ -49,6 +49,8 @@ EV Longitudinal Dynamics and RC Racing & Soccerbot retain their original project
 The archive includes 27 certificate-backed achievements and five CV-only distinctions/qualifications. Every certificate page is preserved. Three pairs document the same achievements and are grouped as multiple sources: the University Physics Competition, ACCELERATE RC Car, and BrandEdge. Participation, service, training, qualifications, and awards remain separately labeled. BrandEdge has no stated year and appears as undated.
 
 Ten certificate pages in `lifelong-achievements.pdf` now use the replacement scans supplied in `Scanned iut certificates.pdf`, rotated upright without cropping or retouching. Their full-size previews and thumbnails were regenerated from the updated PDF. The collection retains its 29-page order and existing links; the other 19 pages are unchanged. The uploaded scan also contained a duplicate CaseMotion certificate with a blank recipient line; the named copy was used instead. Exact source-page mappings and checksums are recorded in [certificate provenance](docs/CERTIFICATE-SOURCES.json).
+
+The source-document library also links the complete upright upload separately as [Scanned IUT certificates](assets/documents/scanned-iut-certificates.pdf). This 11-page PDF retains the uploaded order, including the duplicate page, alongside the updated lifelong collection.
 
 To add an achievement, append a record in `achievements.js` with a unique `id`, `title`, `result`, `category`, `year` (or `null`), `kind`, `description`, and `sources`. Each source specifies `label`, `url`, `page`, and optional `image`, `thumbnail`, and `tabLabel`. Use original-document evidence for results and dates. Add files under `assets/` and keep URLs relative. Category and year options are derived from the records.
 
