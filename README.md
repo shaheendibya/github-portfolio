@@ -12,6 +12,8 @@ python3 -m http.server 8000 --bind 127.0.0.1
 
 Open http://127.0.0.1:8000/. The main page is `index.html`; the searchable achievement archive is `archive.html`. Each project opens a dedicated URL such as `project.html?project=stock-market-crash-simulator`. Relative asset paths support deployment under a GitHub Pages repository path.
 
+The interface keeps its cream-and-sage palette, serif headlines, and arched portrait, with floating navigation, original circuit linework, paper-like cards, and restrained motion. The moon button switches to a forest-green dark mode; the choice is remembered locally across the portfolio, archive, and project pages. Light mode remains the default. Motion respects the visitor's reduced-motion preference, and all decorative graphics are local assets.
+
 ## Featured project work
 
 The homepage features five projects with original reports, repository links, authentic covers, and image galleries:
@@ -39,6 +41,7 @@ EV Longitudinal Dynamics and RC Racing & Soccerbot retain their original project
 - `achievements.js`: the archive's structured content, including 32 distinct records and original-document references.
 - `archive.js` and `archive.css`: search, category/year/type filters, accessible certificate previews, source switching, and responsive archive layouts.
 - `style.css`: shared visual design and portfolio layouts.
+- `polish.css`, `detail-polish.css`, and `polish.js`: shared visual refinements, optional dark mode, reading progress, and motion enhancements. These load after the original styles and scripts.
 - `assets/documents/`: the original CV, 29-page achievement collection, Insignia certificate, and complete 11-page IUT scan rotated upright.
 - `assets/certificates/`: optimized WebP certificate previews and thumbnails. Originals remain available as PDFs.
 - `assets/projects/`: project reports, authentic previews, CAD and Proteus source files, and the original review DOCX with its browser reading PDF.
@@ -62,6 +65,7 @@ With the server running, the cloud environment's existing Python Playwright and 
 
 ```sh
 python3 tests/smoke.py
+python3 tests/polish.py
 ```
 
 The test checks:
@@ -73,6 +77,8 @@ The test checks:
 - Portfolio/archive layouts at 1440, 1024, 768, 390, and 320px; all five featured project pages at 1440 and 320px; mobile navigation and JavaScript/resource errors.
 
 Override `--base-url` or `--chromium` for another local setup, for example `python3 tests/smoke.py --base-url http://127.0.0.1:8002/`. These checks exercise the website in Chromium; they do not execute the MATLAB, Proteus, or AutoCAD projects. Playwright is a development check; the website itself needs no Python or browser automation dependencies.
+
+The polish checks cover theme toggling and persistence, keyboard operation, light/dark layouts, decorative orbit bounds, reduced motion, disabled storage, and the no-JavaScript fallback.
 
 ## GitHub Pages
 

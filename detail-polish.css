@@ -1,0 +1,274 @@
+/* Small refinements for the archive and project pages; shared theme tokens
+   come from polish.css. Documents and original images keep their own colors. */
+.archive-page,
+.project-detail-page {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.archive-page .skip-link {
+  color: var(--paper);
+}
+
+.archive-intro-grid,
+.project-detail-hero {
+  position: relative;
+}
+
+.archive-intro h1,
+.project-detail-title {
+  text-wrap: balance;
+}
+
+.archive-stats {
+  border-color: var(--line);
+}
+
+.archive-category,
+.certificate-source-nav button {
+  border-radius: 999px;
+  background: var(--surface, var(--paper));
+  border-color: var(--line);
+  color: var(--muted);
+  transition: background .2s, border-color .2s, color .2s;
+}
+
+.archive-category[aria-pressed="true"],
+.certificate-source-nav button[aria-pressed="true"] {
+  background: var(--green);
+  border-color: var(--green);
+  color: var(--paper);
+}
+
+.archive-filter-fields input,
+.archive-filter-fields select {
+  border-radius: 10px;
+  background: var(--surface, var(--paper));
+  border-color: var(--line);
+  color: var(--ink);
+  transition: border-color .2s, box-shadow .2s;
+}
+
+.archive-filter-fields input:focus,
+.archive-filter-fields select:focus {
+  border-color: var(--green);
+}
+
+.archive-filter-fields select option {
+  background: var(--surface, var(--paper));
+  color: var(--ink);
+}
+
+.archive-card {
+  border-radius: 16px;
+  border-color: var(--line);
+  background: var(--surface, var(--paper));
+  transition: transform .25s, border-color .25s, box-shadow .25s;
+}
+
+.archive-card:focus-within {
+  border-color: var(--green);
+}
+
+.archive-card-preview {
+  border-radius: 15px 15px 0 0;
+}
+
+.archive-card-preview,
+.archive-card-preview img,
+.archive-document-preview,
+.certificate-preview,
+.project-image-preview {
+  background: var(--sage);
+}
+
+.archive-card-number,
+.archive-card-preview::after {
+  border-color: var(--line);
+  border-radius: 6px;
+  background: var(--surface-raised, var(--paper));
+  color: var(--green);
+}
+
+.archive-document-preview .archive-preview-rule {
+  border-color: var(--line);
+}
+
+.archive-card-result,
+.certificate-detail > .certificate-result {
+  border-radius: 6px;
+  background: var(--sage);
+  color: var(--green);
+}
+
+.archive-card-result[data-kind="award"],
+.certificate-detail > .certificate-result[data-kind="award"] {
+  background: #f3e8dc;
+  color: #865a39;
+}
+
+.archive-card-result[data-kind="participation"] {
+  background: var(--sage);
+  color: var(--muted);
+}
+
+html[data-theme="dark"] .archive-card-result[data-kind="award"],
+html[data-theme="dark"] .certificate-detail > .certificate-result[data-kind="award"] {
+  background: #3c3024;
+  color: #efbd8e;
+}
+
+.archive-empty,
+.archive-noscript {
+  border-radius: 16px;
+  border-color: var(--line);
+  background: var(--surface, var(--paper));
+}
+
+.archive-documents > a {
+  border-radius: 10px;
+  transition: background .2s, color .2s;
+}
+
+.archive-documents > a > span:not(.archive-document-icon):not(.archive-document-arrow) {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+.archive-document-icon {
+  border-radius: 8px;
+  border-color: var(--line);
+  background: var(--surface, var(--paper));
+}
+
+.certificate-dialog,
+.project-image-dialog {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--surface, var(--paper));
+  color: var(--ink);
+  box-shadow: var(--shadow, 0 24px 80px #142b2630);
+}
+
+.certificate-dialog::backdrop,
+.project-image-dialog::backdrop {
+  background: #102019b8;
+  backdrop-filter: blur(8px);
+}
+
+.certificate-preview,
+.project-image-preview {
+  border-radius: 12px;
+}
+
+.certificate-detail > .certificate-note {
+  border-color: var(--line);
+}
+
+.certificate-close,
+.project-image-close,
+.project-image-controls button,
+.project-command button {
+  border-radius: 8px;
+  color: var(--green);
+}
+
+.project-detail-art {
+  border-color: var(--line);
+  border-radius: 16px;
+  background: var(--sage);
+  color: var(--green);
+}
+
+.project-detail-tools > span {
+  border-radius: 999px;
+  border-color: var(--line);
+  background: var(--sage);
+  color: var(--green);
+}
+
+.project-detail-evidence,
+.project-detail-highlights > *,
+.project-detail-resource-grid > a,
+.project-detail-navigation > a {
+  border-radius: 16px;
+  border-color: var(--line);
+  background: var(--surface, var(--paper));
+}
+
+.project-detail-evidence {
+  background: var(--sage);
+}
+
+.project-detail-evidence-links a {
+  border-color: var(--line);
+}
+
+.project-detail-resource-grid > a,
+.project-detail-navigation > a {
+  transition: background .25s, border-color .25s, transform .25s, box-shadow .25s;
+}
+
+.project-command {
+  border-radius: 12px;
+  background: var(--sage);
+}
+
+.project-command button {
+  border-color: var(--line);
+  background: var(--surface-raised, var(--paper));
+}
+
+.project-detail-gallery img,
+.project-gallery-open {
+  border-radius: 12px;
+}
+
+.project-detail-gallery img {
+  background: var(--sage);
+}
+
+@media (hover: hover) {
+  .archive-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--green);
+    box-shadow: var(--shadow, 0 10px 30px #142b2610);
+  }
+
+  .archive-documents > a:hover {
+    background: var(--sage);
+  }
+
+  .project-detail-resource-grid > a:hover,
+  .project-detail-navigation > a:hover {
+    transform: translateY(-3px);
+    border-color: var(--green);
+    background: var(--surface-raised, var(--paper));
+    box-shadow: var(--shadow, 0 10px 30px #142b2610);
+  }
+
+  .certificate-close:hover,
+  .project-image-close:hover,
+  .project-image-controls button:not(:disabled):hover,
+  .project-command button:hover {
+    background: var(--sage);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .archive-card:hover,
+  .project-detail-resource-grid > a:hover,
+  .project-detail-navigation > a:hover {
+    transform: none;
+  }
+}
+
+@media print {
+  .archive-card,
+  .project-detail-resource-grid > a,
+  .project-detail-navigation > a,
+  .project-detail-highlights > * {
+    box-shadow: none;
+    transform: none;
+  }
+}
