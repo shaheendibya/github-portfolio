@@ -94,7 +94,7 @@
   },
   "additional_certificates": [
     {
-      "record_id": "iarco-2026-senior",
+      "record_id": "iarco-2026-participation",
       "source_filename": "Shaheen_Rahman_Dibya_IARCO_2026_2026-09-15_11-00-49.pdf",
       "path": "assets/documents/iarco-2026-participation.pdf",
       "sha256": "f3a752c3b7e81d248832f70f0ee2da1aeadb1a85313b4d6e0433964ea2237672",
@@ -115,7 +115,12 @@
           "maximum": 70
         },
         "bootcamps": 4
-      },
+      }
+    }
+  ],
+  "pending_achievements": [
+    {
+      "record_id": "iarco-2026-senior",
       "owner_reported_result": {
         "placement": 6,
         "category": "Senior",
@@ -123,7 +128,9 @@
         "source": "Portfolio owner",
         "placement_certificate_status": "pending"
       },
-      "future_certificate": "When supplied, replace the status:pending source on iarco-2026-senior with the actual placement certificate URL, page, preview and thumbnail. Keep the existing participation source and the stable achievement ID; update the placement status and pending note at the same time."
+      "certificate_status": "pending",
+      "sources": [],
+      "future_certificate": "Keep this record empty of certificate files and previews until the sixth-place certificate is provided. Then attach that actual placement certificate to iarco-2026-senior. The participation certificate belongs exclusively to iarco-2026-participation."
     }
   ]
 }

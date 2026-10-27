@@ -52,7 +52,6 @@
     return source.page && !url.includes('#') ? `${url}#page=${source.page}` : url;
   }
   function citation(source) {
-    if (source.status === 'pending') return source.pendingLabel || `${source.label || 'Certificate'} · pending`;
     return `${source.label || 'Source document'}${source.page ? ` · p. ${source.page}` : ''}`;
   }
   function resultText(record) { return record.result || kindNames[recordKind(record)] || 'Achievement record'; }
@@ -115,13 +114,13 @@
   year.value = state.year;
   kind.value = state.kind;
 
-  function documentPreview(source) {
+  function documentPreview(source, record) {
     const preview = node('div', 'archive-document-preview');
-    const pending = source?.status === 'pending';
-    preview.append(node('span', 'archive-preview-monogram', pending ? source.placeholder || '—' : 'D.'));
+    const pending = !source && record?.certificateStatus === 'pending';
+    preview.append(node('span', 'archive-preview-monogram', pending ? '—' : 'D.'));
     preview.append(node('span', 'archive-preview-rule'));
-    preview.append(node('span', 'archive-preview-source', source && source.label ? source.label : 'Document record'));
-    preview.append(node('span', 'archive-preview-label', pending ? source.pendingLabel || 'Certificate pending' : 'View original source'));
+    preview.append(node('span', 'archive-preview-source', source?.label || (pending ? record.title : 'Document record')));
+    preview.append(node('span', 'archive-preview-label', pending ? 'Placement certificate pending' : 'View original source'));
     return preview;
   }
 
@@ -145,7 +144,7 @@
       img.height = 420;
       img.addEventListener('error', () => img.replaceWith(documentPreview(primary)), { once: true });
       preview.append(img);
-    } else preview.append(documentPreview(primary));
+    } else preview.append(documentPreview(primary, record));
     const content = node('div', 'archive-card-content');
     const meta = node('p', 'archive-card-meta');
     meta.append(node('span', '', categoryName(record.category)), node('span', '', yearLabel(recordYear(record))));
@@ -167,13 +166,11 @@
       original.rel = 'noopener';
       original.setAttribute('aria-label', `Open original source for ${record.title}: ${citation(primary)}`);
       source.append(original);
-    } else source.append(node('span', '', 'Achievement record'));
+    } else source.append(node('span', '', record.certificateStatus === 'pending' ? 'Certificate pending' : 'Achievement record'));
     const arrow = node('span', '', '↗');
     arrow.setAttribute('aria-hidden', 'true');
-    source.append(arrow);
+    if (primary?.url) source.append(arrow);
     content.append(meta, title, result, description, source);
-    const pending = sources(record).find(item => item.status === 'pending');
-    if (pending) content.insertBefore(node('p', 'archive-card-status', pending.pendingLabel || 'Certificate pending'), source);
     card.append(preview, content);
     return card;
   }
@@ -232,15 +229,16 @@
       img.decoding = 'async';
       img.addEventListener('error', () => img.replaceWith(documentPreview(source)), { once: true });
       preview.append(img);
-    } else preview.append(documentPreview(source));
-    document.getElementById('certificate-citation').textContent = source ? citation(source) : 'Source document unavailable';
+    } else preview.append(documentPreview(source, record));
+    const pending = !source && record.certificateStatus === 'pending';
+    document.getElementById('certificate-citation').textContent = source ? citation(source) : pending ? 'Placement certificate pending' : 'Source document unavailable';
     const original = document.getElementById('certificate-original');
     original.hidden = !source || !source.url;
     if (source && source.url) original.href = sourceLink(source);
     else original.removeAttribute('href');
     const readNote = dialog.querySelector('.certificate-read-note');
-    readNote.textContent = source?.status === 'pending'
-      ? source.pendingMessage || 'The certificate will be added here once it is available.'
+    readNote.textContent = pending
+      ? 'The sixth-place certificate will be added here once it is available.'
       : 'Open the original PDF for full resolution and surrounding context.';
     document.getElementById('certificate-source-nav').querySelectorAll('button').forEach((button, buttonIndex) => button.setAttribute('aria-pressed', String(buttonIndex === index)));
   }

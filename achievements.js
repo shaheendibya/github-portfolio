@@ -1,6 +1,6 @@
 // Achievement archive drawn from supplied certificates, the CV, and owner-reported results.
 // One entry per achievement; sources preserve every supporting certificate page.
-// Use a null year when no year is stated. Pending sources reserve a certificate tab without a URL or image.
+// Use a null year when no year is stated. Pending certificates have no source, URL, or image.
 window.portfolioAchievements = [
   {
     "id": "achievement-01",
@@ -42,11 +42,22 @@ window.portfolioAchievements = [
     "title": "IARCO 2026 — Senior Category",
     "result": "6th place",
     "year": 2026,
-    "description": "Sixth place in the Senior category of the International Academic Research Competition (IARCO) 2026. Completed four research bootcamps and scored 57/70 on Research 101 assessments.",
+    "description": "Sixth place in the Senior category of the International Academic Research Competition (IARCO) 2026.",
     "category": "academics",
     "kind": "award",
-    "certificateStatus": "placement-pending",
-    "note": "Placement certificate forthcoming. The participation certificate is available below (ID: 2026-S-453; dated 1 September 2026).",
+    "certificateStatus": "pending",
+    "note": "Placement certificate pending. This space is reserved for the sixth-place certificate.",
+    "sources": []
+  },
+  {
+    "id": "iarco-2026-participation",
+    "title": "IARCO 2026 — Senior Participation",
+    "result": "Participation",
+    "year": 2026,
+    "description": "Participated in the Senior category of the International Academic Research Competition (IARCO) on 1 September 2026. Completed four research bootcamps and scored 57/70 on Research 101 assessments.",
+    "category": "academics",
+    "kind": "participation",
+    "note": "Participation certificate ID: 2026-S-453.",
     "sources": [
       {
         "label": "IARCO 2026 participation certificate",
@@ -55,14 +66,6 @@ window.portfolioAchievements = [
         "page": 1,
         "image": "assets/certificates/iarco-2026-participation.webp",
         "thumbnail": "assets/certificates/iarco-2026-participation-thumb.webp"
-      },
-      {
-        "label": "IARCO 2026 placement certificate",
-        "tabLabel": "6th-place certificate",
-        "status": "pending",
-        "placeholder": "6th",
-        "pendingLabel": "Placement certificate pending",
-        "pendingMessage": "The sixth-place certificate will be added here once it is available."
       }
     ]
   },

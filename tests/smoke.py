@@ -212,13 +212,13 @@ with sync_playwright() as playwright:
 
     page.goto(base + 'archive.html', wait_until='networkidle')
     records = page.evaluate('window.portfolioAchievements')
-    assert len(records) == 33 and len({record['id'] for record in records}) == 33
+    assert len(records) == 34 and len({record['id'] for record in records}) == 34
     sources = {(source['url'], source['page']) for record in records for source in record['sources'] if source.get('url')}
     expected_sources = {('assets/documents/lifelong-achievements.pdf', number) for number in range(1, 30)}
     expected_sources |= {('assets/documents/insignia-competition.pdf', 1), ('assets/documents/cv.pdf', 1),
                          ('assets/documents/iarco-2026-participation.pdf', 1)}
     assert sources == expected_sources, 'Every page of the supplied documents must remain accessible'
-    expect(page.locator('.archive-card')).to_have_count(33)
+    expect(page.locator('.archive-card')).to_have_count(34)
     for category in {record['category'] for record in records}:
         page.locator(f'.archive-category[data-category="{category}"]').click()
         expect(page.locator('.archive-card')).to_have_count(sum(record['category'] == category for record in records))
@@ -246,13 +246,13 @@ with sync_playwright() as playwright:
     page.locator('#archive-search').fill('this-record-does-not-exist')
     expect(page.locator('#archive-empty')).to_be_visible()
     page.locator('#archive-empty-clear').click()
-    expect(page.locator('.archive-card')).to_have_count(33)
+    expect(page.locator('.archive-card')).to_have_count(34)
     page.locator('#archive-search').fill('soccerbot')
     page.locator('.archive-card-title').click()
     expect(page.locator('#certificate-result')).to_have_text('Champion')
     expect(page.locator('#certificate-original')).to_have_attribute('href', 'assets/documents/cv.pdf#page=1')
     page.locator('.certificate-close').click()
-    print('PASS: all 33 records, all document pages, categories, year/type/search filters, certificate sources, empty state, and CV-only record')
+    print('PASS: all 34 records, all document pages, categories, year/type/search filters, certificate sources, empty state, and CV-only record')
 
     for path in ['index.html', 'archive.html']:
         for width in [1440, 1024, 768, 390, 320]:
