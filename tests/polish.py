@@ -72,7 +72,7 @@ with sync_playwright() as playwright:
     assert page.locator('.toolkit>div>span').all_text_contents() == [
         'MATLAB', 'Simulink', 'Proteus', 'PSpice', 'AutoCAD', 'Arduino']
     page.goto(base + 'archive.html', wait_until='networkidle')
-    expect(page.locator('.archive-documents>a')).to_have_count(4)
+    expect(page.locator('.archive-documents>a')).to_have_count(5)
     for link in page.locator('.archive-documents>a').all():
         response = page.request.head(urljoin(base, link.get_attribute('href')))
         assert response.status == 200
@@ -86,7 +86,7 @@ with sync_playwright() as playwright:
     page.keyboard.press('Escape')
     page.locator('[data-category="engineering"]').click()
     expect(case_motion).to_have_count(0)
-    print('PASS: four source PDFs, PSpice, and CaseMotion category retained')
+    print('PASS: five source PDFs, PSpice, and CaseMotion category retained')
 
     reduced = browser.new_context(reduced_motion='reduce')
     reduced_page = reduced.new_page()

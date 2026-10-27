@@ -219,6 +219,68 @@ html { scroll-padding-top: 120px; }
 .recognition-small p:not(.eyebrow) { color: var(--muted); }
 .recognition-icon { border-color: var(--line); color: var(--green); background: var(--sage); }
 .recognition-link { background: var(--sage); color: var(--muted); border: 1px solid var(--line); }
+
+/* Two milestones share the feature tier; other highlights form a quiet strip. */
+.recognition-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.recognition-feature { min-width: 0; }
+.recognition-iarco {
+  background: linear-gradient(135deg, var(--sage), var(--surface));
+  border-color: var(--line);
+}
+.recognition-iarco .recognition-meta,
+.recognition-iarco .recognition-meta .tag,
+.recognition-iarco .recognition-copy > .eyebrow { color: var(--green); }
+.recognition-iarco .recognition-copy > p:not(.eyebrow) { color: var(--muted); }
+.iarco-rank-art {
+  position: absolute;
+  top: 68px;
+  right: 42px;
+  width: 160px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--line);
+  color: var(--green);
+  text-align: center;
+}
+.iarco-rank-art > span:first-child {
+  display: block;
+  font: 112px/1 var(--serif);
+  letter-spacing: -8px;
+}
+.iarco-rank-art sup {
+  display: inline-block;
+  font-size: 34px;
+  letter-spacing: -1px;
+  vertical-align: top;
+  padding-top: 13px;
+}
+.iarco-rank-art > span:last-child {
+  display: block;
+  margin-top: 8px;
+  font: 10px/1.5 var(--mono);
+  letter-spacing: 1.6px;
+}
+.recognition-copy > .recognition-evidence {
+  padding-top: 13px;
+  border-top: 1px solid var(--line);
+  font-size: 11px;
+  line-height: 1.8;
+}
+.recognition-evidence > span { color: var(--green); }
+.recognition-stack {
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: none;
+  align-items: stretch;
+  gap: 20px;
+}
+.recognition-stack .recognition-small {
+  min-width: 0;
+  padding: 24px;
+  gap: 14px;
+}
+.recognition-stack .recognition-small h3 { font-size: clamp(22px, 2vw, 25px); }
+.recognition-stack .recognition-link { min-width: 0; padding: 24px; font-size: 11px; }
+
 .about-section {
   width: min(1280px, calc(100% - 48px));
   margin-inline: auto;
@@ -302,6 +364,11 @@ html { scroll-padding-top: 120px; }
 [data-theme="dark"] .recognition-meta .tag,
 [data-theme="dark"] .recognition-copy > .eyebrow,
 [data-theme="dark"] .recognition-copy > p:not(.eyebrow) { color: #c8cfb7; }
+[data-theme="dark"] .recognition-iarco { background: linear-gradient(135deg, var(--sage), var(--surface)); }
+[data-theme="dark"] .recognition-iarco .recognition-meta,
+[data-theme="dark"] .recognition-iarco .recognition-meta .tag,
+[data-theme="dark"] .recognition-iarco .recognition-copy > .eyebrow { color: var(--green); }
+[data-theme="dark"] .recognition-iarco .recognition-copy > p:not(.eyebrow) { color: var(--muted); }
 [data-theme="dark"] .contact-section { background: #1b3025; }
 [data-theme="dark"] .project-visual { background: var(--sage); color: var(--green); }
 
@@ -320,6 +387,12 @@ html { scroll-padding-top: 120px; }
   .desktop-nav { gap: 16px; }
   .brand-name > span { display: none; }
   .hero { padding-top: 75px; }
+}
+@media (max-width: 950px) {
+  .recognition-stack { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .recognition-stack > .recognition-link { grid-column: 1 / -1; }
+  .iarco-rank-art { top: 68px; right: 25px; width: 145px; }
+  .iarco-rank-art > span:first-child { font-size: 100px; }
 }
 @media (max-width: 900px) {
   .portrait-orbit { right: 0; }
@@ -353,6 +426,8 @@ html { scroll-padding-top: 120px; }
   .about-section { width: calc(100% - 32px); border-radius: 20px; }
   .about-section .container { width: calc(100% - 40px); }
   .timeline article { padding: 22px; }
+  .recognition-grid { grid-template-columns: minmax(0, 1fr); }
+  .iarco-rank-art { right: 35px; }
 }
 @media (max-width: 570px) {
   .header-inner.container { height: 61px; gap: 10px; }
@@ -379,6 +454,10 @@ html { scroll-padding-top: 120px; }
   .timeline { padding-left: 20px; }
   .timeline article, .timeline article + article { padding: 18px; }
   .timeline .timeline-top { align-items: start; flex-wrap: wrap; gap: 8px; }
+  .recognition-stack { grid-template-columns: minmax(0, 1fr); }
+  .recognition-stack .recognition-small,
+  .recognition-stack .recognition-link { padding: 23px 22px; }
+  .iarco-rank-art { top: 72px; right: 25px; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }

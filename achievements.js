@@ -1,6 +1,6 @@
-// Achievement archive transcribed from the three supplied documents.
+// Achievement archive drawn from supplied certificates, the CV, and owner-reported results.
 // One entry per achievement; sources preserve every supporting certificate page.
-// Use a null year when no year is stated. CV-only records have no certificate image.
+// Use a null year when no year is stated. Pending sources reserve a certificate tab without a URL or image.
 window.portfolioAchievements = [
   {
     "id": "achievement-01",
@@ -34,6 +34,35 @@ window.portfolioAchievements = [
         "page": 1,
         "image": null,
         "thumbnail": null
+      }
+    ]
+  },
+  {
+    "id": "iarco-2026-senior",
+    "title": "IARCO 2026 — Senior Category",
+    "result": "6th place",
+    "year": 2026,
+    "description": "Sixth place in the Senior category of the International Academic Research Competition (IARCO) 2026. Completed four research bootcamps and scored 57/70 on Research 101 assessments.",
+    "category": "academics",
+    "kind": "award",
+    "certificateStatus": "placement-pending",
+    "note": "Placement certificate forthcoming. The participation certificate is available below (ID: 2026-S-453; dated 1 September 2026).",
+    "sources": [
+      {
+        "label": "IARCO 2026 participation certificate",
+        "tabLabel": "Participation certificate",
+        "url": "assets/documents/iarco-2026-participation.pdf",
+        "page": 1,
+        "image": "assets/certificates/iarco-2026-participation.webp",
+        "thumbnail": "assets/certificates/iarco-2026-participation-thumb.webp"
+      },
+      {
+        "label": "IARCO 2026 placement certificate",
+        "tabLabel": "6th-place certificate",
+        "status": "pending",
+        "placeholder": "6th",
+        "pendingLabel": "Placement certificate pending",
+        "pendingMessage": "The sixth-place certificate will be added here once it is available."
       }
     ]
   },

@@ -91,5 +91,39 @@
     "sha256": "9675499371191f0e68e2a38f0b52badc37007c421374034601a194ba18b69771",
     "page_count": 11,
     "note": "Complete uploaded scan with every page rotated upright. Includes the blank-recipient duplicate on page 10 to preserve the uploaded page order."
-  }
+  },
+  "additional_certificates": [
+    {
+      "record_id": "iarco-2026-senior",
+      "source_filename": "Shaheen_Rahman_Dibya_IARCO_2026_2026-09-15_11-00-49.pdf",
+      "path": "assets/documents/iarco-2026-participation.pdf",
+      "sha256": "f3a752c3b7e81d248832f70f0ee2da1aeadb1a85313b4d6e0433964ea2237672",
+      "page_count": 1,
+      "processing": "Original upright landscape PDF copied byte-for-byte. WebP preview and thumbnail rendered at 1500 px and 600 px wide.",
+      "certificate_facts": {
+        "recipient": "Shaheen Rahman Dibya",
+        "institution": "Islamic University of Technology",
+        "competition": "International Academic Research Competition (IARCO)",
+        "edition": 3,
+        "year": 2026,
+        "category": "Senior",
+        "certificate_type": "Participation",
+        "date": "2026-09-01",
+        "certificate_id": "2026-S-453",
+        "research_101_score": {
+          "earned": 57,
+          "maximum": 70
+        },
+        "bootcamps": 4
+      },
+      "owner_reported_result": {
+        "placement": 6,
+        "category": "Senior",
+        "year": 2026,
+        "source": "Portfolio owner",
+        "placement_certificate_status": "pending"
+      },
+      "future_certificate": "When supplied, replace the status:pending source on iarco-2026-senior with the actual placement certificate URL, page, preview and thumbnail. Keep the existing participation source and the stable achievement ID; update the placement status and pending note at the same time."
+    }
+  ]
 }

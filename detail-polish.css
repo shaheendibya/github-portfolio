@@ -112,6 +112,17 @@
   color: var(--muted);
 }
 
+.archive-card-status {
+  align-self: flex-start;
+  margin: 0 0 14px;
+  padding: 5px 9px;
+  border: 1px dashed var(--line);
+  border-radius: 6px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
 html[data-theme="dark"] .archive-card-result[data-kind="award"],
 html[data-theme="dark"] .certificate-detail > .certificate-result[data-kind="award"] {
   background: #3c3024;

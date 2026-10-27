@@ -52,6 +52,7 @@
     return source.page && !url.includes('#') ? `${url}#page=${source.page}` : url;
   }
   function citation(source) {
+    if (source.status === 'pending') return source.pendingLabel || `${source.label || 'Certificate'} · pending`;
     return `${source.label || 'Source document'}${source.page ? ` · p. ${source.page}` : ''}`;
   }
   function resultText(record) { return record.result || kindNames[recordKind(record)] || 'Achievement record'; }
@@ -116,10 +117,11 @@
 
   function documentPreview(source) {
     const preview = node('div', 'archive-document-preview');
-    preview.append(node('span', 'archive-preview-monogram', 'D.'));
+    const pending = source?.status === 'pending';
+    preview.append(node('span', 'archive-preview-monogram', pending ? source.placeholder || '—' : 'D.'));
     preview.append(node('span', 'archive-preview-rule'));
     preview.append(node('span', 'archive-preview-source', source && source.label ? source.label : 'Document record'));
-    preview.append(node('span', 'archive-preview-label', 'View original source'));
+    preview.append(node('span', 'archive-preview-label', pending ? source.pendingLabel || 'Certificate pending' : 'View original source'));
     return preview;
   }
 
@@ -158,7 +160,8 @@
     const description = node('p', 'archive-card-description', record.description || 'See the original document for the complete record.');
     const source = node('div', 'archive-card-citation');
     if (primary && primary.url) {
-      const original = node('a', '', `${citation(primary)}${sources(record).length > 1 ? ` +${sources(record).length - 1} source${sources(record).length > 2 ? 's' : ''}` : ''}`);
+      const additional = sources(record).filter(item => item.url).length - 1;
+      const original = node('a', '', `${citation(primary)}${additional > 0 ? ` +${additional} source${additional > 1 ? 's' : ''}` : ''}`);
       original.href = sourceLink(primary);
       original.target = '_blank';
       original.rel = 'noopener';
@@ -169,6 +172,8 @@
     arrow.setAttribute('aria-hidden', 'true');
     source.append(arrow);
     content.append(meta, title, result, description, source);
+    const pending = sources(record).find(item => item.status === 'pending');
+    if (pending) content.insertBefore(node('p', 'archive-card-status', pending.pendingLabel || 'Certificate pending'), source);
     card.append(preview, content);
     return card;
   }
@@ -232,6 +237,11 @@
     const original = document.getElementById('certificate-original');
     original.hidden = !source || !source.url;
     if (source && source.url) original.href = sourceLink(source);
+    else original.removeAttribute('href');
+    const readNote = dialog.querySelector('.certificate-read-note');
+    readNote.textContent = source?.status === 'pending'
+      ? source.pendingMessage || 'The certificate will be added here once it is available.'
+      : 'Open the original PDF for full resolution and surrounding context.';
     document.getElementById('certificate-source-nav').querySelectorAll('button').forEach((button, buttonIndex) => button.setAttribute('aria-pressed', String(buttonIndex === index)));
   }
 
