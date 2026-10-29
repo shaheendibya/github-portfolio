@@ -1,8 +1,8 @@
 # Add actual work to a project page
 
-The homepage currently features five projects with original resources: Stock Market Crash Simulator, SAP-1 8-bit Computer, Residential Electrical Services, Golf Streak, and the EV, PHEV & HEV Literature Review. Each has a report, repository link, authentic cover, gallery, and author/team credits.
+The homepage features seven projects. The original five report-backed projects retain their reports and repositories; separate Soccerbot and RC racing hardware pages now include component/tool inventories and original event-photo galleries. Code or repository links are included only when supplied.
 
-EV Longitudinal Dynamics and RC Racing & Soccerbot retain their stable detail-page URLs with `featured: false`. Add the remaining Formula IUT models and robotics code/photos to those existing entries when available, then set `featured: true` to include them in the homepage and featured-project navigation.
+EV Longitudinal Dynamics remains unfeatured until its Formula IUT models are supplied. The old combined RC Racing & Soccerbot URL remains an overview linking to `project.html?project=soccerbot` and `project.html?project=rc-racing`. Keep those separate hardware pages and their competition records distinct.
 
 ## Option 1: Create a repository for source files
 
@@ -38,7 +38,7 @@ Preserve original documents and native project files. For derived browser copies
 
 Each entry has a unique, stable `slug`. Its existing URL is `project.html?project=SLUG`. Keep that slug when adding material so shared links continue to work.
 
-The main content fields are `title`, `category`, `label`, `description`, `detail`, `role`, `context`, `contribution`, `overview` (paragraph strings), `focus` (strings), `highlights` (`value`/`label` objects), `tags`, and `evidence` (`label`/`url` source links). The `art` field identifies a conceptual illustration used when a real cover is absent. The five current featured projects use actual covers.
+The main content fields are `title`, `category`, `label`, `description`, `detail`, `role`, `context`, `contribution`, `overview` (paragraph strings), `focus` (strings), `highlights` (`value`/`label` objects), `tags`, and `evidence` (`label`/`url` source links). The `art` field identifies a conceptual illustration used when a real cover is absent. All seven current featured projects use actual covers. Hardware pages can also supply `components` as `{name, details}` rows, `tools` as strings, and an optional `buildNote`; empty groups remain hidden.
 
 Use `credits` as an array of author names. Keep individual contributions distinct from the team's overall deliverables. `featured: false` preserves a detail page while excluding it from homepage cards and featured previous/next navigation; `true` includes it. An omitted `featured` value also includes the project.
 
@@ -115,13 +115,15 @@ The literature review preserves the original DOCX alongside its generated PDF. I
 
 ## Check and publish
 
+After changing JavaScript or CSS, run `python3 scripts/version_assets.py` to refresh content-hash asset references.
+
 Run the static site locally from the portfolio checkout:
 
 ```sh
 python3 -m http.server 8000 --bind 127.0.0.1
 ```
 
-With the environment's Python Playwright and Chromium available, run `python3 tests/smoke.py`. The browser checks cover the five featured projects, preserved legacy URLs, real covers/media, report/repository hero actions, team credits, launch-command copying, native-file downloads, enlarged-gallery navigation, the achievement archive, and responsive layouts. They exercise the website; native MATLAB, Proteus, and AutoCAD projects require their own software and validation.
+With the environment's Python Playwright and Chromium available, run `python3 tests/smoke.py`. The browser checks cover all seven featured projects, preserved legacy URLs, real covers/media, report/repository hero actions, team credits, launch-command copying, native-file downloads, enlarged-gallery navigation, the achievement archive, and responsive layouts. They exercise the website; native MATLAB, Proteus, and AutoCAD projects require their own software and validation.
 
 Commit and push changes to `main`, or use **Commit changes** after browser edits. In repository **Settings → Pages**, choose **Deploy from a branch**, then **main** and **/ (root)**, and save. GitHub Pages publishes updates after the branch changes are deployed.
 

@@ -107,6 +107,27 @@
   document.getElementById('project-credits').replaceChildren(...credits.map(name => node('li', '', name)));
   document.getElementById('project-credits-section').hidden = !credits.length;
 
+  const components = Array.isArray(project.components) ? project.components.filter(
+    component => component && typeof component.name === 'string' && component.name.trim()
+  ) : [];
+  const tools = Array.isArray(project.tools) ? project.tools.filter(
+    tool => typeof tool === 'string' && tool.trim()
+  ) : [];
+  document.getElementById('project-components').replaceChildren(...components.map(component => {
+    const row = node('tr');
+    const name = node('th', '', component.name);
+    name.scope = 'row';
+    row.append(name, node('td', '', typeof component.details === 'string' ? component.details : ''));
+    return row;
+  }));
+  document.getElementById('project-components-section').hidden = !components.length;
+  document.getElementById('project-build-tools').replaceChildren(...tools.map(tool => node('li', '', tool)));
+  document.getElementById('project-build-tools-section').hidden = !tools.length;
+  const buildNote = document.getElementById('project-build-note');
+  buildNote.textContent = typeof project.buildNote === 'string' ? project.buildNote : '';
+  buildNote.hidden = !buildNote.textContent.trim();
+  document.getElementById('project-build-section').hidden = !(components.length || tools.length);
+
   if (project.launch?.instructions) {
     document.getElementById('project-launch-title').textContent = project.launch.label;
     document.getElementById('project-launch-instructions').textContent = project.launch.instructions;
@@ -127,7 +148,7 @@
     }
   }
 
-  const resourceTypes = {code: 'Source code', repository: 'GitHub repository', report: 'Project report', presentation: 'Presentation', demo: 'Demo', video: 'Video', files: 'Project files'};
+  const resourceTypes = {achievement: 'Competition record', certificate: 'Competition certificate', code: 'Source code', repository: 'GitHub repository', report: 'Project report', presentation: 'Presentation', demo: 'Demo', video: 'Video', files: 'Project files'};
   const resources = (project.resources || []).map(resource => {
     const anchor = link(resource.label, resource.url, 'project-resource');
     if (!anchor) return null;

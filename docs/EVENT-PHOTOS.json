@@ -1,0 +1,236 @@
+{
+  "source_archive": "pics of events.zip",
+  "source_sha256": "f37ee569ffffeea8e6aa489d752c2d18ff9b1fda1d3fec290298c6928279e9d5",
+  "supplied_photos": 71,
+  "unique_files": 68,
+  "published_photos": 13,
+  "selection": "Five ACCELERATE photos, five Techathon photos, and three EEE Day photos chosen for complementary team, prize, event and build views. Original image content retained; EXIF orientation normalized and images encoded as WebP without upscaling. No generated imagery or retouching.",
+  "exact_duplicate_groups": [
+    [
+      21,
+      66
+    ],
+    [
+      22,
+      68
+    ],
+    [
+      23,
+      69
+    ]
+  ],
+  "omitted_near_duplicate_groups": [
+    [
+      1,
+      3
+    ],
+    [
+      5,
+      8
+    ],
+    [
+      9,
+      10
+    ],
+    [
+      12,
+      14,
+      17
+    ],
+    [
+      13,
+      18
+    ],
+    [
+      6,
+      11
+    ],
+    [
+      24,
+      25,
+      26,
+      27,
+      28
+    ],
+    [
+      29,
+      30,
+      32
+    ],
+    [
+      31,
+      33,
+      34,
+      35,
+      36
+    ],
+    [
+      38,
+      47
+    ],
+    [
+      39,
+      42,
+      48,
+      49,
+      51
+    ],
+    [
+      40,
+      64
+    ],
+    [
+      44,
+      50,
+      54
+    ],
+    [
+      45,
+      52,
+      53
+    ]
+  ],
+  "event_mapping_notes": "Files repeated across EEE Day and Techathon folders (21/66,22/68,23/69) were omitted because their event identity is ambiguous. Automech story collages were omitted from the championship showcase; Automech participation/finalist records remain distinct.",
+  "selected": [
+    {
+      "event_id": "accelerate-2025",
+      "review_id": 15,
+      "source_path": "pics of events/Accelerate/photo_6246576465549924893_y.jpg",
+      "source_sha256": "e34305d3ef5af17460282cc77b775acf2f87d0779d15c5bbf7d92a1f175b9b4d",
+      "published_path": "assets/events/accelerate-2025/team.webp",
+      "published_sha256": "8d8e3d0c4e2272415ccfd38281b21e6d892f74be9eab424493312acfc46ff536",
+      "width": 1280,
+      "height": 960
+    },
+    {
+      "event_id": "accelerate-2025",
+      "review_id": 10,
+      "source_path": "pics of events/Accelerate/photo_6246576465549924888_y.jpg",
+      "source_sha256": "ebe8e7f950b2250d1a7d698a95094e96732773fc89ebf5e6fa83aba60f3eff22",
+      "published_path": "assets/events/accelerate-2025/presentation.webp",
+      "published_sha256": "b10f0c6d5adc97faa64738ce83675e380b71d08eb797b8444b52c2b3d3515cb6",
+      "width": 1280,
+      "height": 960
+    },
+    {
+      "event_id": "accelerate-2025",
+      "review_id": 1,
+      "source_path": "pics of events/Accelerate/photo_6246576465549924878_y.jpg",
+      "source_sha256": "ee83033ff12018a0f0811866f26126abfc20dc8a100d5bc135b64a9a8737b32b",
+      "published_path": "assets/events/accelerate-2025/car-and-controller.webp",
+      "published_sha256": "8a55dd204c11fa5f3bd92c7875179d8eac026f06a1b74674d4bbda8a24767d78",
+      "width": 960,
+      "height": 1280
+    },
+    {
+      "event_id": "accelerate-2025",
+      "review_id": 6,
+      "source_path": "pics of events/Accelerate/photo_6246576465549924883_y.jpg",
+      "source_sha256": "a680716d763db9deb3a10a93424fb40a907dc9fadc106295e01028624ed6e434",
+      "published_path": "assets/events/accelerate-2025/electronics.webp",
+      "published_sha256": "21729d732fdb915eca5595e9293db18e2cd016e5a4c6203d7d1d25ee06fbd816",
+      "width": 1280,
+      "height": 960
+    },
+    {
+      "event_id": "accelerate-2025",
+      "review_id": 13,
+      "source_path": "pics of events/Accelerate/photo_6246576465549924891_y.jpg",
+      "source_sha256": "ceeabe92d0eaf468db7a3875d2d8d3ae9f6eee55aa56ddddcabe2fb27bcdfa75",
+      "published_path": "assets/events/accelerate-2025/race-grid.webp",
+      "published_sha256": "8b0a9da683747621c7f980e2ac2f837da2a46b745e9894eb501cdf90d2e07fe6",
+      "width": 1280,
+      "height": 960
+    },
+    {
+      "event_id": "techathon-2025",
+      "review_id": 55,
+      "source_path": "pics of events/Tecathon 2.0/photo_6246576465549924965_y.jpg",
+      "source_sha256": "f7ea913f9d779fec86710c49642e977cc9f2f59786d64d75e0f8d794c433c5ac",
+      "published_path": "assets/events/techathon-2025/champion-team.webp",
+      "published_sha256": "8b0d04952c9000ccab40b2339e7f95b153e2a389023fff8756805b54e1ff0501",
+      "width": 1280,
+      "height": 960
+    },
+    {
+      "event_id": "techathon-2025",
+      "review_id": 38,
+      "source_path": "pics of events/Tecathon 2.0/photo_6246576465549924918_y.jpg",
+      "source_sha256": "21e1c768defdf95f18d3a463ed3c19e01db6a4073e06faeed326af00511ec078",
+      "published_path": "assets/events/techathon-2025/award-presentation.webp",
+      "published_sha256": "63b03642e6a1a5206f616709e0075c466fc113ffd8d6f9f09f667aad6c0e2e6b",
+      "width": 1280,
+      "height": 960
+    },
+    {
+      "event_id": "techathon-2025",
+      "review_id": 44,
+      "source_path": "pics of events/Tecathon 2.0/photo_6246576465549924947_y.jpg",
+      "source_sha256": "e4a60fc95a6de53fc32c9bd0d7aecde73942f566c096cb73639b9332ecff3592",
+      "published_path": "assets/events/techathon-2025/workbench.webp",
+      "published_sha256": "30b60d994f9f710533ed7409651272702108716b69b87da95753a956f6a916bd",
+      "width": 1280,
+      "height": 960
+    },
+    {
+      "event_id": "techathon-2025",
+      "review_id": 56,
+      "source_path": "pics of events/Tecathon 2.0/photo_6246576465549924968_y.jpg",
+      "source_sha256": "eb8aad8ef3217eb4293f535adc910d9b7dcb0225dd9246254259c65e7c7314c6",
+      "published_path": "assets/events/techathon-2025/course.webp",
+      "published_sha256": "ceb496d9498e0d793b02d9f11f1ca91d3d92fa919a4de6182792253a431e9d07",
+      "width": 1280,
+      "height": 720
+    },
+    {
+      "event_id": "techathon-2025",
+      "review_id": 41,
+      "source_path": "pics of events/Tecathon 2.0/photo_6246576465549924941_y.jpg",
+      "source_sha256": "bf51690c2675a2ad0172d4462dd39ed39278e35c6d714ecbe5a4eacb83645471",
+      "published_path": "assets/events/techathon-2025/event-group.webp",
+      "published_sha256": "8bdf9d822b499b308857eee48097a21cbf19b411216b46210e45ccb38bdabec3",
+      "width": 1280,
+      "height": 960
+    },
+    {
+      "event_id": "eee-day-2025",
+      "review_id": 24,
+      "source_path": "pics of events/EEE Day/photo_6246576465549924985_y.jpg",
+      "source_sha256": "fdbf19174847be41c794b56315664def6ab211de76d6d697dc1d4d097cff9751",
+      "published_path": "assets/events/eee-day-2025/winner-portrait.webp",
+      "published_sha256": "2b43da7b5d4eb8206e66312659d73daa8f2565193114987ea7e0d2cc0d397ff3",
+      "width": 1280,
+      "height": 1070
+    },
+    {
+      "event_id": "eee-day-2025",
+      "review_id": 29,
+      "source_path": "pics of events/EEE Day/photo_6246576465549924997_y.jpg",
+      "source_sha256": "419cdc1884c4c1fe1d625724d413f2f538807d07aa6f5aa9e3cf1f0a5f0775c4",
+      "published_path": "assets/events/eee-day-2025/champion-trophy.webp",
+      "published_sha256": "8cab523ca9e50031ff6bfc287a093b504996b1d74bca904dada002ef44a3ca76",
+      "width": 960,
+      "height": 1280
+    },
+    {
+      "event_id": "eee-day-2025",
+      "review_id": 36,
+      "source_path": "pics of events/EEE Day/photo_6246576465549925005_y.jpg",
+      "source_sha256": "8d54a82186c25ff0f8cfa64c93a12da38f29ce02f09359024353c3bec1d51bca",
+      "published_path": "assets/events/eee-day-2025/ceremony.webp",
+      "published_sha256": "97ad487b760618a0b457cbee8d06854fe5337433b0df6c273cd039e4b6a1ed20",
+      "width": 1280,
+      "height": 960
+    }
+  ],
+  "awaiting_original_files": [
+    "Class II scholarship photograph with Helmut Kutin",
+    "IUT Excellence Award 2026 portrait",
+    "IUT Excellence Award 2026 team photograph"
+  ],
+  "component_inventory": "Soccerbot list was supplied twice and recorded once. Quantities are stated only where provided. RC motor-driver model BTW7960 is preserved as supplied; no code, wiring diagram or battery arrangement has been invented.",
+  "additional_owner_supplied_context": {
+    "iut_excellence": "The owner identifies the separately pasted 2026 portrait and three-person photograph as IUT Excellence recognition with the UPC team. The existing IUT certificate is dated 13 May 2026; team names are preserved from the UPC record. Original photo files are not yet available in this upload ZIP.",
+    "class_ii": "The owner identifies the separately pasted childhood photograph as receiving the Class II second-position scholarship award from Helmut Kutin. This is reserved for later prominence than university and robotics achievements; the existing scholarship certificate records the year 2012. Original photo file not yet available."
+  }
+}

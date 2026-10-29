@@ -34,22 +34,22 @@ with sync_playwright() as playwright:
     page.on('response', lambda response: http_errors.append((response.status, response.url)) if response.status >= 400 else None)
     page.goto(base, wait_until='networkidle')
     expect(page).to_have_title('Shaheen Rahman Dibya — Engineering Portfolio')
-    expect(page.locator('.project-card:visible')).to_have_count(5)
+    expect(page.locator('.project-card:visible')).to_have_count(7)
     assert page.locator('.portrait-frame img').evaluate('(image) => image.complete && image.naturalWidth > 0')
-    for category, count in [('simulation', 1), ('hardware', 1), ('design', 1),
-                            ('software', 1), ('research', 1), ('all', 5)]:
+    for category, count in [('simulation', 1), ('hardware', 3), ('design', 1),
+                            ('software', 1), ('research', 1), ('all', 7)]:
         button = page.locator(f'[data-project-filter="{category}"]')
         button.click()
         expect(page.locator('.project-card:visible')).to_have_count(count)
         expect(button).to_have_attribute('aria-pressed', 'true')
         expect(page.locator('#project-count')).to_have_text(f'Showing {count} project' + ('' if count == 1 else 's'))
     projects = page.evaluate('window.portfolioProjects')
-    assert len(projects) == len({project['slug'] for project in projects}) == 7
+    assert len(projects) == len({project['slug'] for project in projects}) == 9
     featured = [project for project in projects if project.get('featured', True)]
     legacy = [project for project in projects if project.get('featured') is False]
     expected_slugs = ['stock-market-crash-simulator', 'sap-1-computer',
                       'residential-electrical-services', 'golf-streak',
-                      'ev-literature-review']
+                      'ev-literature-review', 'soccerbot', 'rc-racing']
     assert [project['slug'] for project in featured] == expected_slugs
     assert {project['slug'] for project in legacy} == {'ev-longitudinal-dynamics', 'rc-racing-soccerbot'}
     assert page.locator('#project-list .project-open').evaluate_all('(links) => links.map(link => link.getAttribute("href"))') == [
@@ -77,6 +77,7 @@ with sync_playwright() as playwright:
         expect(page.locator('#project-image-caption')).to_have_text(image['caption'])
         expect(page.locator('#project-image-original')).to_have_attribute('href', image['src'])
 
+    hardware_builds = {'soccerbot', 'rc-racing'}
     native_downloads = set()
     for index, project in enumerate(featured):
         page.goto(base, wait_until='networkidle')
@@ -96,7 +97,10 @@ with sync_playwright() as playwright:
         expect(page.locator('.project-pagination-previous')).to_have_attribute('href', previous_href)
         expect(page.locator('.project-pagination-next')).to_have_attribute('href', next_href)
 
-        expect(page.locator('#project-resources-section')).to_be_visible()
+        if project['resources']:
+            expect(page.locator('#project-resources-section')).to_be_visible()
+        else:
+            expect(page.locator('#project-resources-section')).to_be_hidden()
         expect(page.locator('#project-resources a')).to_have_count(len(project['resources']))
         for resource_index, resource in enumerate(project['resources']):
             link = page.locator('#project-resources a').nth(resource_index)
@@ -112,28 +116,50 @@ with sync_playwright() as playwright:
                 if extension in {'.dwg', '.pdsprj', '.docx'}:
                     assert link.get_attribute('download') is not None, resource['url']
                     native_downloads.add(extension)
-        report = next(resource for resource in project['resources'] if resource['kind'] == 'report')
-        repository = next(resource for resource in project['resources']
-                          if urlsplit(resource['url']).netloc == 'github.com'
-                          and len(urlsplit(resource['url']).path.strip('/').split('/')) == 2)
-        expect(page.locator('#project-actions a')).to_have_count(2)
-        expect(page.locator('#project-actions').get_by_role('link', name='Read report', exact=False)).to_have_attribute('href', report['url'])
-        expect(page.locator('#project-actions').get_by_role('link', name='View on GitHub', exact=False)).to_have_attribute('href', repository['url'])
-
-        assert project['credits'], project['slug']
-        expect(page.locator('#project-credits-section')).to_be_visible()
-        expect(page.locator('#project-credits li')).to_have_text(project['credits'])
-        if project['slug'] != 'ev-literature-review':
-            assert project.get('launch'), project['slug']
-            expect(page.locator('#project-launch-section')).to_be_visible()
-            expect(page.locator('#project-launch-section')).to_contain_text(project['launch']['instructions'])
-            expect(page.locator('#project-launch-section')).to_contain_text(project['launch']['requirements'])
-            if project['launch'].get('command'):
-                expect(page.locator('#project-launch-command')).to_have_text(project['launch']['command'])
-                page.locator('#project-copy-command').click()
-                assert page.evaluate('navigator.clipboard.readText()') == project['launch']['command']
+        if project['slug'] in hardware_builds:
+            # These builds are documented with real parts and photos, not source code.
+            assert not project.get('launch'), project['slug']
+            assert not any(resource['kind'] in {'code', 'repository', 'report'}
+                           for resource in project['resources']), project['slug']
+            expect(page.locator('#project-actions').get_by_role('link', name='Read report', exact=False)).to_have_count(0)
+            expect(page.locator('#project-actions').get_by_role('link', name='View on GitHub', exact=False)).to_have_count(0)
+            expect(page.locator('#project-build-section')).to_be_visible()
+            assert project['components'] and project['tools'], project['slug']
+            expect(page.locator('#project-components tr')).to_have_count(len(project['components']))
+            expect(page.locator('#project-components th')).to_have_text([part['name'] for part in project['components']])
+            expect(page.locator('#project-components td')).to_have_text([part['details'] for part in project['components']])
+            expect(page.locator('#project-build-tools li')).to_have_text(project['tools'])
+            expect(page.locator('#project-launch-section')).to_be_hidden()
+            credits = project.get('credits', [])
+            expect(page.locator('#project-credits li')).to_have_count(len(credits))
+            if credits:
+                expect(page.locator('#project-credits-section')).to_be_visible()
+                expect(page.locator('#project-credits li')).to_have_text(credits)
+            else:
+                expect(page.locator('#project-credits-section')).to_be_hidden()
         else:
-            expect(page.locator('#project-launch-section')).not_to_be_visible()
+            report = next(resource for resource in project['resources'] if resource['kind'] == 'report')
+            repository = next(resource for resource in project['resources']
+                              if urlsplit(resource['url']).netloc == 'github.com'
+                              and len(urlsplit(resource['url']).path.strip('/').split('/')) == 2)
+            expect(page.locator('#project-actions a')).to_have_count(2)
+            expect(page.locator('#project-actions').get_by_role('link', name='Read report', exact=False)).to_have_attribute('href', report['url'])
+            expect(page.locator('#project-actions').get_by_role('link', name='View on GitHub', exact=False)).to_have_attribute('href', repository['url'])
+            expect(page.locator('#project-build-section')).to_be_hidden()
+            assert project['credits'], project['slug']
+            expect(page.locator('#project-credits-section')).to_be_visible()
+            expect(page.locator('#project-credits li')).to_have_text(project['credits'])
+            if project['slug'] != 'ev-literature-review':
+                assert project.get('launch'), project['slug']
+                expect(page.locator('#project-launch-section')).to_be_visible()
+                expect(page.locator('#project-launch-section')).to_contain_text(project['launch']['instructions'])
+                expect(page.locator('#project-launch-section')).to_contain_text(project['launch']['requirements'])
+                if project['launch'].get('command'):
+                    expect(page.locator('#project-launch-command')).to_have_text(project['launch']['command'])
+                    page.locator('#project-copy-command').click()
+                    assert page.evaluate('navigator.clipboard.readText()') == project['launch']['command']
+            else:
+                expect(page.locator('#project-launch-section')).not_to_be_visible()
 
         expect(page.locator('#project-gallery-section')).to_be_visible()
         assert len(project['gallery']) >= 2, project['slug']
@@ -208,7 +234,7 @@ with sync_playwright() as playwright:
     page.evaluate("() => { navigator.clipboard.writeText = async () => { throw new Error('Permission denied'); }; }")
     page.locator('#copy-email').click()
     expect(page.locator('#copy-status')).to_contain_text('Please select and copy')
-    print('PASS: five project categories/pages, featured pagination, legacy URLs, report/repository actions, credits, launch instructions, native downloads, full-size gallery navigation, resource filtering, missing states, and clipboard')
+    print('PASS: five project categories, seven pages, featured pagination, legacy URLs, report/repository actions, credits, launch instructions, native downloads, full-size gallery navigation, resource filtering, missing states, and clipboard')
 
     page.goto(base + 'archive.html', wait_until='networkidle')
     records = page.evaluate('window.portfolioAchievements')
@@ -290,5 +316,5 @@ with sync_playwright() as playwright:
     assert not errors, errors
     assert not failed_requests, failed_requests
     assert not http_errors, http_errors
-    print('PASS: five viewport widths on portfolio/archive, all five details at 320px/1440px, mobile navigation, achievement deep link, no JavaScript or resource errors')
+    print('PASS: five viewport widths on portfolio/archive, all seven details at 320px/1440px, mobile navigation, achievement deep link, no JavaScript or resource errors')
     browser.close()

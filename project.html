@@ -15,10 +15,11 @@
   <link rel="stylesheet" href="polish.css?v=89034255e917">
   <link rel="stylesheet" href="detail-polish.css?v=6c1780caa1e9">
   <link rel="stylesheet" href="identity.css?v=28a35aa760e2">
+  <link rel="stylesheet" href="hardware.css?v=9eec3c9c375e">
   <noscript><style>.project-detail-loading { display: none; }</style></noscript>
-  <script src="projects.js?v=566e3f8930ba" defer></script>
+  <script src="projects.js?v=1f846c62a381" defer></script>
   <script src="app.js?v=6f6972461015" defer></script>
-  <script src="project.js?v=19aafc9f0f97" defer></script>
+  <script src="project.js?v=1db894213849" defer></script>
   <script src="polish.js?v=251fa7a9a225" defer></script>
   <script src="identity.js?v=c2fee371d605" defer></script>
 </head>
@@ -70,6 +71,24 @@
           <section class="project-detail-credits" id="project-credits-section" aria-labelledby="project-credits-title" hidden><h2 class="section-label" id="project-credits-title">Project team</h2><ul id="project-credits"></ul></section>
         </aside>
       </div>
+
+      <section class="project-hardware-build" id="project-build-section" aria-labelledby="project-build-title" hidden>
+        <div class="project-detail-section-heading"><div><p class="section-label">Parts &amp; workshop</p><h2 id="project-build-title">The hardware behind the build.</h2></div></div>
+        <p class="hardware-build-note" id="project-build-note" hidden></p>
+        <div class="hardware-build-grid">
+          <div class="hardware-components" id="project-components-section" hidden>
+            <table class="hardware-components-table" id="project-components-table">
+              <caption>Components used in this build</caption>
+              <thead><tr><th scope="col">Component</th><th scope="col">Build details</th></tr></thead>
+              <tbody id="project-components"></tbody>
+            </table>
+          </div>
+          <section class="hardware-tools" id="project-build-tools-section" aria-labelledby="project-build-tools-title" hidden>
+            <h3 id="project-build-tools-title">Tools used</h3>
+            <ul class="hardware-tools-list" id="project-build-tools"></ul>
+          </section>
+        </div>
+      </section>
 
       <section class="project-detail-resources" id="project-resources-section" aria-labelledby="project-resources-title" hidden><div class="project-detail-section-heading"><div><p class="section-label">Explore the work</p><h2 id="project-resources-title">Files, links &amp; further reading.</h2></div></div><div class="project-detail-resource-grid" id="project-resources"></div></section>
 

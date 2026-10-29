@@ -15,7 +15,10 @@
   <link rel="stylesheet" href="polish.css?v=89034255e917">
   <link rel="stylesheet" href="identity.css?v=28a35aa760e2">
   <link rel="stylesheet" href="participation.css?v=72d3f442ec92">
-  <script src="projects.js?v=566e3f8930ba" defer></script>
+  <link rel="stylesheet" href="events.css?v=44dd59e977d8">
+  <script src="projects.js?v=1f846c62a381" defer></script>
+  <script src="events.js?v=15c69cb11104" defer></script>
+  <script src="event-gallery.js?v=0a5a0f50340c" defer></script>
   <script src="app.js?v=6f6972461015" defer></script>
   <script src="polish.js?v=251fa7a9a225" defer></script>
   <script src="identity.js?v=c2fee371d605" defer></script>
@@ -76,6 +79,12 @@
       </div>
     </section>
 
+    <section id="event-showcase" class="section container event-showcase" aria-labelledby="event-showcase-title">
+      <div class="section-heading"><div><p class="section-label">ON THE COMPETITION FLOOR</p><h2 id="event-showcase-title">Built together.<br><em>Won together.</em></h2></div><p class="event-intro">Three championship moments, seen through the teams, the prizes, and the machines. A small selection of original event photographs.</p></div>
+      <div class="event-grid" id="event-grid"></div>
+      <noscript><p>Explore the <a href="project.html?project=soccerbot">Soccerbot build</a> and <a href="project.html?project=rc-racing">RC racing builds</a> for their component lists and event photographs.</p></noscript>
+    </section>
+
     <section id="iarco-participation" class="section container participation-showcase" aria-labelledby="iarco-participation-title">
       <div class="participation-panel">
         <div class="participation-panel-heading"><p class="section-label">PARTICIPATION / RESEARCH 101</p><span>2026 · SENIOR CATEGORY</span></div>
@@ -108,7 +117,7 @@
 
     <section id="work" class="section container" aria-labelledby="work-title">
       <div class="section-heading"><div><p class="section-label">03 / SELECTED WORK</p><h2 id="work-title">Ideas, made <em>tangible.</em></h2></div><p class="section-aside">Models, circuits, software, and research.<br>Explore the reports and original work.</p></div>
-      <div class="project-toolbar"><div class="filter-group" role="group" aria-label="Filter projects"><button class="filter-button active" data-project-filter="all" aria-pressed="true">All work <span>05</span></button><button class="filter-button" data-project-filter="simulation" aria-pressed="false">Simulation</button><button class="filter-button" data-project-filter="hardware" aria-pressed="false">Electronics</button><button class="filter-button" data-project-filter="design" aria-pressed="false">Design</button><button class="filter-button" data-project-filter="software" aria-pressed="false">Software</button><button class="filter-button" data-project-filter="research" aria-pressed="false">Research</button></div><p id="project-count" class="muted" aria-live="polite">Showing 5 projects</p></div>
+      <div class="project-toolbar"><div class="filter-group" role="group" aria-label="Filter projects"><button class="filter-button active" data-project-filter="all" aria-pressed="true">All work <span>07</span></button><button class="filter-button" data-project-filter="simulation" aria-pressed="false">Simulation</button><button class="filter-button" data-project-filter="hardware" aria-pressed="false">Electronics</button><button class="filter-button" data-project-filter="design" aria-pressed="false">Design</button><button class="filter-button" data-project-filter="software" aria-pressed="false">Software</button><button class="filter-button" data-project-filter="research" aria-pressed="false">Research</button></div><p id="project-count" class="muted" aria-live="polite">Showing 7 projects</p></div>
       <div class="project-grid" id="project-list"></div>
       <noscript><p>Read the reports for <a href="assets/projects/stock-market-crash-simulator/project-report.pdf">Stock Market Crash Simulator</a>, <a href="assets/projects/sap-1-computer/project-report.pdf">SAP-1 8-bit Computer</a>, <a href="assets/projects/residential-electrical-services/project-report.pdf">Residential Electrical Services</a>, <a href="assets/projects/golf-streak/project-report.pdf">Golf Streak</a>, and <a href="assets/projects/ev-literature-review/literature-review.pdf">EV / PHEV / HEV Literature Review</a>.</p></noscript>
     </section>
@@ -121,6 +130,12 @@
 
     <section id="contact" class="contact-section"><div class="container contact-inner"><div><p class="section-label">06 / WHAT’S NEXT?</p><h2>Good work starts with<br><em>a conversation.</em></h2><p>Have a research opportunity, an engineering question,<br>or an idea to explore together? I’d love to hear from you.</p></div><div class="contact-actions"><a class="contact-email" href="mailto:shaheen.dibya17@gmail.com">shaheen.dibya17@gmail.com <span aria-hidden="true">↗</span></a><div class="contact-links"><button class="text-link" id="copy-email">Copy email <span aria-hidden="true">⧉</span></button><a class="text-link" href="https://www.facebook.com/dibya.rahman.77/" target="_blank" rel="noopener noreferrer">Facebook <span aria-hidden="true">↗</span></a><a class="text-link" href="assets/documents/cv.pdf" download="Shaheen-Rahman-Dibya-CV.pdf">Download CV <span aria-hidden="true">↓</span></a></div><p id="copy-status" role="status"></p></div></div></section>
   </main>
+  <dialog id="event-dialog" class="event-dialog" aria-labelledby="event-title" aria-describedby="event-caption">
+    <div class="event-dialog-heading"><h2 id="event-title">Event gallery</h2><button class="event-close" type="button" aria-label="Close event gallery">Close <span aria-hidden="true">×</span></button></div>
+    <div id="event-preview"><img alt=""></div>
+    <p id="event-caption"></p>
+    <div class="event-dialog-controls"><button id="event-prev" type="button">← Previous</button><span id="event-count" aria-live="polite"></span><button id="event-next" type="button">Next →</button><a id="event-original" target="_blank" rel="noopener">Open full-size image ↗</a></div>
+  </dialog>
   <footer class="site-footer container"><a class="brand footer-brand" href="#home"><span class="brand-mark" aria-hidden="true">d.</span><span>Shaheen Rahman Dibya</span></a><p>Engineering, with curiosity. <span>© <span id="current-year">2026</span></span></p><a class="text-link" href="#home">Back to top <span aria-hidden="true">↑</span></a></footer>
 </body>
 </html>

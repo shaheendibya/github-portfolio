@@ -7,7 +7,7 @@ window.portfolioAchievements = [
     "title": "University Physics Competition 2025",
     "result": "Silver medal",
     "year": 2025,
-    "description": "Silver Medal Winner certificate for the Islamic University of Technology team of Abrar Naguib, Md Niamul Al Zihan and Shaheen Rahman Dibya, supervised by Syed Rifat Raiyan. Also recognized by IUT in a certificate issued 13 May 2026.",
+    "description": "Silver Medal Winner certificate for the Islamic University of Technology team of Abrar Naguib, Md Niamul Al Zihan and Shaheen Rahman Dibya, supervised by Syed Rifat Raiyan. The team was recognized at the IUT Excellence Award Ceremony 2026; the IUT certificate is dated 13 May 2026.",
     "category": "academics",
     "kind": "award",
     "sources": [
@@ -456,7 +456,7 @@ window.portfolioAchievements = [
     "title": "Hermann Gmeiner Scholarship — Class II",
     "result": "Scholarship; second position in class",
     "year": 2012,
-    "description": "Awarded the Hermann Gmeiner Scholarship for securing second position in Class II for the year 2012.",
+    "description": "Awarded the Hermann Gmeiner Scholarship for securing second position in Class II for the year 2012. Received the award from Helmut Kutin.",
     "category": "academics",
     "kind": "award",
     "sources": [

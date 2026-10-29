@@ -569,6 +569,328 @@ window.portfolioProjects = [
     "featured": true
   },
   {
+    "title": "Soccerbot — EEE Day Champion",
+    "category": "hardware",
+    "label": "ARDUINO ROBOTICS · SOCCERBOT",
+    "art": "robotics",
+    "slug": "soccerbot",
+    "description": "A team-built Arduino Soccerbot and its championship at Intra IUT EEE Day 2025.",
+    "detail": "Soccerbot hardware, supplied components, and original photographs from the Intra IUT EEE Day 2025 championship.",
+    "role": "Team contributor · Chassis, wiring & troubleshooting",
+    "context": "Intra IUT EEE Day 2025 · Soccerbot",
+    "contribution": "Contributed to chassis design, wiring, soldering, and troubleshooting as part of the Soccerbot team.",
+    "overview": [
+      "A collaborative Soccerbot build developed for competition at IUT. The team won the Soccerbot championship at Intra IUT EEE Day 2025.",
+      "The supplied hardware list uses an Arduino Uno, four 25 mm DC motors, 65 mm wheels, L298N motor drivers, buck converters, Bluetooth modules, and 3.7 V cells. The photos below document the award and event."
+    ],
+    "focus": [
+      "Chassis construction and motor mounting",
+      "Wiring, soldering, and electrical connections",
+      "Power-conversion and motor-driver hardware",
+      "Mechanical integration and competition troubleshooting"
+    ],
+    "tags": [
+      "Arduino Uno",
+      "Soccerbot",
+      "Hardware integration"
+    ],
+    "highlights": [
+      {
+        "value": "Champion",
+        "label": "Intra IUT EEE Day 2025 · Soccerbot"
+      },
+      {
+        "value": "4 motors",
+        "label": "25 mm DC · 500/600 RPM"
+      },
+      {
+        "value": "65 mm",
+        "label": "Wheel diameter · four wheels"
+      }
+    ],
+    "cover": {
+      "src": "assets/events/eee-day-2025/winner-portrait.webp",
+      "alt": "Shaheen holding an award in front of the EEE Day backdrop"
+    },
+    "gallery": [
+      {
+        "src": "assets/events/eee-day-2025/winner-portrait.webp",
+        "alt": "Shaheen holding an award in front of the EEE Day backdrop",
+        "caption": "Shaheen with the award at the EEE Day display."
+      },
+      {
+        "src": "assets/events/eee-day-2025/champion-trophy.webp",
+        "alt": "EEE Day 2025 memento engraved Soccer Bot Champion",
+        "caption": "The memento reads “Soccer Bot Champion” at EEE Day 2025."
+      },
+      {
+        "src": "assets/events/eee-day-2025/ceremony.webp",
+        "alt": "EEE Day 2025 prize-giving ceremony with participants and organizers",
+        "caption": "The prize-giving ceremony beneath the EEE Day 2025 banner."
+      }
+    ],
+    "resources": [
+      {
+        "label": "View the Soccerbot championship record",
+        "kind": "achievement",
+        "url": "archive.html?search=Soccerbot",
+        "description": "The result is recorded in the CV and supported by the original event and trophy photographs."
+      }
+    ],
+    "evidence": [
+      {
+        "label": "Soccerbot result and robotics contribution in my CV",
+        "url": "assets/documents/cv.pdf#page=1"
+      }
+    ],
+    "credits": [],
+    "components": [
+      {
+        "name": "Arduino Uno",
+        "details": "Microcontroller board"
+      },
+      {
+        "name": "25 mm DC motors",
+        "details": "4 motors · 500/600 RPM"
+      },
+      {
+        "name": "65 mm wheels",
+        "details": "4 wheels"
+      },
+      {
+        "name": "L298N motor drivers",
+        "details": "3 modules"
+      },
+      {
+        "name": "Buck converters",
+        "details": "2 modules"
+      },
+      {
+        "name": "3.7 V batteries",
+        "details": "3 cells · 3.7 V each"
+      },
+      {
+        "name": "Bluetooth modules",
+        "details": "2 modules"
+      },
+      {
+        "name": "Battery holder and charger",
+        "details": "Power accessories"
+      },
+      {
+        "name": "Motor mounts and hex couplers",
+        "details": "Mechanical mounting and shaft coupling"
+      },
+      {
+        "name": "Jumper wires",
+        "details": "Male-to-female and male-to-male"
+      },
+      {
+        "name": "Regular wire",
+        "details": "Wiring material"
+      },
+      {
+        "name": "Heat shrink",
+        "details": "Connection insulation"
+      },
+      {
+        "name": "Scotch tape",
+        "details": "Assembly material"
+      },
+      {
+        "name": "Screws and bolts",
+        "details": "Mechanical fasteners"
+      },
+      {
+        "name": "PVC board",
+        "details": "Chassis material"
+      }
+    ],
+    "tools": [
+      "Soldering iron",
+      "Soldering lead and rosin flux (rojon)",
+      "Voltmeter",
+      "Screwdriver set",
+      "Glue gun (optional)"
+    ],
+    "buildNote": "Source code is not available; this page documents the hardware, supplied component list, and competition record.",
+    "featured": true
+  },
+  {
+    "title": "RC Racing — Two Championship Wins",
+    "category": "hardware",
+    "label": "ESP32 ROBOTICS · RC RACING",
+    "art": "robotics",
+    "slug": "rc-racing",
+    "description": "Collaborative RC racing builds with wins at ACCELERATE 2025 and Techathon 2.0.",
+    "detail": "An ESP32-based RC racing hardware showcase with the supplied component list and curated photographs from two winning events.",
+    "role": "Team contributor · Chassis, wiring & troubleshooting",
+    "context": "ACCELERATE 2025 · Freshers RC Car; Techathon 2.0 · RC Racing",
+    "contribution": "Contributed to chassis design, wiring, soldering, and troubleshooting in collaborative RC racing projects.",
+    "overview": [
+      "The teams achieved first place in the Freshers RC Car segment at ACCELERATE 2025 and champion in RC Racing at Techathon 2.0. The ACCELERATE certificate identifies Team Furiosa.",
+      "The supplied RC car component list uses an ESP32, a BTW7960 motor driver, a 37GB high-torque DC motor, a 12 V 2200 mAh LiPo battery, four wheels, a mini breadboard, and a thin plywood chassis. Original event and workbench photos provide the visual record."
+    ],
+    "focus": [
+      "Chassis construction and motor-bracket mounting",
+      "Motor-driver and controller hardware integration",
+      "Wiring, soldering, and troubleshooting",
+      "Team preparation and RC course participation"
+    ],
+    "tags": [
+      "ESP32",
+      "RC racing",
+      "Hardware integration"
+    ],
+    "highlights": [
+      {
+        "value": "1st place",
+        "label": "ACCELERATE 2025 · RC Car, Freshers"
+      },
+      {
+        "value": "Champion",
+        "label": "Techathon 2.0 · RC Racing"
+      },
+      {
+        "value": "ESP32",
+        "label": "Controller in the supplied component list"
+      }
+    ],
+    "cover": {
+      "src": "assets/events/techathon-2025/champion-team.webp",
+      "alt": "RC racing team holding a car, certificates and champion mementos at Techathon"
+    },
+    "gallery": [
+      {
+        "src": "assets/events/techathon-2025/champion-team.webp",
+        "alt": "RC racing team holding a car, certificates and champion mementos at Techathon",
+        "caption": "The team with the RC car, Techathon certificates, and champion mementos."
+      },
+      {
+        "src": "assets/events/techathon-2025/award-presentation.webp",
+        "alt": "Shaheen receiving a certificate and champion memento at Techathon",
+        "caption": "Receiving the RC racing award at Techathon 2.0."
+      },
+      {
+        "src": "assets/events/techathon-2025/workbench.webp",
+        "alt": "Four-wheel robot with controller boards and wiring on a workbench",
+        "caption": "Wiring and electronics on the four-wheel robot at the workbench."
+      },
+      {
+        "src": "assets/events/techathon-2025/course.webp",
+        "alt": "RC car on the Techathon course with participants and an official",
+        "caption": "A run on the marked RC course during the event."
+      },
+      {
+        "src": "assets/events/techathon-2025/event-group.webp",
+        "alt": "Wide group photograph at the Techathon 2.0 event",
+        "caption": "Participants and organizers gathered with robots and certificates."
+      },
+      {
+        "src": "assets/events/accelerate-2025/team.webp",
+        "alt": "Team with certificates and first-place mementos at ACCELERATE 2025",
+        "caption": "Team members holding their ACCELERATE certificates and first-place mementos."
+      },
+      {
+        "src": "assets/events/accelerate-2025/presentation.webp",
+        "alt": "ACCELERATE award presentation with team members and certificates",
+        "caption": "Award presentation in front of the ACCELERATE event banner."
+      },
+      {
+        "src": "assets/events/accelerate-2025/car-and-controller.webp",
+        "alt": "Shaheen holding an RC car and controller at ACCELERATE",
+        "caption": "Shaheen with a four-wheel RC car and controller at the event."
+      },
+      {
+        "src": "assets/events/accelerate-2025/electronics.webp",
+        "alt": "Four-wheel robot with exposed wiring and electronics",
+        "caption": "A close look at the robot electronics in the supplied ACCELERATE photo set."
+      },
+      {
+        "src": "assets/events/accelerate-2025/race-grid.webp",
+        "alt": "Three RC cars on the ACCELERATE competition floor",
+        "caption": "RC cars on the marked competition floor."
+      }
+    ],
+    "resources": [
+      {
+        "label": "ACCELERATE first-place certificate",
+        "kind": "certificate",
+        "url": "assets/documents/lifelong-achievements.pdf#page=5",
+        "description": "First position in the Freshers RC Car segment, Team Furiosa."
+      },
+      {
+        "label": "Techathon RC Racing champion certificate",
+        "kind": "certificate",
+        "url": "assets/documents/lifelong-achievements.pdf#page=4",
+        "description": "Champion in the RC Racing segment at Techathon 2.0."
+      }
+    ],
+    "evidence": [
+      {
+        "label": "ACCELERATE 2025 certificate · page 5",
+        "url": "assets/documents/lifelong-achievements.pdf#page=5"
+      },
+      {
+        "label": "Techathon 2.0 certificate · page 4",
+        "url": "assets/documents/lifelong-achievements.pdf#page=4"
+      }
+    ],
+    "credits": [],
+    "components": [
+      {
+        "name": "ESP32",
+        "details": "Microcontroller board"
+      },
+      {
+        "name": "BTW7960 motor driver",
+        "details": "Motor driver"
+      },
+      {
+        "name": "37GB high-torque DC motor",
+        "details": "Drive motor"
+      },
+      {
+        "name": "Mini breadboard",
+        "details": "Connection board"
+      },
+      {
+        "name": "LiPo battery",
+        "details": "12 V · 2200 mAh"
+      },
+      {
+        "name": "Jumper wires",
+        "details": "Male-to-male, female-to-female, and male-to-female"
+      },
+      {
+        "name": "Thin white plywood board",
+        "details": "Chassis material"
+      },
+      {
+        "name": "Wheels",
+        "details": "4 wheels"
+      },
+      {
+        "name": "Motor bracket",
+        "details": "Motor mounting"
+      },
+      {
+        "name": "Screws, nuts and bolts",
+        "details": "Mechanical fasteners"
+      }
+    ],
+    "tools": [
+      "Screwdriver set",
+      "Utility knife (anti-cutter)",
+      "Drill machine",
+      "Glue gun with glue sticks",
+      "Soldering iron with lead",
+      "Digital multimeter"
+    ],
+    "buildNote": "Source code is not available; this page documents the hardware, supplied component list, and competition record.",
+    "featured": true
+  },
+  {
     "title": "EV Longitudinal Dynamics",
     "category": "simulation",
     "label": "EV SYSTEMS · FORMULA IUT",
@@ -615,10 +937,10 @@ window.portfolioProjects = [
   {
     "title": "RC Racing & Soccerbot",
     "category": "hardware",
-    "label": "ARDUINO ROBOTICS · TEAM PROJECTS",
+    "label": "ARDUINO & ESP32 · TEAM ROBOTICS",
     "art": "robotics",
     "description": "From the workbench to the competition floor. Three championship wins, built together.",
-    "detail": "Collaborative Arduino robotics projects across RC racing and Soccerbot competitions.",
+    "detail": "An overview of separate Soccerbot and RC racing builds, with original event photographs and component lists.",
     "contribution": "Contributed to chassis design, wiring, soldering, and troubleshooting. The teams won Soccerbot at Intra IUT EEE Day 2025 and RC Racing at ACCELERATE 2025 and Techathon 2025.",
     "tags": [
       "Arduino",
@@ -629,8 +951,7 @@ window.portfolioProjects = [
     "role": "Robotics team contributor",
     "context": "Arduino robotics · 2025",
     "overview": [
-      "Collaborative robotics work spanning RC racing and Soccerbot competitions. My contributions included chassis design, wiring, soldering, and troubleshooting.",
-      "The teams won Soccerbot at Intra IUT EEE Day 2025 and RC Racing at ACCELERATE 2025 and Techathon 2.0. The achievement archive includes the supporting RC competition certificates and the Soccerbot result recorded in my CV."
+      "Explore the separate Soccerbot and RC racing pages for their hardware, parts lists, and curated competition galleries. Contributions included chassis design, wiring, soldering, and troubleshooting."
     ],
     "focus": [
       "Chassis design",
@@ -648,7 +969,20 @@ window.portfolioProjects = [
         "label": "Soccerbot & two RC racing events"
       }
     ],
-    "resources": [],
+    "resources": [
+      {
+        "label": "Explore the Soccerbot build",
+        "kind": "files",
+        "url": "project.html?project=soccerbot",
+        "description": "Arduino components, EEE Day championship, and original photos."
+      },
+      {
+        "label": "Explore the RC racing builds",
+        "kind": "files",
+        "url": "project.html?project=rc-racing",
+        "description": "ESP32 component list and wins at ACCELERATE and Techathon."
+      }
+    ],
     "gallery": [],
     "evidence": [
       {
