@@ -1,6 +1,6 @@
 // Achievement archive drawn from supplied certificates, the CV, and owner-reported results.
 // One entry per achievement; sources preserve every supporting certificate page.
-// Use a null year when no year is stated. Pending certificates have no source, URL, or image.
+// Use a null year when no year is stated. The future sixth-place certificate stays outside this certificate archive.
 window.portfolioAchievements = [
   {
     "id": "achievement-01",
@@ -36,18 +36,6 @@ window.portfolioAchievements = [
         "thumbnail": null
       }
     ]
-  },
-  {
-    "id": "iarco-2026-senior",
-    "title": "IARCO 2026 — Senior Category",
-    "result": "6th place",
-    "year": 2026,
-    "description": "Sixth place in the Senior category of the International Academic Research Competition (IARCO) 2026.",
-    "category": "academics",
-    "kind": "award",
-    "certificateStatus": "pending",
-    "note": "Placement certificate pending. This space is reserved for the sixth-place certificate.",
-    "sources": []
   },
   {
     "id": "iarco-2026-participation",

@@ -1,0 +1,302 @@
+/* An engineering fieldbook: optical contours, drafting marks, and layered paper. */
+:root {
+  --field-dot: #34544920;
+  --field-rule: #34544909;
+  --field-wash: #c6d7bf75;
+  --field-copper: #dfad8d38;
+  --folio-shadow: 0 18px 55px #263c2b0b;
+}
+:root[data-theme="dark"] {
+  --field-dot: #b2cfb71b;
+  --field-rule: #a6c6aa09;
+  --field-wash: #527c5636;
+  --field-copper: #b96f4322;
+  --folio-shadow: 0 18px 55px #0003;
+}
+body { position: relative; isolation: isolate; }
+body::before, body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+body::before {
+  background-image:
+    radial-gradient(var(--field-dot) .7px, transparent .8px),
+    linear-gradient(90deg, var(--field-rule) 1px, transparent 1px),
+    linear-gradient(var(--field-rule) 1px, transparent 1px);
+  background-size: 23px 23px, 138px 138px, 138px 138px;
+  background-position: 12px 12px, 12px 12px, 12px 12px;
+  opacity: .62;
+}
+body::after {
+  background:
+    radial-gradient(ellipse 48vw 58vh at var(--field-x, 78%) var(--field-y, 26%), var(--field-wash), transparent 75%),
+    radial-gradient(ellipse 44vw 48vh at 4% 88%, var(--field-copper), transparent 78%);
+}
+.field-rail {
+  position: fixed;
+  inset: 150px auto 90px 27px;
+  width: 16px;
+  z-index: 0;
+  pointer-events: none;
+  border-left: 1px solid var(--line);
+  background: repeating-linear-gradient(0deg, transparent 0 11px, var(--line) 11px 12px) left center / 5px 100% no-repeat;
+}
+.field-rail span {
+  position: absolute;
+  top: 30px;
+  left: -5px;
+  padding: 12px 0;
+  background: var(--paper);
+  color: var(--muted);
+  font: 9px/1.2 var(--mono);
+  letter-spacing: 2px;
+  writing-mode: vertical-rl;
+}
+.site-header {
+  border-radius: 12px;
+  box-shadow: 0 3px 0 color-mix(in srgb, var(--sage) 75%, transparent), 0 12px 35px #1c282408;
+}
+.brand-mark { position: relative; }
+.brand-mark::after {
+  content: '';
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  right: -6px;
+  top: 6px;
+  background: var(--accent);
+}
+.hero { padding-top: 106px; padding-bottom: 88px; }
+.hero::before {
+  inset: 12px -24px 0;
+  background: url('assets/resonance-field.svg') 80% 45% / cover no-repeat;
+  opacity: .24;
+  filter: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 34px;
+  height: 8px;
+  background:
+    linear-gradient(var(--accent), var(--accent)) left center / 40px 2px no-repeat,
+    repeating-linear-gradient(90deg, var(--line) 0 1px, transparent 1px 12px) right center / 100px 7px no-repeat,
+    linear-gradient(var(--line), var(--line)) center / 100% 1px no-repeat;
+  opacity: .8;
+  pointer-events: none;
+}
+.hero-edition {
+  position: absolute;
+  top: 30px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  color: var(--muted);
+  font: 10px/1.6 var(--mono);
+  letter-spacing: 1.8px;
+}
+.hero-edition > span:last-child { color: var(--green); letter-spacing: .6px; }
+.hero-copy > .eyebrow {
+  border: 0;
+  border-left: 2px solid var(--accent);
+  border-radius: 0;
+  background: transparent;
+  padding: 6px 12px;
+}
+.hero h1 { font-size: clamp(76px, 8.4vw, 118px); }
+.hero h1 em::after {
+  left: 5px;
+  width: 70%;
+  height: 6px;
+  bottom: 0;
+  opacity: .55;
+  border-radius: 60% 35%;
+  transform: rotate(-1.4deg);
+  background: linear-gradient(90deg, var(--accent), transparent);
+}
+.hero-intro { max-width: 435px; }
+.hero-visual { isolation: isolate; }
+.hero-visual::before {
+  inset: -21px -16px 35px;
+  border: 0;
+  border-radius: 0;
+  background:
+    linear-gradient(var(--accent), var(--accent)) left bottom / 25px 1px no-repeat,
+    linear-gradient(var(--accent), var(--accent)) left bottom / 1px 25px no-repeat,
+    linear-gradient(var(--green), var(--green)) right top / 25px 1px no-repeat,
+    linear-gradient(var(--green), var(--green)) right top / 1px 25px no-repeat;
+}
+.hero-visual::after {
+  content: '';
+  position: absolute;
+  inset: 17px -10px 14px 12px;
+  border: 1px solid var(--line);
+  border-radius: 220px 220px 14px 14px;
+  background: var(--sage);
+  transform: rotate(3deg);
+  z-index: -1;
+  box-shadow: var(--folio-shadow);
+}
+.portrait-frame {
+  border-width: 9px;
+  border-radius: 220px 220px 10px 10px;
+  box-shadow: 0 15px 50px #20342912;
+}
+.portrait-caption { padding-top: 21px; }
+.portrait-orbit {
+  width: 148px;
+  height: 148px;
+  right: 12px;
+  top: -15px;
+  border-color: color-mix(in srgb, var(--green) 40%, transparent);
+  animation-duration: 52s;
+}
+.portrait-orbit::before {
+  content: '';
+  position: absolute;
+  inset: 9px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+}
+.portrait-orbit::after { width: 7px; height: 7px; }
+.hero-award {
+  left: -36px;
+  border-radius: 4px 14px 14px 14px;
+  border-left: 2px solid var(--accent);
+  box-shadow: var(--folio-shadow);
+}
+.field-signal {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 26px;
+  max-width: 360px;
+  color: var(--green);
+}
+.field-signal svg { width: 115px; height: 33px; flex-shrink: 0; overflow: visible; }
+.field-signal span { font: 9px/1.6 var(--mono); letter-spacing: 1.7px; color: var(--muted); }
+.signal-base { stroke: var(--line); }
+.signal-current {
+  stroke: var(--accent);
+  stroke-dasharray: 30 220;
+  animation: trace-current 8s linear infinite;
+}
+@keyframes trace-current { to { stroke-dashoffset: -250; } }
+.hero-discover { margin-top: 24px; }
+.stat-strip { border-radius: 4px 18px 18px 18px; box-shadow: var(--folio-shadow); }
+.stat-strip > div:first-child { position: relative; }
+.stat-strip > div:first-child::before {
+  content: '';
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  top: -12px;
+  left: 0;
+  background: var(--accent);
+}
+.section-heading { position: relative; }
+.section-heading .section-label { display: flex; align-items: center; gap: 12px; }
+.section-heading .section-label::before { content: ''; width: 22px; height: 1px; background: var(--accent); }
+.recognition-feature, .education-primary, .participation-panel {
+  border-radius: 4px 22px 22px 22px;
+  box-shadow: var(--folio-shadow);
+}
+.recognition-feature { border-top: 2px solid color-mix(in srgb, var(--green) 40%, var(--line)); }
+.recognition-meta .tag { font-family: var(--mono); border-radius: 0; }
+.recognition-small { border-radius: 4px 14px 14px 14px; }
+.recognition-link { border-radius: 4px 14px 14px 14px; }
+.about-section {
+  background: linear-gradient(110deg, var(--sage), color-mix(in srgb, var(--paper) 75%, var(--sage)));
+  border-radius: 5px 30px 30px 30px;
+  box-shadow: inset 0 1px 0 var(--surface);
+}
+.project-card { border-radius: 4px 18px 18px 18px; box-shadow: var(--folio-shadow); }
+.project-card .project-visual { border-bottom: 1px solid var(--line); }
+.project-category { font-family: var(--mono); letter-spacing: .8px; }
+.project-number { color: var(--accent); font-size: 15px; }
+.project-card .project-body { padding: 28px; }
+.project-card .project-title { font-size: 31px; }
+.tool-tags > span { border-radius: 3px; }
+.project-open-arrow { border-radius: 4px 10px 10px 10px; }
+.timeline article { border-radius: 4px 16px 16px 16px; box-shadow: var(--folio-shadow); }
+.archive-banner-art {
+  background-image: radial-gradient(var(--field-dot) .7px, transparent 1px);
+  background-size: 16px 16px;
+}
+.contact-section {
+  background-image: radial-gradient(#d0e2ce17 .7px, transparent 1px);
+  background-size: 20px 20px;
+  border-top: 3px solid var(--accent);
+}
+.archive-card, .project-detail-resource-grid > a, .project-detail-navigation > a {
+  border-radius: 4px 18px 18px 18px;
+  box-shadow: var(--folio-shadow);
+}
+.archive-card-preview { border-radius: 3px 17px 0 0; }
+.archive-intro, .project-detail-hero { position: relative; isolation: isolate; }
+.archive-intro::before, .project-detail-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background: url('assets/resonance-field.svg') 80% center / cover no-repeat;
+  opacity: .09;
+}
+[data-theme="dark"] .hero::before { opacity: .3; filter: brightness(1.7); }
+[data-theme="dark"] .archive-intro::before,
+[data-theme="dark"] .project-detail-hero::before { filter: brightness(1.8); opacity: .1; }
+
+@media (max-width: 1120px) {
+  .field-rail { display: none; }
+  .hero h1 { font-size: 94px; }
+  .hero-award { left: -24px; }
+}
+@media (max-width: 950px) {
+  .hero h1 { font-size: 82px; }
+  .field-signal { gap: 10px; }
+  .field-signal svg { width: 95px; }
+}
+@media (max-width: 760px) {
+  .hero { padding-top: 90px; }
+  .hero-edition { top: 26px; font-size: 9px; }
+  .hero-edition > span:last-child { display: none; }
+  .hero h1 { font-size: 80px; }
+  .hero::before { inset: 28px 0 30px; background-position: 65% 45%; opacity: .18; }
+  .hero::after { bottom: 22px; }
+  .portrait-orbit { width: 124px; height: 124px; right: 12px; }
+  .hero-award { left: -16px; }
+  .about-section { border-radius: 4px 22px 22px 22px; }
+  .project-card .project-body { padding: 24px; }
+}
+@media (max-width: 570px) {
+  body::before { opacity: .4; }
+  .hero { padding-top: 79px; }
+  .hero h1 { font-size: clamp(56px, 15.5vw, 80px); letter-spacing: -3px; }
+  .hero-copy > .eyebrow { padding-left: 9px; font-size: 8px; }
+  .hero::before { background-size: auto 80%; background-position: 65% 45%; }
+  .hero-visual::after { inset: 14px -3px 14px 9px; transform: rotate(2deg); }
+  .hero-visual::before { inset: -10px -6px 35px; }
+  .hero-award { left: -6px; }
+  .portrait-frame { border-width: 6px; }
+  .field-signal { margin-top: 22px; }
+  .field-signal span { font-size: 8px; letter-spacing: 1.2px; }
+  .recognition-feature { border-radius: 4px 18px 18px 18px; }
+  .project-card .project-title { font-size: 28px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .signal-current { animation: none; stroke-dasharray: none; opacity: .6; }
+}
+@media print {
+  body::before, body::after, .field-rail, .hero-edition, .field-signal, .hero::after,
+  .archive-intro::before, .project-detail-hero::before { display: none; }
+  .recognition-feature, .education-primary, .project-card, .timeline article, .archive-card { box-shadow: none; }
+}

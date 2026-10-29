@@ -11,11 +11,14 @@
   <meta property="og:image" content="https://shaheendibya.github.io/github-portfolio/assets/portrait.png">
   <title>Shaheen Rahman Dibya — Engineering Portfolio</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="polish.css">
-  <script src="projects.js" defer></script>
-  <script src="app.js" defer></script>
-  <script src="polish.js" defer></script>
+  <link rel="stylesheet" href="style.css?v=5d728014b991">
+  <link rel="stylesheet" href="polish.css?v=89034255e917">
+  <link rel="stylesheet" href="identity.css?v=28a35aa760e2">
+  <link rel="stylesheet" href="participation.css?v=72d3f442ec92">
+  <script src="projects.js?v=566e3f8930ba" defer></script>
+  <script src="app.js?v=6f6972461015" defer></script>
+  <script src="polish.js?v=251fa7a9a225" defer></script>
+  <script src="identity.js?v=c2fee371d605" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -30,14 +33,17 @@
       <button class="theme-toggle" type="button" hidden aria-label="Dark mode" aria-pressed="false" title="Switch to dark mode"><svg class="theme-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 13A8.6 8.6 0 0 1 11 3.5 8.6 8.6 0 1 0 20.5 13Z"/></svg><svg class="theme-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.4 1.4m11.2 11.2L19 19M5 19l1.4-1.4M17.6 6.4 19 5"/></svg></button>
     </div>
   </header>
+  <div class="field-rail" aria-hidden="true"><span>DIBYA / ENGINEERING FIELD NOTES</span></div>
   <main id="main">
     <section class="hero container" id="home" aria-labelledby="hero-title">
+      <div class="hero-edition" aria-hidden="true"><span>FIELD NOTES / ENGINEERING &amp; RESEARCH</span><span>SHAHEEN RAHMAN DIBYA</span></div>
       <div class="hero-copy">
         <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> ELECTRICAL & ELECTRONIC ENGINEERING · IUT</p>
         <h1 id="hero-title">Curiosity.<br><em>Engineered.</em></h1>
         <p class="hero-intro">I’m <strong>Shaheen Rahman Dibya.</strong> An engineering undergraduate turning open-ended questions into models, circuits, and things that move.</p>
         <div class="hero-actions"><a class="button button-dark" href="#work">Explore my work <span aria-hidden="true">↘</span></a><a class="text-link" href="assets/documents/cv.pdf" download="Shaheen-Rahman-Dibya-CV.pdf">Download CV <span aria-hidden="true">↓</span></a></div>
         <div class="hero-note"><span class="tiny-cross" aria-hidden="true">✳</span><p>Exploring EV systems, applied physics,<br>and the possibilities in between.</p></div>
+        <div class="field-signal" aria-hidden="true"><svg viewBox="0 0 120 34" fill="none" stroke-width="1.3" stroke-linecap="round"><path class="signal-base" d="M1 18H17l7-4 8 4h10l6-13 8 24 8-14 8 3h14l6-5 7 5h20"/><path class="signal-current" d="M1 18H17l7-4 8 4h10l6-13 8 24 8-14 8 3h14l6-5 7 5h20"/></svg><span>QUESTION / MODEL / BUILD</span></div>
         <a class="hero-discover" href="#highlights"><span aria-hidden="true">↓</span> A little further, a little more curious</a>
       </div>
       <div class="hero-visual">
@@ -60,16 +66,42 @@
             <p class="eyebrow">IARCO 2026</p>
             <h3>6th place.<br>Senior category.</h3>
             <p>International Academic Research Competition, focused on research methodology and proposal writing.</p>
-            <p class="recognition-evidence">Placement certificate pending.</p>
-            <a class="text-link" href="archive.html?search=IARCO%202026&amp;kind=award">Explore the achievement <span aria-hidden="true">↗</span></a>
+            <div class="placement-certificate-placeholder">
+              <p>Placement certificate pending.</p>
+              <span>Reserved for the certificate when it arrives.</span>
+            </div>
           </div>
         </article>
         <div class="recognition-stack"><article class="recognition-small"><div class="recognition-icon" aria-hidden="true">01</div><div><p class="eyebrow">ROBOTICS · 2025</p><h3>Soccerbot champion</h3><p>Intra IUT EEE Day. Team engineering, from wiring and soldering to troubleshooting.</p></div><span class="recognition-star" aria-hidden="true">✳</span></article><article class="recognition-small"><div class="recognition-icon" aria-hidden="true">02</div><div><p class="eyebrow">RC RACING · 2025</p><h3>Twice at the finish line.</h3><p>Champion at ACCELERATE and Techathon. Hands-on robotics, tested in competition.</p></div><span class="recognition-star" aria-hidden="true">↗</span></article><a class="recognition-link" href="archive.html"><span>CaseMotion finalist · AutoMech 2025<br><strong>Explore the complete achievement archive</strong></span><span aria-hidden="true">↗</span></a></div>
       </div>
-      <article class="recognition-link recognition-participation">
-        <div><strong>IARCO 2026 participation</strong><p>Senior category · Research 101: 57/70</p></div>
-        <a class="text-link" href="assets/documents/iarco-2026-participation.pdf" target="_blank" rel="noopener">View participation certificate <span aria-hidden="true">↗</span></a>
-      </article>
+    </section>
+
+    <section id="iarco-participation" class="section container participation-showcase" aria-labelledby="iarco-participation-title">
+      <div class="participation-panel">
+        <div class="participation-panel-heading"><p class="section-label">PARTICIPATION / RESEARCH 101</p><span>2026 · SENIOR CATEGORY</span></div>
+        <div class="participation-showcase-grid">
+          <figure class="participation-certificate">
+            <a href="assets/documents/iarco-2026-participation.pdf" target="_blank" rel="noopener" aria-label="Open the original IARCO 2026 participation certificate PDF">
+              <img src="assets/certificates/iarco-2026-participation.webp" width="1500" height="1061" loading="lazy" decoding="async" alt="IARCO 2026 Senior participation certificate for Shaheen Rahman Dibya, recording four research bootcamps and a Research 101 assessment score of 57 out of 70.">
+            </a>
+            <figcaption>Participation certificate · ID: 2026-S-453</figcaption>
+          </figure>
+          <div class="participation-showcase-copy">
+            <p class="eyebrow">International Academic Research Competition</p>
+            <h2 id="iarco-participation-title">IARCO 2026 <em>participation</em></h2>
+            <p>Senior category participation, with training in research methodology and proposal writing.</p>
+            <dl class="participation-assessments">
+              <div><dt>Research 101 assessment</dt><dd>57<span>/70</span></dd></div>
+              <div><dt>Research bootcamps</dt><dd>4</dd></div>
+            </dl>
+            <p class="participation-certificate-date"><span>Certificate date</span><time datetime="2026-09-01">1 September 2026</time></p>
+            <div class="participation-showcase-actions">
+              <a class="button button-dark" href="assets/documents/iarco-2026-participation.pdf" target="_blank" rel="noopener">Open original PDF <span aria-hidden="true">↗</span></a>
+              <a class="text-link" href="archive.html?search=IARCO&amp;kind=participation">Participation record <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section id="about" class="about-section"><div class="container about-grid"><div><p class="section-label">02 / A LITTLE CONTEXT</p><h2>Drawn to questions.<br><em>Driven to build.</em></h2><a class="text-link" href="#contact">Let’s connect <span aria-hidden="true">↗</span></a></div><div class="about-copy"><p class="large-copy">I’m an Electrical & Electronic Engineering undergraduate at the <strong>Islamic University of Technology</strong>, Bangladesh.</p><p>My work brings together EV simulation, digital electronics, robotics, and computational modeling. I enjoy the process of taking a question apart, building a model, and finding out what it can teach me.</p><p>I’m particularly interested in photonics and interdisciplinary engineering research. Through faculty-supervised work and research-style competitions, I’m building a foundation for hands-on research.</p><div class="interest-list" aria-label="Research interests"><span>Photonics & optoelectronics</span><span>Power electronics</span><span>EV & energy systems</span><span>Applied physics</span></div></div></div></section>

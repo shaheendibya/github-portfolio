@@ -1,6 +1,5 @@
-"""Verify separate IARCO participation and sixth-place records, with no award attachment."""
+"""Verify the full IARCO participation showcase and its separate pending placement feature."""
 import argparse
-import json
 from pathlib import Path
 import re
 from urllib.request import urlopen
@@ -29,15 +28,12 @@ with sync_playwright() as playwright:
     page.on('requestfailed', lambda request: failures.append(request.url))
     page.on('response', lambda response: failures.append(f'{response.status}: {response.url}') if response.status >= 400 else None)
     page.goto(base + 'archive.html?search=IARCO', wait_until='networkidle')
-    expect(page.locator('.archive-card')).to_have_count(2)
-    records = page.evaluate('window.portfolioAchievements.filter(record => record.id.startsWith("iarco-2026-"))')
-    assert len(records) == 2
-    award = next(record for record in records if record['id'] == 'iarco-2026-senior')
-    participation = next(record for record in records if record['id'] == 'iarco-2026-participation')
-    assert award['title'] == 'IARCO 2026 — Senior Category' and award['result'] == '6th place'
-    assert award['kind'] == 'award' and award['year'] == 2026 and award['category'] == 'academics'
-    assert award['certificateStatus'] == 'pending' and award['sources'] == []
-    assert not re.search(r'participation|57\s*/\s*70|bootcamp', json.dumps(award), re.I)
+    expect(page.locator('html')).to_have_attribute('data-theme', 'light')
+    expect(page.locator('.archive-card')).to_have_count(1)
+    records = page.evaluate('window.portfolioAchievements.filter(record => record.id.startsWith("iarco-"))')
+    assert len(records) == 1
+    participation = records[0]
+    assert participation['id'] == 'iarco-2026-participation'
     assert participation['title'] == 'IARCO 2026 — Senior Participation'
     assert participation['result'] == 'Participation' and participation['kind'] == 'participation'
     assert participation['category'] == 'academics' and participation['year'] == 2026
@@ -47,24 +43,22 @@ with sync_playwright() as playwright:
     assert source.get('status') != 'pending'
     evidence = participation['description'] + ' ' + participation.get('note', '')
     assert re.search(r'57\s*(?:/|out of)\s*70', evidence) and re.search(r'four|4', evidence)
+    assert not re.search(r'6th|sixth|placement.*pending', evidence, re.I)
     expect(page.locator('.archive-documents a')).to_have_count(5)
     expect(page.locator('.archive-documents').locator(f'a[href="{pdf}"]')).to_have_count(1)
-    for kind, title in [('award', award['title']), ('participation', participation['title'])]:
-        page.locator('#archive-kind').select_option(kind)
-        expect(page.locator('.archive-card')).to_have_count(1)
-        expect(page.locator('.archive-card-title')).to_have_text(title)
+    page.locator('#archive-kind').select_option('award')
+    expect(page.locator('.archive-card')).to_have_count(0)
+    expect(page.locator('#archive-empty')).to_be_visible()
+    page.locator('#archive-kind').select_option('participation')
+    expect(page.locator('.archive-card')).to_have_count(1)
+    expect(page.locator('.archive-card-title')).to_have_text(participation['title'])
     page.locator('#archive-kind').select_option('all')
-    expect(page.locator('.archive-card')).to_have_count(2)
-    award_card = page.locator('.archive-card').filter(has=page.get_by_role('button', name=award['title'], exact=True))
-    expect(award_card.locator('img')).to_have_count(0)
-    expect(award_card.locator('a[href]')).to_have_count(0)
+    assert not re.search(r'6th|sixth', page.locator('#archive-grid').inner_text(), re.I)
 
-    def open_record(record):
-        page.get_by_role('button', name=record['title'], exact=True).click()
-        expect(page.locator('#certificate-title')).to_have_text(record['title'])
-        expect(page.locator('#certificate-result')).to_have_text(record['result'])
-
-    def expect_participation():
+    def open_participation():
+        page.get_by_role('button', name=participation['title'], exact=True).click()
+        expect(page.locator('#certificate-title')).to_have_text(participation['title'])
+        expect(page.locator('#certificate-result')).to_have_text('Participation')
         preview = page.locator('#certificate-preview img')
         expect(preview).to_have_count(1)
         expect(preview).to_have_attribute('src', image)
@@ -74,31 +68,18 @@ with sync_playwright() as playwright:
         expect(page.locator('#certificate-original')).to_have_attribute('href', pdf + '#page=1')
         expect(page.locator('.certificate-read-note')).to_contain_text(re.compile(r'original PDF', re.I))
         expect(page.locator('#certificate-source-nav button')).to_have_count(1)
+        assert not re.search(r'6th|sixth', page.locator('#certificate-dialog').inner_text(), re.I)
 
-    def expect_empty_award():
-        expect(page.locator('#certificate-preview img')).to_have_count(0)
-        expect(page.locator('#certificate-preview a[href]')).to_have_count(0)
-        expect(page.locator('#certificate-original')).not_to_be_visible()
-        assert page.locator('#certificate-original').get_attribute('href') is None
-        expect(page.locator('#certificate-source-nav button')).to_have_count(0)
-        expect(page.locator('.certificate-read-note')).to_contain_text(re.compile(r'pending|forthcoming|not yet|once.*available|will be added', re.I))
-        assert 'participation' not in page.locator('#certificate-dialog').inner_text().lower()
-
-    open_record(participation)
-    expect_participation()
-    page.keyboard.press('Escape')
-    open_record(award)
-    expect_empty_award()
+    open_participation()
     page.keyboard.press('Escape')
     page.locator('#archive-search').fill('University Physics')
     page.locator('.archive-card-title').click()
     expect(page.locator('#certificate-original')).to_have_attribute('href', 'assets/documents/lifelong-achievements.pdf#page=1')
     page.keyboard.press('Escape')
     page.locator('#archive-search').fill('IARCO')
-    open_record(participation)
-    expect_participation()
+    open_participation()
     page.keyboard.press('Escape')
-    print('PASS: separate filtered records and participation → empty award → documented record reset')
+    print('PASS: participation-only archive, award/participation filters, and documented-record dialog reset')
 
     for theme in ['light', 'dark']:
         page.evaluate('(theme) => localStorage.setItem("dibya-theme", theme)', theme)
@@ -109,23 +90,33 @@ with sync_playwright() as playwright:
             features = page.locator('.recognition-feature')
             expect(features).to_have_count(2)
             expect(features.filter(has_text='UNIVERSITY PHYSICS')).to_have_count(1)
-            iarco = features.filter(has_text='IARCO')
-            expect(iarco).to_have_count(1)
-            expect(iarco).to_contain_text(re.compile(r'6th|sixth', re.I))
-            assert not re.search(r'participation|57\s*/\s*70|bootcamp', iarco.inner_text(), re.I)
-            assert pdf not in iarco.inner_html() and image not in iarco.inner_html()
-            widths = features.evaluate_all('(cards) => cards.map(card => card.getBoundingClientRect().width)')
-            assert abs(widths[0] - widths[1]) < 2, (theme, width, widths)
+            rank = features.filter(has_text='IARCO')
+            expect(rank).to_have_count(1)
+            expect(rank).to_contain_text(re.compile(r'6th|sixth', re.I))
+            expect(rank).to_contain_text(re.compile(r'pending|forthcoming|awaiting', re.I))
+            expect(rank.locator('img, a[href*=".pdf"], a[href*="archive.html"]')).to_have_count(0)
+            assert not re.search(r'participation|57\s*/\s*70|bootcamp', rank.inner_text(), re.I)
+            showcase = page.locator('#iarco-participation')
+            expect(showcase).to_have_count(1)
+            showcase.scroll_into_view_if_needed()
+            expect(showcase).to_be_visible()
+            expect(showcase).to_contain_text(re.compile(r'participation', re.I))
+            expect(showcase).to_contain_text(re.compile(r'57\s*/\s*70'))
+            expect(showcase).to_contain_text(re.compile(r'four|4'))
+            assert not re.search(r'6th|sixth', showcase.inner_text(), re.I)
+            certificate = showcase.locator(f'img[src="{image}"]')
+            expect(certificate).to_have_count(1)
+            certificate.evaluate('(image) => image.decode()')
+            assert certificate.evaluate('(image) => image.naturalWidth >= 1500')
+            expect(showcase.locator(f'a[href="{pdf}"]').first).to_be_visible()
             assert page.evaluate('document.documentElement.scrollWidth <= innerWidth'), (theme, width, 'home')
             page.goto(base + 'archive.html?search=IARCO', wait_until='networkidle')
-            expect(page.locator('.archive-card')).to_have_count(2)
+            expect(page.locator('.archive-card')).to_have_count(1)
             assert page.evaluate('document.documentElement.scrollWidth <= innerWidth'), (theme, width, 'archive')
-            for record, verify in [(participation, expect_participation), (award, expect_empty_award)]:
-                open_record(record)
-                verify()
-                assert page.locator('#certificate-dialog').evaluate('(dialog) => dialog.scrollWidth <= dialog.clientWidth + 1'), (theme, width, record['id'])
-                page.keyboard.press('Escape')
+            open_participation()
+            assert page.locator('#certificate-dialog').evaluate('(dialog) => dialog.scrollWidth <= dialog.clientWidth + 1'), (theme, width, 'dialog')
+            page.keyboard.press('Escape')
     assert not errors, errors
     assert not failures, failures
     browser.close()
-print('PASS: peer homepage features and separate archive/modals in both themes at four widths; no browser/resource errors')
+print('PASS: full participation showcase and unattached placement feature in both themes at four widths; no browser/resource errors')
