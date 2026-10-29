@@ -100,6 +100,11 @@ window.portfolioEvents = [
         "src": "assets/events/eee-day-2025/ceremony.webp",
         "alt": "EEE Day 2025 prize-giving ceremony with participants and organizers",
         "caption": "The prize-giving ceremony beneath the EEE Day 2025 banner."
+      },
+      {
+        "src": "assets/events/eee-day-2025/championship-collage.webp",
+        "alt": "EEE Day Soccerbot championship collage with award portrait, robot, champion trophy and prize-giving ceremony",
+        "caption": "EEE Day Soccerbot championship: award portrait, robot, champion trophy, and prize-giving ceremony in the original collage."
       }
     ]
   }

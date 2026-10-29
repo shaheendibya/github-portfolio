@@ -3,8 +3,8 @@
   "source_sha256": "f37ee569ffffeea8e6aa489d752c2d18ff9b1fda1d3fec290298c6928279e9d5",
   "supplied_photos": 71,
   "unique_files": 68,
-  "published_photos": 13,
-  "selection": "Five ACCELERATE photos, five Techathon photos, and three EEE Day photos chosen for complementary team, prize, event and build views. Original image content retained; EXIF orientation normalized and images encoded as WebP without upscaling. No generated imagery or retouching.",
+  "published_photos": 14,
+  "selection": "Five ACCELERATE photos, five Techathon photos, and four EEE Day images chosen for complementary team, prize, event and build views. The EEE Day selection includes the owner-requested original championship collage (review 37). Original image content retained; EXIF orientation normalized and images encoded as WebP without upscaling. No generated imagery or retouching.",
   "exact_duplicate_groups": [
     [
       21,
@@ -221,6 +221,17 @@
       "published_sha256": "97ad487b760618a0b457cbee8d06854fe5337433b0df6c273cd039e4b6a1ed20",
       "width": 1280,
       "height": 960
+    },
+    {
+      "event_id": "eee-day-2025",
+      "review_id": 37,
+      "source_path": "pics of events/EEE Day/photo_6275818574291080830_y.jpg",
+      "source_sha256": "eba44d3e855bb48322c6a612da870bf2ec152a393cd49b4a13f9088d5824e9d6",
+      "published_path": "assets/events/eee-day-2025/championship-collage.webp",
+      "published_sha256": "2b68eed02835965799a0230d5f3be79d775b4dc0c238ee4f5056d101ec3e0c68",
+      "width": 720,
+      "height": 1280,
+      "selection_note": "Owner specifically requested this original collage be included in EEE Day. Full collage preserved in both the homepage event gallery and Soccerbot project gallery."
     }
   ],
   "awaiting_original_files": [],

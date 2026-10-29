@@ -14,7 +14,7 @@ parser.add_argument('--chromium', default='/usr/bin/chromium')
 args = parser.parse_args()
 base = args.base_url.rstrip('/') + '/'
 root = Path(__file__).resolve().parents[1]
-expected_events = {'accelerate-2025': 5, 'techathon-2025': 5, 'eee-day-2025': 3}
+expected_events = {'accelerate-2025': 5, 'techathon-2025': 5, 'eee-day-2025': 4}
 builds = ['soccerbot', 'rc-racing']
 
 
@@ -39,7 +39,7 @@ with sync_playwright() as playwright:
     assert all(project.get('featured') is True for project in hardware.values())
     events = page.evaluate('window.portfolioEvents')
     assert {event['id']: len(event['gallery']) for event in events} == expected_events
-    assert len({image['src'] for event in events for image in event['gallery']}) == 13
+    assert len({image['src'] for event in events for image in event['gallery']}) == 14
     assert all(event['projectSlug'] in builds for event in events)
     by_id = {event['id']: event for event in events}
     assert re.search(r'first|1st', by_id['accelerate-2025']['result'], re.I)
@@ -59,7 +59,7 @@ with sync_playwright() as playwright:
                 assert body == (root / image['src']).read_bytes()
                 hashes.append(sha256(body).hexdigest())
     assert len(hashes) == len(set(hashes)), 'Duplicate photo files slipped into the curated events'
-    print('PASS: three accurately labeled winning events, 13 unique curated photographs, and available original assets')
+    print('PASS: three accurately labeled winning events, 14 unique curated images, and available original assets')
 
     def expect_event_image(event, index):
         image = event['gallery'][index]
