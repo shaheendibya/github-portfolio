@@ -49,8 +49,10 @@ EV Longitudinal Dynamics remains a CV-based page with `featured: false` until it
 - `identity.css`, `identity.js`, and `assets/resonance-field.svg`: the original fieldbook background, portrait framing, optical contours, and pointer-responsive ambient light.
 - `participation.css`: the dedicated IARCO participation certificate showcase and separate empty placement-certificate placeholder.
 - `events.js`, `event-gallery.js`, and `events.css`: three championship event galleries with accessible enlarged-photo navigation.
+- `recognition.css` and `recognition-gallery.js`: UPC team and certificate, IUT Excellence recognition, and the later Class II scholarship photo spreads, with accessible grouped image galleries.
 - `hardware.css`: optional build component tables and tool lists on project pages.
 - `docs/EVENT-PHOTOS.json`: photo selections, hashes, exact/near duplicates, event-mapping notes, and supplied hardware inventory context.
+- `docs/RECOGNITION-PHOTOS.json`: the four follow-up photographs, source and published hashes, certificate pairings, and award-date context.
 - `assets/documents/`: the original CV, 29-page achievement collection, Insignia certificate, complete 11-page IUT scan rotated upright, and original IARCO 2026 participation certificate.
 - `assets/certificates/`: optimized WebP certificate previews and thumbnails. Originals remain available as PDFs.
 - `assets/projects/`: project reports, authentic previews, CAD and Proteus source files, and the original review DOCX with its browser reading PDF.
@@ -60,7 +62,7 @@ EV Longitudinal Dynamics remains a CV-based page with `featured: false` until it
 
 The championship showcase uses 13 photos selected from the supplied 71-photo ZIP (68 unique files): five ACCELERATE, five Techathon, and three EEE Day images. Near-identical poses, cross-folder duplicates, and Automech story collages were omitted. Event captions follow visible banners/trophies and existing results. Robotics component quantities are shown only where supplied; the repeated Soccerbot list was recorded once. The RC driver model “BTW7960” is retained as supplied. Original code is unavailable, so these pages document hardware and competition work.
 
-The separately pasted IUT Excellence portrait/team and Class II scholarship photographs still require original file uploads before they can be published as photos. The award context and scholarship presenter have been added to their existing archive descriptions; no replacement image has been generated.
+The follow-up `picss.zip` supplied four original photographs. The UPC showcase pairs the team and faculty sponsor photograph with the 2025 silver-medal certificate. The separate IUT Excellence showcase includes the team photograph, individual award portrait, and university recognition certificate dated 13 May 2026 for the same UPC result. After education, the Class II scholarship showcase pairs the childhood award photograph with its certificate: second position for scholarship year 2012, received from Helmut Kutin (owner-supplied context). The certificate was issued on 4 May 2013; no photograph date is inferred. Photos and certificate previews open in grouped, keyboard-accessible galleries and remain full-size image links without JavaScript. Original PDF links retain their correct pages. See [recognition photograph provenance](docs/RECOGNITION-PHOTOS.json).
 
 The archive includes 33 records: 28 with supporting certificates and five CV-sourced distinctions/qualifications. Every certificate page is preserved. Three pairs document the same achievements and are grouped as multiple sources: the University Physics Competition, ACCELERATE RC Car, and BrandEdge. Participation, service, training, qualifications, and awards remain separately labeled. BrandEdge has no stated year and appears as undated.
 
@@ -84,6 +86,7 @@ python3 tests/polish.py
 python3 tests/iarco.py
 python3 tests/asset_versions.py
 python3 tests/robotics.py
+python3 tests/recognition.py
 ```
 
 The test checks:

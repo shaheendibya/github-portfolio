@@ -1,0 +1,82 @@
+{
+  "source_upload": "picss.zip",
+  "source_upload_sha256": "13f63528b95d6ce52aafa93ee9f24e2c13cb554213a7cc35ba72315fcbe635aa",
+  "source_photo_count": 4,
+  "published_photo_count": 4,
+  "processing": "EXIF orientation normalized and converted to WebP at original dimensions. No cropping, retouching, upscaling or generated content.",
+  "photos": [
+    {
+      "source_path": "photo_6275818574291080863_y.jpg",
+      "source_sha256": "ca81f51768c2ed0e35104dded1391741429e6342f2c7d1cd68918d37321bb84e",
+      "published_path": "assets/events/iut-excellence-2026/team.webp",
+      "published_sha256": "868bd6c2265bd2c813316c47d07eff5cc8d6b12985477cc9192a9699c631f183",
+      "width": 960,
+      "height": 1280,
+      "published_bytes": 186954
+    },
+    {
+      "source_path": "photo_6275818574291080861_y.jpg",
+      "source_sha256": "902ccf4af42175c3aabe83b4a09c9ede5911cbed0913306e1191596c11ea2e81",
+      "published_path": "assets/events/class-ii-scholarship/helmut-kutin-award.webp",
+      "published_sha256": "1c197d3ea8ba88b346eb3d127c21424fa4ab91e5b68f4012d68156b31a16c95f",
+      "width": 1280,
+      "height": 768,
+      "published_bytes": 125472
+    },
+    {
+      "source_path": "photo_6275818574291080875_y.jpg",
+      "source_sha256": "f8d533dc36ab181c4748319406448e04154a66c05b7dd07edd3160d243b90a2e",
+      "published_path": "assets/events/upc-2025/team-and-supervisor.webp",
+      "published_sha256": "080ac89edd956f6a66258ed021095555eebf59def83dc8a101e32630701b3552",
+      "width": 1280,
+      "height": 960,
+      "published_bytes": 345422
+    },
+    {
+      "source_path": "photo_6275818574291080864_y.jpg",
+      "source_sha256": "d5ed365c3d18f31ea416d988b815d33f195c10cba3d4707c303d0382249b8ae8",
+      "published_path": "assets/events/iut-excellence-2026/award-portrait.webp",
+      "published_sha256": "2828e3a3fe696f3cdae0f06e605b61a66ee75895aa6d0c971e7bf577d874ecaa",
+      "width": 960,
+      "height": 1280,
+      "published_bytes": 154808
+    }
+  ],
+  "showcases": [
+    {
+      "id": "upc-showcase",
+      "achievement_id": "achievement-01",
+      "gallery": "upc",
+      "photos": [
+        "assets/events/upc-2025/team-and-supervisor.webp"
+      ],
+      "certificate_preview": "assets/certificates/achievement-01.webp",
+      "original_document": "assets/documents/lifelong-achievements.pdf#page=1",
+      "facts": "UPC 2025 Silver Medal Winner, Team 730. Certificate names Abrar Naguib, Md Niamul Al Zihan and Shaheen Rahman Dibya under faculty sponsor Syed Rifat Raiyan. Owner identifies the uploaded four-person photograph as the UPC team and supervisor. No left-to-right identities or photograph date inferred."
+    },
+    {
+      "id": "iut-excellence",
+      "achievement_id": "achievement-01",
+      "gallery": "iut",
+      "photos": [
+        "assets/events/iut-excellence-2026/team.webp",
+        "assets/events/iut-excellence-2026/award-portrait.webp"
+      ],
+      "certificate_preview": "assets/certificates/achievement-29.webp",
+      "original_document": "assets/documents/lifelong-achievements.pdf#page=29",
+      "facts": "Owner identifies the two photographs as IUT Excellence Award Ceremony 2026 team and individual photographs. Existing IUT Recognition of Achievement certificate dated 13 May 2026 recognizes the UPC 2025 Silver Medal; this is university recognition of the same result, not a separate competition placement."
+    },
+    {
+      "id": "class-ii-scholarship",
+      "achievement_id": "achievement-22",
+      "gallery": "scholarship",
+      "photos": [
+        "assets/events/class-ii-scholarship/helmut-kutin-award.webp"
+      ],
+      "certificate_preview": "assets/certificates/achievement-22.webp",
+      "original_document": "assets/documents/lifelong-achievements.pdf#page=22",
+      "facts": "Certificate states Hermann Gmeiner Scholarship for second position in Class II for award year 2012, issued 4 May 2013. Owner identifies the childhood photograph as receiving that award from Helmut Kutin. No photograph date inferred. Placed after education at the owner’s request for later priority."
+    }
+  ],
+  "remaining_photographs_needed": []
+}

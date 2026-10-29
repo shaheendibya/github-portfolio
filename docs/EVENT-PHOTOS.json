@@ -223,14 +223,11 @@
       "height": 960
     }
   ],
-  "awaiting_original_files": [
-    "Class II scholarship photograph with Helmut Kutin",
-    "IUT Excellence Award 2026 portrait",
-    "IUT Excellence Award 2026 team photograph"
-  ],
+  "awaiting_original_files": [],
   "component_inventory": "Soccerbot list was supplied twice and recorded once. Quantities are stated only where provided. RC motor-driver model BTW7960 is preserved as supplied; no code, wiring diagram or battery arrangement has been invented.",
   "additional_owner_supplied_context": {
-    "iut_excellence": "The owner identifies the separately pasted 2026 portrait and three-person photograph as IUT Excellence recognition with the UPC team. The existing IUT certificate is dated 13 May 2026; team names are preserved from the UPC record. Original photo files are not yet available in this upload ZIP.",
-    "class_ii": "The owner identifies the separately pasted childhood photograph as receiving the Class II second-position scholarship award from Helmut Kutin. This is reserved for later prominence than university and robotics achievements; the existing scholarship certificate records the year 2012. Original photo file not yet available."
-  }
+    "iut_excellence": "Original team and award-portrait photos received in picss.zip and published with IUT recognition of the UPC 2025 silver medal; see RECOGNITION-PHOTOS.json.",
+    "class_ii": "Original childhood photo received in picss.zip, showing the owner receiving the Class II second-position scholarship award from Helmut Kutin (owner-supplied identification). The scholarship year is 2012; certificate issued 4 May 2013. See RECOGNITION-PHOTOS.json."
+  },
+  "recognition_photo_manifest": "docs/RECOGNITION-PHOTOS.json"
 }

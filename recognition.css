@@ -1,0 +1,210 @@
+/* Original photographs and certificates, arranged as pages of the fieldbook. */
+.recognition-showcase { padding-top: 0; padding-bottom: 96px; }
+.recognition-section-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 28px;
+  margin-bottom: 32px;
+}
+.recognition-section-heading > div { min-width: 0; }
+.recognition-section-heading h2 { text-wrap: balance; }
+.recognition-heading-note {
+  max-width: 330px;
+  font-size: 14px;
+  line-height: 1.85;
+  color: var(--muted);
+}
+.recognition-panel {
+  padding: 30px;
+  border: 1px solid var(--line);
+  border-top: 2px solid color-mix(in srgb, var(--green) 35%, var(--line));
+  border-radius: 4px 24px 24px 24px;
+  background: var(--surface);
+  box-shadow: var(--folio-shadow, var(--shadow));
+}
+.recognition-upc-grid,
+.recognition-scholarship-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 36px;
+}
+.recognition-team-story,
+.recognition-story,
+.recognition-iut-evidence { min-width: 0; }
+.recognition-photo,
+.recognition-document { margin: 0; min-width: 0; }
+.recognition-photo-link {
+  display: block;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 3px 12px 12px 12px;
+  background: var(--surface-raised);
+  transition: border-color .2s, box-shadow .2s;
+}
+.recognition-photo-link img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+.recognition-photo figcaption,
+.recognition-document figcaption {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 5px 16px;
+  margin-top: 13px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.75;
+}
+.recognition-photo-hint {
+  flex-shrink: 0;
+  color: var(--green);
+  font: 10px/1.6 var(--mono);
+  letter-spacing: .2px;
+}
+.recognition-field-facts {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(0, .6fr) minmax(0, 1fr);
+  gap: 18px;
+  margin: 26px 0 0;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+}
+.recognition-field-facts > div { min-width: 0; }
+.recognition-field-facts dt { font: 10px/1.6 var(--mono); color: var(--muted); }
+.recognition-field-facts dd { margin: 8px 0 0; color: var(--green); font-size: 13px; line-height: 1.6; }
+.recognition-story > .eyebrow,
+.recognition-iut-evidence > .eyebrow { margin-bottom: 12px; color: var(--green); }
+.recognition-story h3,
+.recognition-iut-evidence h3 {
+  font-size: clamp(27px, 3vw, 38px);
+  letter-spacing: -1px;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+.recognition-story > p:not(.eyebrow),
+.recognition-iut-evidence > p:not(.eyebrow) {
+  margin-top: 18px;
+  font-size: 13px;
+  line-height: 1.85;
+  color: var(--muted);
+}
+.recognition-team-credits { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line); }
+.recognition-team-credits > p:first-child { font: 10px/1.6 var(--mono); color: var(--muted); }
+.recognition-team-credits ul { margin: 11px 0 0; padding: 0; list-style: none; color: var(--ink); font-size: 13px; line-height: 1.8; }
+.recognition-team-credits .recognition-supervisor { margin-top: 12px; color: var(--muted); font-size: 11px; line-height: 1.8; }
+.recognition-supervisor strong { display: block; color: var(--green); font-size: 13px; }
+.recognition-story .recognition-document { margin-top: 26px; }
+.recognition-document .recognition-photo-link { max-width: 370px; }
+.recognition-pdf { margin-top: 15px; font-size: 11px; line-height: 1.7; }
+.recognition-iut .recognition-panel {
+  background: linear-gradient(120deg, var(--sage), color-mix(in srgb, var(--surface) 82%, var(--sage)));
+}
+.recognition-panel-dateline {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+  padding-bottom: 23px;
+  margin-bottom: 28px;
+  border-bottom: 1px solid var(--line);
+}
+.recognition-panel-dateline p { color: var(--green); font-size: 13px; }
+.recognition-panel-dateline time { color: var(--muted); font: 10px/1.6 var(--mono); }
+.recognition-iut-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) minmax(0, 1.05fr);
+  gap: 22px;
+  align-items: start;
+}
+.recognition-iut-evidence { padding: 5px 0 0 4px; }
+.recognition-iut-evidence h3 { font-size: clamp(25px, 2.4vw, 31px); }
+.recognition-iut-evidence .recognition-document { margin-top: 22px; }
+.recognition-early { padding-top: 32px; }
+.recognition-early .recognition-panel { box-shadow: none; }
+.recognition-scholarship-grid { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); }
+.recognition-dialog {
+  width: min(1120px, calc(100% - 32px));
+  max-height: calc(100dvh - 32px);
+  padding: 25px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: var(--shadow);
+}
+.recognition-dialog::backdrop { background: #102019bd; backdrop-filter: blur(8px); }
+.recognition-dialog-heading { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-bottom: 20px; }
+.recognition-dialog-heading h2 { font-size: 27px; line-height: 1.25; letter-spacing: -.7px; }
+.recognition-close { display: flex; align-items: center; gap: 12px; flex-shrink: 0; padding: 8px 11px; border: 1px solid var(--line); border-radius: 7px; background: transparent; color: var(--green); font-size: 12px; }
+.recognition-close span { font-size: 24px; line-height: 1; }
+#recognition-preview { display: grid; place-items: center; min-height: 180px; padding: 8px; border: 1px solid var(--line); border-radius: 10px; background: var(--sage); }
+#recognition-preview img { display: block; width: auto; height: auto; max-width: 100%; max-height: 61dvh; object-fit: contain; }
+#recognition-caption { margin-top: 16px; color: var(--muted); font-size: 13px; line-height: 1.8; }
+.recognition-dialog-controls { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 18px; padding-top: 17px; margin-top: 18px; border-top: 1px solid var(--line); font-size: 12px; }
+.recognition-dialog-controls button { padding: 7px 12px; border: 1px solid var(--line); border-radius: 7px; color: var(--green); background: transparent; }
+.recognition-dialog-controls button:disabled { opacity: .4; cursor: default; }
+#recognition-count { color: var(--muted); font-family: var(--mono); }
+#recognition-original { margin-left: auto; color: var(--green); }
+@media (hover: hover) {
+  .recognition-photo-link:hover { border-color: var(--green); box-shadow: 5px 6px 0 var(--sage); }
+  .recognition-close:hover,
+  .recognition-dialog-controls button:not(:disabled):hover { background: var(--sage); border-color: var(--green); }
+}
+@media (max-width: 1050px) {
+  .recognition-upc-grid,
+  .recognition-scholarship-grid { gap: 28px; }
+  .recognition-iut-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px; }
+  .recognition-iut-evidence { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0 30px; padding: 4px 0 0; }
+  .recognition-iut-evidence > .eyebrow,
+  .recognition-iut-evidence h3,
+  .recognition-iut-evidence > p:not(.eyebrow) { grid-column: 1; }
+  .recognition-iut-evidence .recognition-document { grid-column: 2; grid-row: 1 / 5; margin: 0; }
+}
+@media (max-width: 760px) {
+  .recognition-showcase { padding-bottom: 72px; }
+  .recognition-section-heading { align-items: start; flex-direction: column; gap: 18px; margin-bottom: 27px; }
+  .recognition-heading-note { max-width: 460px; }
+  .recognition-panel { padding: 25px; }
+  .recognition-upc-grid,
+  .recognition-scholarship-grid { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .recognition-story .recognition-document .recognition-photo-link { max-width: 440px; }
+  .recognition-iut-grid { gap: 24px 18px; }
+  .recognition-iut-evidence { gap: 0 22px; }
+  .recognition-early { padding-top: 18px; }
+}
+@media (max-width: 570px) {
+  .recognition-showcase { padding-bottom: 58px; }
+  .recognition-heading-note { font-size: 13px; }
+  .recognition-panel { padding: 20px 16px; border-radius: 4px 18px 18px 18px; }
+  .recognition-photo-link { padding: 6px; }
+  .recognition-photo figcaption,
+  .recognition-document figcaption { margin-top: 10px; font-size: 10px; gap: 4px 12px; }
+  .recognition-field-facts { gap: 14px; grid-template-columns: minmax(0, 1.5fr) minmax(0, .65fr) minmax(0, 1fr); }
+  .recognition-field-facts dd { font-size: 11px; }
+  .recognition-iut-grid { grid-template-columns: minmax(0, 1fr); gap: 27px; }
+  .recognition-iut-grid > .recognition-photo { max-width: 420px; }
+  .recognition-iut-evidence { display: block; }
+  .recognition-iut-evidence .recognition-document { margin-top: 22px; }
+  .recognition-panel-dateline { margin-bottom: 23px; padding-bottom: 20px; }
+  .recognition-panel-dateline p { font-size: 12px; }
+  .recognition-dialog { padding: 18px; }
+  .recognition-dialog-heading { align-items: start; gap: 14px; }
+  .recognition-dialog-heading h2 { font-size: 22px; }
+  .recognition-close { gap: 7px; padding: 6px; }
+  #recognition-caption { font-size: 12px; }
+  .recognition-dialog-controls { gap: 10px; }
+  #recognition-original { width: 100%; margin-left: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .recognition-photo-link { transition: none; } }
+@media print {
+  .recognition-showcase { padding-bottom: 30px; }
+  .recognition-panel { box-shadow: none; break-inside: avoid; }
+  .recognition-photo-hint, .recognition-dialog { display: none; }
+}
