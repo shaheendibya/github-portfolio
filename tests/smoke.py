@@ -35,13 +35,13 @@ with sync_playwright() as playwright:
     page.on('response', lambda response: http_errors.append((response.status, response.url)) if response.status >= 400 else None)
     page.goto(base, wait_until='networkidle')
     expect(page).to_have_title('Shaheen Rahman Dibya — Engineering Portfolio')
-    expect(page.locator('.project-card:visible')).to_have_count(7)
+    expect(page.locator('#project-list .project-card:visible')).to_have_count(5)
     assert page.locator('.portrait-frame img').evaluate('(image) => image.complete && image.naturalWidth > 0')
-    for category, count in [('simulation', 1), ('hardware', 3), ('design', 1),
-                            ('software', 1), ('research', 1), ('all', 7)]:
+    for category, count in [('simulation', 1), ('hardware', 1), ('design', 1),
+                            ('software', 1), ('research', 1), ('all', 5)]:
         button = page.locator(f'[data-project-filter="{category}"]')
         button.click()
-        expect(page.locator('.project-card:visible')).to_have_count(count)
+        expect(page.locator('#project-list .project-card:visible')).to_have_count(count)
         expect(button).to_have_attribute('aria-pressed', 'true')
         expect(page.locator('#project-count')).to_have_text(f'Showing {count} project' + ('' if count == 1 else 's'))
     projects = page.evaluate('window.portfolioProjects')
@@ -53,10 +53,16 @@ with sync_playwright() as playwright:
                       'ev-literature-review', 'soccerbot', 'rc-racing']
     assert [project['slug'] for project in featured] == expected_slugs
     assert {project['slug'] for project in legacy} == {'ev-longitudinal-dynamics', 'rc-racing-soccerbot'}
+    showcase_projects = [project for project in featured if project.get('homepageSection') != 'achievements']
+    assert [project['slug'] for project in showcase_projects] == expected_slugs[:5]
+    assert [project['slug'] for project in featured if project.get('homepageSection') == 'achievements'] == ['soccerbot', 'rc-racing']
+    homepage_slugs = page.locator('.project-card').evaluate_all('(cards) => cards.map(card => card.dataset.slug)')
+    assert len(homepage_slugs) == len(set(homepage_slugs)) == 7
+    assert set(homepage_slugs) == set(expected_slugs)
     assert page.locator('#project-list .project-open').evaluate_all('(links) => links.map(link => link.getAttribute("href"))') == [
-        f'project.html?project={slug}' for slug in expected_slugs]
-    expect(page.locator('#project-list .project-visual img')).to_have_count(len(featured))
-    for index, project in enumerate(featured):
+        f'project.html?project={project["slug"]}' for project in showcase_projects]
+    expect(page.locator('#project-list .project-visual img')).to_have_count(len(showcase_projects))
+    for index, project in enumerate(showcase_projects):
         cover = page.locator('#project-list .project-card').nth(index).locator('.project-visual img')
         expect(cover).to_have_attribute('src', project['cover']['src'])
         expect(cover).to_have_attribute('alt', project['cover']['alt'])
@@ -64,7 +70,7 @@ with sync_playwright() as playwright:
         cover.evaluate('(image) => image.decode()')
         assert cover.evaluate('(image) => image.complete && image.naturalWidth > 0'), project['slug']
     # Clicking a card's illustration must work as well as its title/arrow links.
-    page.locator('.project-card').first.click(position={'x': 100, 'y': 80})
+    page.locator('#project-list .project-card').first.click(position={'x': 100, 'y': 80})
     expect(page.locator('#project-title')).to_have_text(featured[0]['title'])
     page.locator('.project-pagination-next').click()
     expect(page.locator('#project-title')).to_have_text(featured[1]['title'])

@@ -1,4 +1,4 @@
-"""Verify compact robotics award links, archived event photos, and supplied hardware lists."""
+"""Verify distinct robotics project cards, archived event photos, and supplied hardware lists."""
 import argparse
 from hashlib import sha256
 from pathlib import Path
@@ -49,7 +49,10 @@ with sync_playwright() as playwright:
     hardware = {project['slug']: project for project in projects if project['slug'] in builds}
     assert set(hardware) == set(builds)
     assert all(project.get('featured') is True for project in hardware.values())
+    assert all(project.get('homepageSection') == 'achievements' for project in hardware.values())
+    page.goto(base + 'archive.html', wait_until='networkidle')
     events = page.evaluate('window.portfolioEvents')
+    page.goto(base, wait_until='networkidle')
     assert {event['id']: len(event['gallery']) for event in events} == expected_events
     assert {event['id']: event['recordId'] for event in events} == expected_records
     photo_paths = {image['src'] for event in events for image in event['gallery']}
@@ -74,15 +77,34 @@ with sync_playwright() as playwright:
                 assert body == (root / image['src']).read_bytes()
                 hashes.append(sha256(body).hexdigest())
     assert len(hashes) == len(set(hashes)), 'Duplicate photo files slipped into the curated events'
-    expect(page.locator('#event-grid a[data-event-id]')).to_have_count(3)
-    expect(page.locator('#event-grid img, #event-grid .event-thumb, #event-grid button')).to_have_count(0)
+    expect(page.locator('#event-grid.project-grid')).to_have_count(1)
+    expect(page.locator('#project-list .project-card')).to_have_count(5)
+    expect(page.locator('#event-grid .project-card')).to_have_count(2)
+    expect(page.locator('#event-grid .project-visual img')).to_have_count(2)
+    expect(page.locator('#event-grid .event-thumb, #event-grid .event-summary')).to_have_count(0)
+    expect(page.locator('#event-grid .achievement-record-links a')).to_have_count(3)
     expect(page.locator('#event-dialog')).to_have_count(0)
+    homepage_slugs = page.locator('.project-card').evaluate_all('(cards) => cards.map(card => card.dataset.slug)')
+    assert len(homepage_slugs) == len(set(homepage_slugs)) == 7
+    assert {card.get_attribute('data-slug') for card in page.locator('#event-grid .project-card').all()} == set(builds)
+    assert page.evaluate('''() => {
+        const order = ['#highlights', '#upc-showcase', '#work', '#event-showcase', '#iut-excellence', '#iarco-participation'];
+        return order.every((selector, index) => document.querySelectorAll(selector).length === 1
+            && (index === 0 || Boolean(document.querySelector(order[index - 1])
+                .compareDocumentPosition(document.querySelector(selector)) & Node.DOCUMENT_POSITION_FOLLOWING)));
+    }'''), 'IARCO, UPC, reports, robotics, IUT recognition, and participation must follow the requested order'
+    for slug, project in hardware.items():
+        card = page.locator(f'#event-grid .project-card[data-slug="{slug}"]')
+        expect(card).to_contain_text(project['title'])
+        expect(card.locator('.project-open')).to_have_attribute('href', f'project.html?project={slug}')
+        expect(card.locator('.project-visual img')).to_have_attribute('src', project['cover']['src'])
+        expect(card.locator('.project-visual img')).to_have_attribute('alt', project['cover']['alt'])
     for event in events:
-        card = page.locator(f'#event-grid a[data-event-id="{event["id"]}"]')
-        expect(card).to_have_attribute('href', f'archive.html?record={event["recordId"]}')
-        for text in [event['title'], event['result'], event['discipline']]:
-            expect(card).to_contain_text(text)
-    print('PASS: three compact award links and all 14 distinct photographs retained in event and project data')
+        card = page.locator(f'#event-grid .project-card[data-slug="{event["projectSlug"]}"]')
+        record_link = card.locator(f'.achievement-record-links a[href="archive.html?record={event["recordId"]}"]')
+        expect(record_link).to_have_count(1)
+        expect(record_link).to_have_accessible_name(re.compile(r'\S'))
+    print('PASS: strict achievement priority, seven unique project cards, two robotics builds, three award links, and all 14 distinct photographs retained')
 
     def expect_event_image(event, index):
         image = event['gallery'][index]
@@ -134,9 +156,9 @@ with sync_playwright() as playwright:
 
     for event in events:
         page.goto(base, wait_until='networkidle')
-        card = page.locator(f'#event-grid a[data-event-id="{event["id"]}"]')
-        card.scroll_into_view_if_needed()
-        card.click()
+        record_link = page.locator(f'#event-grid .achievement-record-links a[href="archive.html?record={event["recordId"]}"]')
+        record_link.scroll_into_view_if_needed()
+        record_link.click()
         assert urlsplit(page.url).path.endswith('/archive.html')
         record = expect_event_details(event)
         page.locator('#certificate-event-jump').click()
@@ -170,7 +192,7 @@ with sync_playwright() as playwright:
         expect_cleared_details()
         page.keyboard.press('Escape')
         wait_record_url(page)
-    print('PASS: whole-card navigation opens the matching archive award, exact event photos/components/tools, source tabs, and cleared nonrobotics records')
+    print('PASS: all three award links open matching archive records, exact event photos/components/tools, source tabs, and cleared nonrobotics records')
 
     # A deep link works when active filters exclude the record; closing preserves those filters.
     event = by_id['techathon-2025']
@@ -250,9 +272,10 @@ with sync_playwright() as playwright:
         for width in [1440, 768, 390, 320]:
             page.set_viewport_size({'width': width, 'height': 1000})
             page.goto(base + '#event-showcase', wait_until='networkidle')
-            expect(page.locator('#event-grid a[data-event-id]')).to_have_count(3)
-            expect(page.locator('#event-grid img, #event-grid .event-thumb')).to_have_count(0)
-            assert page.evaluate('document.documentElement.scrollWidth <= innerWidth'), (theme, width, 'compact events')
+            expect(page.locator('#event-grid .project-card')).to_have_count(2)
+            expect(page.locator('#event-grid .project-visual img')).to_have_count(2)
+            expect(page.locator('#event-grid .achievement-record-links a')).to_have_count(3)
+            assert page.evaluate('document.documentElement.scrollWidth <= innerWidth'), (theme, width, 'robotics achievements')
             for event in events:
                 page.goto(base + f'archive.html?record={event["recordId"]}', wait_until='networkidle')
                 expect_event_details(event)
@@ -265,4 +288,4 @@ with sync_playwright() as playwright:
     assert not errors, errors
     assert not failures, failures
     browser.close()
-print('PASS: compact homepage links and full archive photos/build details fit desktop/mobile in both themes with no browser/resource errors')
+print('PASS: distinct robotics project cards and full archive photos/build details fit desktop/mobile in both themes with no browser/resource errors')

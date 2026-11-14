@@ -69,11 +69,15 @@ with sync_playwright() as playwright:
         const before = (left, right) => Boolean(document.querySelector(left)
             .compareDocumentPosition(document.querySelector(right)) & Node.DOCUMENT_POSITION_FOLLOWING);
         return before('#highlights', '#upc-showcase')
-            && before('#upc-showcase', '#iut-excellence')
-            && before('#iut-excellence', '#event-showcase')
+            && before('#upc-showcase', '#work')
+            && before('#work', '#event-showcase')
+            && before('#event-showcase', '#iut-excellence')
+            && before('#iut-excellence', '#iarco-participation')
+            && before('#iarco-participation', '#about')
             && before('#education', '#class-ii-scholarship')
             && before('#class-ii-scholarship', '.archive-banner');
     }'''), 'Recognition photos should keep the requested showcase priority'
+    expect(page.locator('.hero-award')).to_have_attribute('href', '#upc-showcase')
     expect(page.locator('#upc-showcase')).to_contain_text(re.compile(r'silver', re.I))
     expect(page.locator('#upc-showcase')).to_contain_text(re.compile(r'Team\s+730', re.I))
     expect(page.locator('#upc-showcase')).to_contain_text(re.compile(r'supervisor|supervis|sponsor', re.I))

@@ -44,13 +44,16 @@
   const list = document.getElementById('project-list');
   if (!list) return;
 
-  const projects = (window.portfolioProjects || []).filter(project => project.featured !== false);
+  const featured = (window.portfolioProjects || []).filter(project => project.featured !== false);
+  const projects = featured.filter(project => project.homepageSection !== 'achievements');
+  const championshipBuilds = featured.filter(project => project.homepageSection === 'achievements');
   const illustrations = window.portfolioProjectIllustrations || {};
 
-  projects.forEach((project, index) => {
+  const createProjectCard = (project, index) => {
     const card = document.createElement('article');
     card.className = 'project-card';
     card.dataset.category = project.category;
+    card.dataset.slug = project.slug;
     card.innerHTML = `<div class="project-visual project-visual-${project.art}" aria-hidden="true"><svg viewBox="0 0 480 280" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round">${illustrations[project.art] || ''}</svg><span class="project-visual-label">CONCEPT ILLUSTRATION / ${String(index + 1).padStart(2, '0')}</span></div><div class="project-body"><div class="project-category"><span>${project.label}</span><span class="project-number">${String(index + 1).padStart(2, '0')}</span></div><h3 class="project-title"><a class="project-open" href="project.html?project=${encodeURIComponent(project.slug)}">${project.title}</a></h3><p class="project-description">${project.description}</p><div class="project-card-bottom"><div class="tool-tags">${project.tags.map(tag => `<span>${tag}</span>`).join('')}</div><a class="project-open-arrow" href="project.html?project=${encodeURIComponent(project.slug)}" aria-label="View ${project.title} project page">↗</a></div></div>`;
     if (project.cover?.src) {
       const visual = card.querySelector('.project-visual');
@@ -64,8 +67,22 @@
       visual.classList.add('has-project-cover');
       visual.replaceChildren(image);
     }
-    list.append(card);
-  });
+    if (project.homepageSection === 'achievements' && project.achievementLinks?.length) {
+      const records = document.createElement('div');
+      records.className = 'achievement-record-links';
+      for (const record of project.achievementLinks) {
+        const link = document.createElement('a');
+        link.className = 'text-link';
+        link.href = `archive.html?record=${encodeURIComponent(record.recordId)}`;
+        link.textContent = `${record.label} ↗`;
+        records.append(link);
+      }
+      card.querySelector('.project-body').append(records);
+    }
+    return card;
+  };
+  list.replaceChildren(...projects.map(createProjectCard));
+  document.getElementById('event-grid')?.replaceChildren(...championshipBuilds.map(createProjectCard));
 
   document.querySelector('[data-project-filter="all"] span').textContent = String(projects.length).padStart(2, '0');
   document.getElementById('project-count').textContent = `Showing ${projects.length} projects`;

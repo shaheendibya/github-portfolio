@@ -56,6 +56,14 @@
   }
 
   const project = projects[index];
+  if (project.homepageSection === 'achievements') {
+    const breadcrumb = document.querySelector('.project-detail-breadcrumb a');
+    breadcrumb.href = 'index.html#event-showcase';
+    breadcrumb.lastChild.textContent = ' Championship builds';
+    const collection = document.querySelector('.project-detail-more-heading > a');
+    collection.href = 'index.html#event-showcase';
+    collection.firstChild.textContent = 'Championship builds ';
+  }
   const featured = projects.filter(item => item.featured !== false);
   const featuredIndex = featured.findIndex(item => item.slug === slug);
   document.title = `${project.title} — Shaheen Rahman Dibya`;

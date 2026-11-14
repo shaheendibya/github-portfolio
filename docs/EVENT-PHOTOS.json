@@ -231,7 +231,7 @@
       "published_sha256": "2b68eed02835965799a0230d5f3be79d775b4dc0c238ee4f5056d101ec3e0c68",
       "width": 720,
       "height": 1280,
-      "selection_note": "Owner specifically requested this original collage be included in EEE Day. Full collage preserved in both the homepage event gallery and Soccerbot project gallery."
+      "selection_note": "Owner specifically requested this original collage be included in EEE Day. Full collage preserved in the event's archive achievement view and Soccerbot project gallery."
     }
   ],
   "awaiting_original_files": [],
@@ -242,7 +242,17 @@
   },
   "recognition_photo_manifest": "docs/RECOGNITION-PHOTOS.json",
   "presentation": {
-    "homepage": "Three compact text-first achievement links; no event photo grids or thumbnails. Existing selected-work project covers remain.",
+    "homepage": "Five original report projects appear once under Selected work. Two large competition-build cards appear once under Competition wins: Soccerbot and RC Racing. Each card opens its complete build page and provides individual archive-record links for its championship events.",
+    "homepage_order": [
+      "Official IARCO sixth-place feature",
+      "Full UPC team and silver-medal certificate showcase",
+      "Selected work: five original report projects",
+      "Competition wins: Soccerbot and RC Racing build cards",
+      "IUT Excellence recognition",
+      "IARCO participation certificate",
+      "Personal context, experience, education and later recognition"
+    ],
+    "project_grouping": "All seven project records remain featured for their detail pages and navigation. Soccerbot and RC Racing use homepageSection: achievements to appear only in the competition section. The shared app.js card renderer populates both homepage grids.",
     "achievement_views": "Event-specific photo gallery, original certificate/CV sources, supplied components and tools, and build-page link. Original images and project galleries retained.",
     "record_mapping": {
       "accelerate-2025": "achievement-05",

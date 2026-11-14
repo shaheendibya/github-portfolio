@@ -16,9 +16,11 @@ After editing JavaScript or CSS, run `python3 scripts/version_assets.py` before 
 
 The interface keeps its cream-and-sage palette, serif headlines, and arched portrait, with an engineering fieldbook identity: a fine drafting grid, original optical-field contours, copper details, layered paper frames, and a gentle cursor-responsive background glow. The moon button switches to a forest-green dark mode; the choice is remembered locally across the portfolio, archive, and project pages. Light mode remains the default. Motion respects the visitor's reduced-motion preference, and all decorative graphics are local assets.
 
+The homepage leads with the official IARCO sixth-place feature, followed by the full UPC team-and-certificate showcase. Selected work contains five original report projects; the next section presents two large competition-build cards for Soccerbot and RC Racing. IUT Excellence recognition, IARCO participation, and the remaining personal context follow. Each project/build card appears once.
+
 ## Featured project work
 
-The homepage features seven projects with authentic covers and galleries. Five have original reports and repository links; the two robotics builds have supplied component lists and curated competition photographs:
+Seven featured project pages remain available, with authentic covers and galleries. The five report projects appear under **Selected work** (`#work`); the two robotics builds appear under **Competition wins** (`#event-showcase`), with supplied component lists and curated competition photographs:
 
 | Project | Available material and attribution |
 | --- | --- |
@@ -39,8 +41,8 @@ EV Longitudinal Dynamics remains a CV-based page with `featured: false` until it
 ## Content
 
 - `index.html`: biography, featured achievements, research experience, education, and contact information.
-- `projects.js`: shared content for seven featured projects and two preserved legacy pages, including credits, resources, covers, galleries, optional hardware component/tool inventories, and launch instructions where available.
-- `app.js`: clickable project cards, project filters, mobile navigation, and email copying.
+- `projects.js`: shared content for seven featured projects and two preserved legacy pages, including credits, resources, covers, galleries, optional hardware component/tool inventories, and launch instructions where available. Soccerbot and RC Racing retain `featured: true` and use `homepageSection: "achievements"` to place their cards in the competition section.
+- `app.js`: one shared renderer for the five selected-work cards and two competition-build cards, selected-work filters, mobile navigation, and email copying.
 - `project.html`, `project.js`, and `project.css`: individual project pages, report/repository actions, native downloads, launch-command copying, enlarged-image dialogs, and featured previous/next navigation.
 - `achievements.js`: the archive's structured content, including 34 distinct records and original-document references.
 - `archive.js`, `archive.css`, and `archive-events.css`: search, category/year/type filters, accessible certificate previews, source switching, direct record URLs, and event-specific photo galleries with component/tool inventories.
@@ -48,7 +50,7 @@ EV Longitudinal Dynamics remains a CV-based page with `featured: false` until it
 - `polish.css`, `detail-polish.css`, and `polish.js`: shared visual refinements, optional dark mode, reading progress, and motion enhancements. These load after the original styles and scripts.
 - `identity.css`, `identity.js`, and `assets/resonance-field.svg`: the original fieldbook background, portrait framing, optical contours, and pointer-responsive ambient light.
 - `participation.css`: the official IARCO sixth-place feature and separate participation certificate showcase.
-- `events.js`, `event-gallery.js`, and `events.css`: preserved event photos and three compact homepage achievement links. Exact record IDs connect each win to its archive detail view.
+- `events.js`: preserved event photos, exact archive record IDs, and build-page mappings. `events.css` styles the two homepage competition-build cards and their individual award links.
 - `recognition.css` and `recognition-gallery.js`: UPC team and certificate, IUT Excellence recognition, and the later Class II scholarship photo spreads, with accessible grouped image galleries.
 - `hardware.css`: optional build component tables and tool lists on project pages.
 - `docs/EVENT-PHOTOS.json`: photo selections, hashes, exact/near duplicates, event-mapping notes, and supplied hardware inventory context.
@@ -70,9 +72,9 @@ Ten certificate pages in `lifelong-achievements.pdf` now use the replacement sca
 
 The source-document library also links the complete upright upload separately as [Scanned IUT certificates](assets/documents/scanned-iut-certificates.pdf). This 11-page PDF retains the uploaded order, including the duplicate page, alongside the updated lifelong collection.
 
-IARCO’s official sixth-place certificate is featured beside UPC on the homepage and has its own `iarco-2026-senior` award record. The original one-page PDF confirms sixth of 34 selected Senior finalists, 138/200 overall (proposal 65/100; presentation 73/100), the research title, and an issue date of 1 November 2026 (ID 2026-s-jHPTx). The original PDF is copied byte-for-byte; portrait previews are rendered without cropping or retouching. The participation certificate stays in its separate homepage showcase and `iarco-2026-participation` record, with its own PDF dated 1 September 2026, Research 101 score of 57/70, and four research bootcamps. The two results never share certificate sources.
+IARCO’s official sixth-place certificate leads the homepage in `#highlights` and has its own `iarco-2026-senior` award record. The UPC team and silver-medal certificate follow in `#upc-showcase`. The original one-page IARCO PDF confirms sixth of 34 selected Senior finalists, 138/200 overall (proposal 65/100; presentation 73/100), the research title, and an issue date of 1 November 2026 (ID 2026-s-jHPTx). The original PDF is copied byte-for-byte; portrait previews are rendered without cropping or retouching. The participation certificate stays in its separate homepage showcase and `iarco-2026-participation` record, with its own PDF dated 1 September 2026, Research 101 score of 57/70, and four research bootcamps. The two results never share certificate sources.
 
-The homepage keeps robotics wins concise: three text-first achievement links, with no event photo grids or thumbnails. Opening one uses an exact `archive.html?record=...` URL to display that event’s result, original document sources, all of its selected photos (ACCELERATE 5, Techathon 5, EEE Day 4), and the supplied build components and tools. The EEE Day collage remains in both the achievement view and Soccerbot project gallery. Component inventories come from the existing project data; original project pages and all photo assets remain available. Non-robotics records do not inherit these photos or parts.
+The two large competition cards open the Soccerbot and RC Racing build pages, with all four EEE Day images or all ten ACCELERATE/Techathon images and their supplied component/tool lists. Individual award links use exact `archive.html?record=...` URLs for the three championship records. Each archive detail view keeps its original document sources, event-specific photos (ACCELERATE 5, Techathon 5, EEE Day 4), and matching hardware inventory. The EEE Day collage remains in both its achievement view and Soccerbot project gallery. Components and tools come from the existing project data; code is unavailable and no source-code link is invented. Non-robotics records do not inherit these photos or parts.
 
 To add an achievement, append a record in `achievements.js` with a unique `id`, `title`, `result`, `category`, `year` (or `null`), `kind`, `description`, and `sources`. Each source specifies `label`, `url`, `page`, and optional `image`, `thumbnail`, and `tabLabel`. Use original-document evidence for results and dates. Add files under `assets/` and keep URLs relative. Category and year options are derived from the records.
 
@@ -93,7 +95,7 @@ python3 tests/recognition.py
 
 The test checks:
 
-- Seven featured pages across five categories, whole-card links, featured previous/next navigation, and both preserved legacy URLs.
+- Five selected-work cards across five filter categories, two competition-build cards, seven featured detail pages, whole-card links, featured previous/next navigation, and both preserved legacy URLs.
 - Actual covers and gallery images, report/repository hero actions, team credits, launch instructions, MATLAB-command copying, and local PDF/native-file availability.
 - Download attributes for `.dwg`, `.pdsprj`, and `.docx`; enlarged-image dialogs, source captions, previous/next controls, Escape closing, and focus restoration.
 - Resource filtering, missing-project states, email clipboard success/fallback, all 34 archive records and original document pages, archive filters, certificate source switching, and CV-only records.
@@ -101,7 +103,7 @@ The test checks:
 
 Override `--base-url` or `--chromium` for another local setup, for example `python3 tests/smoke.py --base-url http://127.0.0.1:8002/`. These checks exercise the website in Chromium; they do not execute the MATLAB, Proteus, or AutoCAD projects. Playwright is a development check; the website itself needs no Python or browser automation dependencies.
 
-The polish checks cover theme toggling and persistence, keyboard operation, light/dark layouts, decorative orbit bounds, reduced motion, disabled storage, and the no-JavaScript fallback. The IARCO checks enforce separate official placement and participation records, correct certificate downloads and score attribution, and responsive light/dark layouts. Robotics checks cover compact homepage links, event-specific archive galleries, supplied inventories, original source semantics, record URLs and navigation, and clearing between unrelated records.
+The polish checks cover theme toggling and persistence, keyboard operation, light/dark layouts, decorative orbit bounds, reduced motion, disabled storage, and the no-JavaScript fallback. The IARCO checks enforce separate official placement and participation records, correct certificate downloads and score attribution, and responsive light/dark layouts. Robotics checks cover the two homepage build cards and their individual award links, event-specific archive galleries, supplied inventories, original source semantics, record URLs and navigation, and clearing between unrelated records.
 
 ## GitHub Pages
 

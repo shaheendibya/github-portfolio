@@ -1,47 +1,37 @@
-/* Three compact invitations; photographs and build details live in each record. */
+/* The robotics achievements keep their pictured build cards in one place. */
 .event-showcase { padding-top: 0; }
-.event-intro { max-width: 390px; font-size: 14px; line-height: 1.85; color: var(--muted); }
-.event-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
-.event-card.event-summary {
+.event-intro { max-width: 420px; color: var(--muted); font-size: 14px; line-height: 1.85; }
+#event-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+}
+#event-grid > .project-card { min-width: 0; }
+#event-grid .project-cover { object-fit: contain; }
+#event-grid .achievement-record-links {
   display: flex;
-  flex-direction: column;
-  min-width: 0;
-  min-height: 250px;
-  padding: 25px;
-  border: 1px solid var(--line);
-  border-radius: 4px 18px 18px 18px;
-  background: var(--surface);
-  box-shadow: var(--folio-shadow, var(--shadow));
-  transition: border-color .2s, box-shadow .2s, transform .2s;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
 }
-.event-summary-meta { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
-.event-result { padding: 4px 8px; border: 1px solid var(--line); border-radius: 4px; background: var(--sage); color: var(--green); font-size: 11px; line-height: 1.5; }
-.event-summary-meta time { color: var(--muted); font: 10px/1.6 var(--mono); }
-.event-summary-discipline { margin-top: 23px; color: var(--muted); font: 10px/1.6 var(--mono); letter-spacing: .3px; }
-.event-summary h3 { margin-top: 9px; color: var(--ink); font-size: 29px; line-height: 1.2; letter-spacing: -.8px; }
-.event-outcome { margin-top: 13px; margin-bottom: 24px; color: var(--muted); font-size: 12px; line-height: 1.75; }
-.event-summary-cta { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: auto; padding-top: 18px; border-top: 1px solid var(--line); color: var(--green); font-size: 12px; }
-.event-summary-cta > span { font-size: 21px; line-height: 1; transition: transform .2s; }
-.recognition-small h3 a { text-decoration-color: var(--line); text-decoration-thickness: 1px; text-underline-offset: 5px; }
-.recognition-small h3 a:hover { text-decoration: underline; text-decoration-color: var(--green); }
-@media (hover: hover) {
-  .event-card.event-summary:hover { border-color: var(--green); box-shadow: var(--shadow); transform: translateY(-3px); }
-  .event-summary:hover .event-summary-cta > span { transform: translate(2px, -2px); }
+#event-grid .achievement-record-links a {
+  position: relative;
+  z-index: 2;
+  color: var(--green);
+  font-size: 12px;
+  line-height: 1.8;
+  text-decoration: underline;
+  text-decoration-color: var(--line);
+  text-underline-offset: 4px;
+  transition: text-decoration-color .2s;
 }
-@media (max-width: 900px) {
-  .event-grid { gap: 16px; }
-  .event-card.event-summary { min-height: 260px; padding: 21px; }
-  .event-summary h3 { font-size: 25px; }
-}
-@media (max-width: 700px) {
-  .event-grid { grid-template-columns: minmax(0, 1fr); gap: 14px; }
-  .event-card.event-summary { min-height: 0; padding: 23px; }
-  .event-summary-discipline { margin-top: 19px; }
-  .event-summary h3 { font-size: 28px; }
-  .event-outcome { margin-bottom: 21px; }
+#event-grid .achievement-record-links a:hover { text-decoration-color: var(--green); }
+@media (max-width: 760px) {
+  #event-grid { grid-template-columns: minmax(0, 1fr); gap: 24px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .event-card.event-summary, .event-summary-cta > span { transition: none; }
-  .event-card.event-summary:hover, .event-summary:hover .event-summary-cta > span { transform: none; }
+  #event-grid .achievement-record-links a { transition: none; }
 }
-@media print { .event-card.event-summary { break-inside: avoid; box-shadow: none; } }

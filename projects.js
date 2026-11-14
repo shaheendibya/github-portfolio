@@ -719,7 +719,14 @@ window.portfolioProjects = [
       "Glue gun (optional)"
     ],
     "buildNote": "Source code is not available; this page documents the hardware, supplied component list, and competition record.",
-    "featured": true
+    "featured": true,
+    "homepageSection": "achievements",
+    "achievementLinks": [
+      {
+        "recordId": "cv-soccerbot-2025",
+        "label": "EEE Day championship"
+      }
+    ]
   },
   {
     "title": "RC Racing — Two Championship Wins",
@@ -893,7 +900,18 @@ window.portfolioProjects = [
       "Digital multimeter"
     ],
     "buildNote": "Source code is not available; this page documents the hardware, supplied component list, and competition record.",
-    "featured": true
+    "featured": true,
+    "homepageSection": "achievements",
+    "achievementLinks": [
+      {
+        "recordId": "achievement-05",
+        "label": "ACCELERATE first place"
+      },
+      {
+        "recordId": "achievement-04",
+        "label": "Techathon champion"
+      }
+    ]
   },
   {
     "title": "EV Longitudinal Dynamics",
