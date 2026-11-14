@@ -12,9 +12,12 @@
   <link rel="stylesheet" href="polish.css?v=89034255e917">
   <link rel="stylesheet" href="detail-polish.css?v=6c1780caa1e9">
   <link rel="stylesheet" href="identity.css?v=28a35aa760e2">
-  <script src="achievements.js?v=6de478063ad6" defer></script>
+  <link rel="stylesheet" href="archive-events.css?v=1341bd513d4c">
+  <script src="achievements.js?v=50da366ea15d" defer></script>
+  <script src="projects.js?v=6b5a266759fa" defer></script>
+  <script src="events.js?v=5c163639dc6c" defer></script>
   <script src="app.js?v=6f6972461015" defer></script>
-  <script src="archive.js?v=a39181b81cdc" defer></script>
+  <script src="archive.js?v=9d8505983584" defer></script>
   <script src="polish.js?v=251fa7a9a225" defer></script>
   <script src="identity.js?v=c2fee371d605" defer></script>
 </head>
@@ -46,7 +49,7 @@
       <div class="archive-stats" aria-label="About the archive">
         <div><strong id="archive-total">—</strong><span>achievement records</span></div>
         <div><strong id="archive-years">—</strong><span>years represented</span></div>
-        <div><strong>05</strong><span>original source documents</span></div>
+        <div><strong>06</strong><span>original source documents</span></div>
         <a href="#document-library">Browse source documents <span aria-hidden="true">↘</span></a>
       </div>
     </section>
@@ -71,6 +74,7 @@
     <section class="archive-library" id="document-library" aria-labelledby="library-title">
       <div><p class="section-label">02 / The source material</p><h2 id="library-title">The original documents.</h2><p>Read the full collection, verify a record, or download a copy for reference.</p></div>
       <div class="archive-documents">
+        <a href="assets/documents/iarco-2026-sixth-place.pdf" target="_blank" rel="noopener"><span class="archive-document-icon" aria-hidden="true">PDF</span><span><strong>IARCO 2026 sixth place</strong><small>Senior category finalist certificate · 748 KB</small></span><span class="archive-document-arrow" aria-hidden="true">↗</span></a>
         <a href="assets/documents/iarco-2026-participation.pdf" target="_blank" rel="noopener"><span class="archive-document-icon" aria-hidden="true">PDF</span><span><strong>IARCO 2026 participation</strong><small>Senior category certificate · 482 KB</small></span><span class="archive-document-arrow" aria-hidden="true">↗</span></a>
         <a href="assets/documents/lifelong-achievements.pdf" target="_blank" rel="noopener"><span class="archive-document-icon" aria-hidden="true">PDF</span><span><strong>Lifelong Achievements</strong><small>Complete certificate collection · 17.6 MB</small></span><span class="archive-document-arrow" aria-hidden="true">↗</span></a>
         <a href="assets/documents/scanned-iut-certificates.pdf" target="_blank" rel="noopener"><span class="archive-document-icon" aria-hidden="true">PDF</span><span><strong>Scanned IUT certificates</strong><small>Upright scans · 11 pages · 5.3 MB</small></span><span class="archive-document-arrow" aria-hidden="true">↗</span></a>
@@ -85,7 +89,20 @@
 
   <dialog id="certificate-dialog" class="certificate-dialog" aria-labelledby="certificate-title">
     <div class="certificate-dialog-heading"><p class="eyebrow">From the archive</p><button type="button" class="certificate-close" aria-label="Close certificate preview">Close <span aria-hidden="true">×</span></button></div>
-    <div class="certificate-dialog-content"><div class="certificate-preview" id="certificate-preview"></div><div class="certificate-detail"><p id="certificate-category" class="eyebrow"></p><h2 id="certificate-title"></h2><p class="certificate-result" id="certificate-result"></p><p id="certificate-description"></p><p id="certificate-note" class="certificate-note" hidden></p><div class="certificate-source-nav" id="certificate-source-nav" role="group" aria-label="Choose source document"></div><p class="certificate-citation" id="certificate-citation"></p><a class="button button-dark" id="certificate-original" href="#" target="_blank" rel="noopener">Open original document <span aria-hidden="true">↗</span></a><p class="certificate-read-note">Open the original PDF for full resolution and surrounding context.</p></div></div>
+    <div class="certificate-dialog-content"><div class="certificate-preview" id="certificate-preview"></div><div class="certificate-detail"><p id="certificate-category" class="eyebrow"></p><h2 id="certificate-title"></h2><p class="certificate-result" id="certificate-result"></p><p id="certificate-description"></p><p id="certificate-note" class="certificate-note" hidden></p><div class="certificate-source-nav" id="certificate-source-nav" role="group" aria-label="Choose source document"></div><p class="certificate-citation" id="certificate-citation"></p><a class="button button-dark" id="certificate-original" href="#" target="_blank" rel="noopener">Open original document <span aria-hidden="true">↗</span></a><p class="certificate-read-note">Open the original PDF for full resolution and surrounding context.</p><a class="achievement-event-jump" id="certificate-event-jump" href="#certificate-event-details" hidden>Photos &amp; build details <span aria-hidden="true">↓</span></a></div></div>
+    <section class="achievement-event-details" id="certificate-event-details" aria-labelledby="achievement-event-title" tabindex="-1" hidden>
+      <div class="achievement-event-heading"><div><p class="section-label">Event photographs &amp; hardware</p><h2 id="achievement-event-title"></h2></div><a class="text-link" id="achievement-build-link" hidden>Explore the build <span aria-hidden="true">↗</span></a></div>
+      <div class="achievement-event-photos" id="achievement-event-photos" hidden>
+        <figure class="achievement-photo"><div id="achievement-photo-preview"><img alt=""></div><figcaption id="achievement-photo-caption"></figcaption></figure>
+        <div class="achievement-photo-controls"><button type="button" id="achievement-photo-prev" aria-label="Previous event photograph">← Previous</button><span id="achievement-photo-count" role="status" aria-live="polite"></span><button type="button" id="achievement-photo-next" aria-label="Next event photograph">Next →</button><a id="achievement-photo-original" target="_blank" rel="noopener">Open full-size image ↗</a></div>
+        <div class="achievement-photo-thumbs" id="achievement-photo-thumbs" role="group" aria-label="Choose an event photograph"></div>
+      </div>
+      <p class="achievement-build-note" id="achievement-build-note" hidden></p>
+      <div class="achievement-build-grid">
+        <div class="achievement-components-panel" id="achievement-components-section" hidden><table class="achievement-components-table"><caption>Components used in this build</caption><thead><tr><th scope="col">Component</th><th scope="col">Build details</th></tr></thead><tbody id="achievement-components"></tbody></table></div>
+        <section class="achievement-tools-panel" id="achievement-tools-section" aria-labelledby="achievement-tools-title" hidden><h3 id="achievement-tools-title">Tools used</h3><ul id="achievement-tools"></ul></section>
+      </div>
+    </section>
   </dialog>
 </body>
 </html>

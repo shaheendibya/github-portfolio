@@ -160,26 +160,31 @@
   font-size: 12px;
 }
 
-.placement-certificate-placeholder {
-  margin-top: 22px;
-  padding: 16px;
-  border: 1px dashed var(--line);
-  border-radius: 9px;
-  background: color-mix(in srgb, var(--paper) 45%, transparent);
+/* The final-round result now has its own official certificate. */
+.recognition-iarco .iarco-official-layout {
+  display: grid;
+  grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+  align-items: center;
+  gap: 22px;
+  margin-top: 33px;
 }
-
-.placement-certificate-placeholder p {
-  font-size: 12px;
-  color: var(--green);
-}
-
-.placement-certificate-placeholder > span {
+.iarco-certificate-art {
   display: block;
-  margin-top: 5px;
-  font-size: 11px;
-  line-height: 1.7;
-  color: var(--muted);
+  min-width: 0;
+  padding: 7px;
+  border: 1px solid var(--line);
+  border-radius: 4px 10px 10px 10px;
+  background: var(--surface-raised, var(--paper));
+  box-shadow: 5px 6px 0 color-mix(in srgb, var(--paper) 55%, transparent);
 }
+.iarco-certificate-art img { display: block; width: 100%; height: auto; max-height: 300px; object-fit: contain; }
+.recognition-iarco .recognition-copy { margin: 0; max-width: none; }
+.recognition-iarco .recognition-copy h3 { font-size: clamp(30px, 2.8vw, 38px); letter-spacing: -1.2px; }
+.recognition-iarco .recognition-copy > p:not(.eyebrow) { max-width: none; }
+.recognition-iarco .recognition-copy > .iarco-official-stats { font-size: 12px; line-height: 1.8; }
+.iarco-official-stats strong { color: var(--green); }
+.iarco-official-stats > span { margin-inline: 3px; color: var(--muted); }
+@media (hover: hover) { .iarco-certificate-art:hover { border-color: var(--green); } }
 
 @media (max-width: 900px) {
   .participation-showcase-grid {
@@ -195,6 +200,9 @@
 }
 
 @media (max-width: 570px) {
+  .recognition-iarco .iarco-official-layout { grid-template-columns: minmax(0, 1fr); gap: 25px; margin-top: 25px; }
+  .iarco-certificate-art { width: min(180px, 100%); justify-self: center; }
+  .recognition-iarco .recognition-copy h3 { font-size: 34px; }
   .participation-showcase {
     padding-bottom: 64px;
   }

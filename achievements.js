@@ -1,6 +1,6 @@
 // Achievement archive drawn from supplied certificates, the CV, and owner-reported results.
 // One entry per achievement; sources preserve every supporting certificate page.
-// Use a null year when no year is stated. The future sixth-place certificate stays outside this certificate archive.
+// Use a null year when no year is stated. IARCO placement and participation use separate records and certificates.
 window.portfolioAchievements = [
   {
     "id": "achievement-01",
@@ -34,6 +34,26 @@ window.portfolioAchievements = [
         "page": 1,
         "image": null,
         "thumbnail": null
+      }
+    ]
+  },
+  {
+    "id": "iarco-2026-senior",
+    "title": "IARCO 2026 — Senior Category",
+    "result": "6th place",
+    "year": 2026,
+    "description": "Placed sixth among 34 selected Senior-category finalists in the International Academic Research Competition 2026, scoring 138/200: 65/100 for the research proposal and 73/100 for the presentation. Research title: “Certainty Without Accuracy: Effects of Generative-AI Confidence Expression on Delayed Unaided Circuit-Fault Diagnosis”.",
+    "category": "academics",
+    "kind": "award",
+    "note": "Official certificate issued 1 November 2026 · Certificate ID: 2026-s-jHPTx.",
+    "sources": [
+      {
+        "label": "IARCO 2026 sixth-place certificate",
+        "tabLabel": "Official placement certificate",
+        "url": "assets/documents/iarco-2026-sixth-place.pdf",
+        "page": 1,
+        "image": "assets/certificates/iarco-2026-sixth-place.webp",
+        "thumbnail": "assets/certificates/iarco-2026-sixth-place-thumb.webp"
       }
     ]
   },

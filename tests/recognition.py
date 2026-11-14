@@ -170,7 +170,7 @@ with sync_playwright() as playwright:
 
     page.goto(base + 'archive.html', wait_until='networkidle')
     records = page.evaluate('window.portfolioAchievements')
-    assert len(records) == 33
+    assert len(records) == 34
     upc = next(record for record in records if record['id'] == 'achievement-01')
     assert upc['result'] == 'Silver medal'
     upc_sources = {(source['url'], source.get('page')) for source in upc['sources']}
@@ -179,7 +179,7 @@ with sync_playwright() as playwright:
     assert class_ii['year'] == 2012 and re.search(r'second', class_ii['result'], re.I)
     assert 'Helmut Kutin' in class_ii['description']
     assert [(source['url'], source.get('page')) for source in class_ii['sources']] == [(pdf, 22)]
-    print('PASS: existing 33-record archive retains UPC/IUT evidence and the distinct Class II scholarship source')
+    print('PASS: 34-record archive retains UPC/IUT evidence and the distinct Class II scholarship source')
 
     for theme in ['light', 'dark']:
         page.evaluate('(theme) => localStorage.setItem("dibya-theme", theme)', theme)

@@ -37,7 +37,8 @@ window.portfolioEvents = [
         "alt": "Three RC cars on the ACCELERATE competition floor",
         "caption": "RC cars on the marked competition floor."
       }
-    ]
+    ],
+    "recordId": "achievement-05"
   },
   {
     "id": "techathon-2025",
@@ -74,7 +75,8 @@ window.portfolioEvents = [
         "alt": "Wide group photograph at the Techathon 2.0 event",
         "caption": "Participants and organizers gathered with robots and certificates."
       }
-    ]
+    ],
+    "recordId": "achievement-04"
   },
   {
     "id": "eee-day-2025",
@@ -106,6 +108,7 @@ window.portfolioEvents = [
         "alt": "EEE Day Soccerbot championship collage with award portrait, robot, champion trophy and prize-giving ceremony",
         "caption": "EEE Day Soccerbot championship: award portrait, robot, champion trophy, and prize-giving ceremony in the original collage."
       }
-    ]
+    ],
+    "recordId": "cv-soccerbot-2025"
   }
 ];

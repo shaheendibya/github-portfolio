@@ -240,5 +240,14 @@
     "iut_excellence": "Original team and award-portrait photos received in picss.zip and published with IUT recognition of the UPC 2025 silver medal; see RECOGNITION-PHOTOS.json.",
     "class_ii": "Original childhood photo received in picss.zip, showing the owner receiving the Class II second-position scholarship award from Helmut Kutin (owner-supplied identification). The scholarship year is 2012; certificate issued 4 May 2013. See RECOGNITION-PHOTOS.json."
   },
-  "recognition_photo_manifest": "docs/RECOGNITION-PHOTOS.json"
+  "recognition_photo_manifest": "docs/RECOGNITION-PHOTOS.json",
+  "presentation": {
+    "homepage": "Three compact text-first achievement links; no event photo grids or thumbnails. Existing selected-work project covers remain.",
+    "achievement_views": "Event-specific photo gallery, original certificate/CV sources, supplied components and tools, and build-page link. Original images and project galleries retained.",
+    "record_mapping": {
+      "accelerate-2025": "achievement-05",
+      "techathon-2025": "achievement-04",
+      "eee-day-2025": "cv-soccerbot-2025"
+    }
+  }
 }

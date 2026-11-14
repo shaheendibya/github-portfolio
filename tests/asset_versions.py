@@ -68,20 +68,36 @@ with sync_playwright() as playwright:
     page.goto(base + 'archive.html?search=IARCO%202026', wait_until='networkidle')
     assert len(bare_requests) == 1, 'The archive requested obsolete unversioned data'
     records = page.evaluate('window.portfolioAchievements.filter(record => record.id.startsWith("iarco-"))')
-    assert len(records) == 1
-    participation = records[0]
-    assert participation['id'] == 'iarco-2026-participation'
+    assert {record['id'] for record in records} == {'iarco-2026-participation', 'iarco-2026-senior'}
+    participation = next(record for record in records if record['id'] == 'iarco-2026-participation')
+    placement = next(record for record in records if record['id'] == 'iarco-2026-senior')
     assert participation['kind'] == 'participation'
+    assert placement['kind'] == 'award'
     assert [source['url'] for source in participation['sources']] == [
         'assets/documents/iarco-2026-participation.pdf']
-    expect(page.locator('.archive-card')).to_have_count(1)
+    assert [source['url'] for source in placement['sources']] == [
+        'assets/documents/iarco-2026-sixth-place.pdf']
+    expect(page.locator('.archive-card')).to_have_count(2)
     page.locator('#archive-kind').select_option('award')
-    expect(page.locator('.archive-card')).to_have_count(0)
+    expect(page.locator('.archive-card')).to_have_count(1)
+    expect(page.locator('.archive-card-title')).to_have_text(placement['title'])
+    page.locator('.archive-card-title').click()
+    expect(page.locator('#certificate-original')).to_have_attribute(
+        'href', 'assets/documents/iarco-2026-sixth-place.pdf#page=1')
+    page.keyboard.press('Escape')
+    page.wait_for_function('!new URLSearchParams(location.search).has("record")')
     page.locator('#archive-kind').select_option('participation')
     expect(page.locator('.archive-card')).to_have_count(1)
     page.get_by_role('button', name=participation['title'], exact=True).click()
     expect(page.locator('#certificate-original')).to_have_attribute(
         'href', 'assets/documents/iarco-2026-participation.pdf#page=1')
+    page.keyboard.press('Escape')
+    page.wait_for_function('!new URLSearchParams(location.search).has("record")')
+    page.goto(base + 'archive.html?record=iarco-2026-senior', wait_until='networkidle')
+    expect(page.locator('#certificate-dialog')).to_be_visible()
+    expect(page.locator('#certificate-original')).to_have_attribute(
+        'href', 'assets/documents/iarco-2026-sixth-place.pdf#page=1')
+    assert len(bare_requests) == 1, 'A direct record link requested obsolete unversioned data'
     assert not errors, errors
     browser.close()
-print('PASS: fresh archive bypasses obsolete bare data and lists only IARCO participation')
+print('PASS: fresh archive bypasses obsolete bare data and keeps official placement and participation sources separate')

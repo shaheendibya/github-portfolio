@@ -28,6 +28,10 @@
   const dialog = document.getElementById('certificate-dialog');
   let lastTrigger = null;
   let openRecord = null;
+  let eventPhotos = [];
+  let photoIndex = 0;
+  let returnFocusRecordId = null;
+  const recordHistoryKey = '__dibyaArchiveRecordEntry';
 
   function node(tag, className, text) {
     const element = document.createElement(tag);
@@ -105,14 +109,17 @@
   const yearCount = document.getElementById('archive-years');
   yearCount.textContent = String(datedYears.length).padStart(2, '0');
   if (datedYears.length) yearCount.title = `${datedYears[datedYears.length - 1]}–${datedYears[0]}`;
-  const initialQuery = new URLSearchParams(window.location.search);
-  if (initialQuery.has('search')) state.search = initialQuery.get('search') || '';
-  if (categories.includes(initialQuery.get('category'))) state.category = initialQuery.get('category');
-  if (years.includes(initialQuery.get('year'))) state.year = initialQuery.get('year');
-  if (records.some(record => recordKind(record) === initialQuery.get('kind'))) state.kind = initialQuery.get('kind');
-  search.value = state.search;
-  year.value = state.year;
-  kind.value = state.kind;
+  function readLocationFilters() {
+    const query = new URLSearchParams(window.location.search);
+    state.search = query.get('search') || '';
+    state.category = categories.includes(query.get('category')) ? query.get('category') : 'all';
+    state.year = years.includes(query.get('year')) ? query.get('year') : 'all';
+    state.kind = records.some(record => recordKind(record) === query.get('kind')) ? query.get('kind') : 'all';
+    search.value = state.search;
+    year.value = state.year;
+    kind.value = state.kind;
+  }
+  readLocationFilters();
 
   function documentPreview(source, record) {
     const preview = node('div', 'archive-document-preview');
@@ -133,7 +140,10 @@
     preview.setAttribute('aria-label', `View record: ${record.title}`);
     preview.setAttribute('aria-haspopup', 'dialog');
     preview.append(node('span', 'archive-card-number', String(index + 1).padStart(2, '0')));
-    const imageSource = sources(record).find(source => source.thumbnail || source.image);
+    const event = (Array.isArray(window.portfolioEvents) ? window.portfolioEvents : []).find(item => item.recordId === record.id);
+    const eventPhoto = event?.gallery?.find(photo => photoUrl(photo.src));
+    const imageSource = sources(record).find(source => source.thumbnail || source.image)
+      || (eventPhoto && {image: eventPhoto.src});
     if (imageSource) {
       const img = node('img');
       img.src = imageSource.thumbnail || imageSource.image;
@@ -175,7 +185,7 @@
     return card;
   }
 
-  function render() {
+  function render(updateUrl = true) {
     const query = cleanSearch(state.search);
     const filtered = records.filter(record => {
       const haystack = cleanSearch([record.title, record.result, record.description, categoryName(record.category), record.year, ...sources(record).map(source => source.label)].filter(Boolean).join(' '));
@@ -190,6 +200,7 @@
     empty.hidden = filtered.length !== 0;
     grid.hidden = filtered.length === 0;
     categoryList.querySelectorAll('button').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.category === state.category)));
+    if (!updateUrl) return;
     const url = new URL(window.location.href);
     Object.entries({ search: state.search.trim(), category: state.category, year: state.year, kind: state.kind }).forEach(([key, value]) => {
       if (value && value !== 'all') url.searchParams.set(key, value);
@@ -217,6 +228,126 @@
   kind.addEventListener('change', () => { state.kind = kind.value; render(); });
   clear.addEventListener('click', resetFilters);
   document.getElementById('archive-empty-clear').addEventListener('click', () => { resetFilters(); search.focus(); });
+
+  function photoUrl(value) {
+    if (typeof value !== 'string' || !value.trim()) return null;
+    try {
+      return ['http:', 'https:'].includes(new URL(value, document.baseURI).protocol) ? value : null;
+    } catch {
+      return null;
+    }
+  }
+
+  function clearEventDetails() {
+    document.getElementById('certificate-event-details').hidden = true;
+    document.getElementById('certificate-event-jump').hidden = true;
+    document.getElementById('achievement-event-title').textContent = '';
+    const buildLink = document.getElementById('achievement-build-link');
+    buildLink.hidden = true;
+    buildLink.removeAttribute('href');
+    document.getElementById('achievement-event-photos').hidden = true;
+    const preview = document.querySelector('#achievement-photo-preview img');
+    preview.removeAttribute('src');
+    preview.alt = '';
+    document.getElementById('achievement-photo-caption').textContent = '';
+    document.getElementById('achievement-photo-count').textContent = '';
+    document.getElementById('achievement-photo-original').removeAttribute('href');
+    document.getElementById('achievement-photo-thumbs').replaceChildren();
+    document.getElementById('achievement-photo-prev').disabled = true;
+    document.getElementById('achievement-photo-next').disabled = true;
+    document.getElementById('achievement-components').replaceChildren();
+    document.getElementById('achievement-components-section').hidden = true;
+    document.getElementById('achievement-tools').replaceChildren();
+    document.getElementById('achievement-tools-section').hidden = true;
+    const note = document.getElementById('achievement-build-note');
+    note.textContent = '';
+    note.hidden = true;
+    eventPhotos = [];
+    photoIndex = 0;
+  }
+
+  function showEventPhoto(position) {
+    if (!eventPhotos.length) return;
+    photoIndex = Math.max(0, Math.min(position, eventPhotos.length - 1));
+    const photo = eventPhotos[photoIndex];
+    const preview = document.querySelector('#achievement-photo-preview img');
+    preview.src = photo.src;
+    preview.alt = photo.alt || `Event photograph ${photoIndex + 1}`;
+    document.getElementById('achievement-photo-caption').textContent = photo.caption || photo.alt || '';
+    document.getElementById('achievement-photo-count').textContent = `${photoIndex + 1} / ${eventPhotos.length}`;
+    const original = document.getElementById('achievement-photo-original');
+    original.href = photo.src;
+    original.setAttribute('aria-label', `Open full-size image: ${preview.alt}`);
+    document.getElementById('achievement-photo-prev').disabled = photoIndex === 0;
+    document.getElementById('achievement-photo-next').disabled = photoIndex === eventPhotos.length - 1;
+    document.querySelectorAll('.achievement-photo-thumb').forEach((button, index) => {
+      button.setAttribute('aria-pressed', String(index === photoIndex));
+    });
+  }
+
+  function showEventDetails(record) {
+    clearEventDetails();
+    const events = Array.isArray(window.portfolioEvents) ? window.portfolioEvents : [];
+    const event = events.find(item => item.recordId === record.id);
+    if (!event) return;
+    const projects = Array.isArray(window.portfolioProjects) ? window.portfolioProjects : [];
+    const project = projects.find(item => item.slug === event.projectSlug);
+    document.getElementById('achievement-event-title').textContent = event.title;
+    eventPhotos = (Array.isArray(event.gallery) ? event.gallery : []).filter(photo => photo && photoUrl(photo.src));
+    document.getElementById('achievement-photo-thumbs').replaceChildren(...eventPhotos.map((photo, index) => {
+      const button = node('button', 'achievement-photo-thumb');
+      button.type = 'button';
+      button.setAttribute('aria-label', `View photograph ${index + 1} of ${eventPhotos.length}: ${photo.alt || event.title}`);
+      const image = node('img');
+      image.src = photo.src;
+      image.alt = '';
+      image.loading = 'lazy';
+      image.decoding = 'async';
+      button.append(image);
+      button.addEventListener('click', () => showEventPhoto(index));
+      return button;
+    }));
+    document.getElementById('achievement-event-photos').hidden = !eventPhotos.length;
+    showEventPhoto(0);
+
+    const components = Array.isArray(project?.components) ? project.components.filter(
+      item => item && typeof item.name === 'string' && item.name.trim()
+    ) : [];
+    const tools = Array.isArray(project?.tools) ? project.tools.filter(
+      item => typeof item === 'string' && item.trim()
+    ) : [];
+    document.getElementById('achievement-components').replaceChildren(...components.map(component => {
+      const row = node('tr');
+      const name = node('th', '', component.name);
+      name.scope = 'row';
+      row.append(name, node('td', '', typeof component.details === 'string' ? component.details : ''));
+      return row;
+    }));
+    document.getElementById('achievement-components-section').hidden = !components.length;
+    document.getElementById('achievement-tools').replaceChildren(...tools.map(tool => node('li', '', tool)));
+    document.getElementById('achievement-tools-section').hidden = !tools.length;
+    if (project) {
+      const buildLink = document.getElementById('achievement-build-link');
+      buildLink.href = `project.html?project=${encodeURIComponent(project.slug)}`;
+      buildLink.hidden = false;
+      const note = document.getElementById('achievement-build-note');
+      note.textContent = typeof project.buildNote === 'string' ? project.buildNote : '';
+      note.hidden = !note.textContent.trim();
+    }
+    const hidden = !(eventPhotos.length || components.length || tools.length);
+    document.getElementById('certificate-event-details').hidden = hidden;
+    document.getElementById('certificate-event-jump').hidden = hidden;
+  }
+
+  document.getElementById('achievement-photo-prev').addEventListener('click', () => showEventPhoto(photoIndex - 1));
+  document.getElementById('achievement-photo-next').addEventListener('click', () => showEventPhoto(photoIndex + 1));
+  document.getElementById('certificate-event-jump').addEventListener('click', event => {
+    event.preventDefault();
+    const details = document.getElementById('certificate-event-details');
+    const top = details.getBoundingClientRect().top - dialog.getBoundingClientRect().top + dialog.scrollTop - 20;
+    dialog.scrollTo({top, behavior: 'instant'});
+    details.focus({preventScroll: true});
+  });
 
   function showSource(record, index) {
     const source = sources(record)[index];
@@ -267,15 +398,54 @@
       nav.append(button);
     });
     showSource(record, 0);
-    dialog.showModal();
+    showEventDetails(record);
+    if (!dialog.open) dialog.showModal();
+    dialog.scrollTop = 0;
     document.documentElement.style.overflow = 'hidden';
+  }
+
+  function setRecordUrl(recordId, method) {
+    const url = new URL(window.location.href);
+    if (recordId) url.searchParams.set('record', recordId);
+    else url.searchParams.delete('record');
+    const location = `${url.pathname}${url.search}${url.hash}`;
+    if (location !== `${window.location.pathname}${window.location.search}${window.location.hash}`) {
+      let entryState = window.history.state;
+      if (method === 'pushState') {
+        const objectState = entryState && typeof entryState === 'object' && !Array.isArray(entryState);
+        const marker = {recordId: String(recordId), url: location};
+        // Preserve other application state; the previous entry itself is untouched.
+        if (!objectState) marker.previousState = entryState;
+        entryState = {...(objectState ? entryState : {}), [recordHistoryKey]: marker};
+      }
+      window.history[method](entryState, '', location);
+    }
+  }
+
+  function recordTrigger(recordId) {
+    return [...grid.querySelectorAll('.archive-card-title')].find(button => button.dataset.recordId === String(recordId));
+  }
+
+  function restoreRecordFocus(recordId) {
+    const trigger = lastTrigger?.isConnected ? lastTrigger : recordTrigger(recordId) || search;
+    trigger.focus({preventScroll: true});
+  }
+
+  function syncRecordFromLocation() {
+    const recordId = new URLSearchParams(window.location.search).get('record');
+    const record = records.find(item => String(item.id) === recordId);
+    if (record) showRecord(record, recordTrigger(record.id));
+    else if (dialog.open) dialog.close();
   }
 
   grid.addEventListener('click', event => {
     const trigger = event.target.closest('button[data-record-id]');
     if (!trigger) return;
     const record = records.find(item => String(item.id) === trigger.dataset.recordId);
-    if (record) showRecord(record, trigger);
+    if (record) {
+      setRecordUrl(record.id, 'pushState');
+      showRecord(record, trigger);
+    }
   });
   dialog.querySelector('.certificate-close').addEventListener('click', () => dialog.close());
   dialog.addEventListener('click', event => {
@@ -284,9 +454,31 @@
     if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) dialog.close();
   });
   dialog.addEventListener('close', () => {
+    // A close event can be queued just before a history navigation reopens it.
+    if (dialog.open) return;
+    const closedId = openRecord?.id;
     document.documentElement.style.overflow = '';
     openRecord = null;
-    if (lastTrigger && lastTrigger.isConnected) lastTrigger.focus();
+    clearEventDetails();
+    if (closedId && new URLSearchParams(window.location.search).get('record') === String(closedId)) {
+      const marker = window.history.state?.[recordHistoryKey];
+      const location = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+      if (marker?.recordId === String(closedId) && marker.url === location) {
+        returnFocusRecordId = closedId;
+        window.history.back();
+      } else setRecordUrl(null, 'replaceState');
+    }
+    restoreRecordFocus(closedId);
+  });
+  window.addEventListener('popstate', () => {
+    readLocationFilters();
+    render(false);
+    syncRecordFromLocation();
+    if (!dialog.open && returnFocusRecordId) {
+      restoreRecordFocus(returnFocusRecordId);
+      returnFocusRecordId = null;
+    }
   });
   render();
+  syncRecordFromLocation();
 })();

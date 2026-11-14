@@ -116,21 +116,46 @@
         },
         "bootcamps": 4
       }
-    }
-  ],
-  "pending_achievements": [
+    },
     {
       "record_id": "iarco-2026-senior",
-      "owner_reported_result": {
-        "placement": 6,
-        "category": "Senior",
+      "source_filename": "IARCO_2026_Finalist_Shaheen_Rahman_Dibya_5483.pdf",
+      "path": "assets/documents/iarco-2026-sixth-place.pdf",
+      "sha256": "adfcaf9ac451728cc5c1da64906d77e05bc573fff65e9593a200b901863dc614",
+      "page_count": 1,
+      "processing": "Original upright portrait PDF copied byte-for-byte. Certificate preview rendered from the PDF at 1500 px wide and thumbnail at 600 px wide; no retouching or cropping.",
+      "preview": "assets/certificates/iarco-2026-sixth-place.webp",
+      "thumbnail": "assets/certificates/iarco-2026-sixth-place-thumb.webp",
+      "certificate_facts": {
+        "recipient": "Shaheen Rahman Dibya",
+        "institution": "Islamic University of Technology, Bangladesh",
+        "competition": "International Academic Research Competition (IARCO)",
         "year": 2026,
-        "source": "Portfolio owner",
-        "placement_certificate_status": "pending"
+        "category": "Senior",
+        "certificate_type": "Official finalist placement certificate",
+        "placement": 6,
+        "selected_finalists": 34,
+        "total_score": {
+          "earned": 138,
+          "maximum": 200
+        },
+        "research_proposal_score": {
+          "earned": 65,
+          "maximum": 100
+        },
+        "presentation_score": {
+          "earned": 73,
+          "maximum": 100
+        },
+        "similarity_percent": 16,
+        "penalty": 0,
+        "date": "2026-11-01",
+        "certificate_id": "2026-s-jHPTx",
+        "research_title": "Certainty Without Accuracy: Effects of Generative-AI Confidence Expression on Delayed Unaided Circuit-Fault Diagnosis",
+        "printed_results_url": "https://iarco.org/2026-winners?category=Senior&rank=6"
       },
-      "certificate_status": "pending",
-      "sources": [],
-      "future_certificate": "This owner-reported result is reserved only in its separate homepage feature; it is excluded from the certificate archive until its placement certificate is provided. On receipt, create a distinct iarco-2026-senior archive record with that real placement certificate. The assessment/participation certificate belongs exclusively to iarco-2026-participation."
+      "relationship_to_participation": "Distinct placement certificate for the final competition result. The earlier assessment/bootcamp certificate remains exclusively with iarco-2026-participation."
     }
-  ]
+  ],
+  "pending_achievements": []
 }
