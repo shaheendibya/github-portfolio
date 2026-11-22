@@ -20,10 +20,10 @@ for path in ['index.html', 'style.css', 'app.js', 'archive.html', 'archive.css',
         assert response.status == 200 and response.read(), path
 for path in ['cv.pdf', 'lifelong-achievements.pdf', 'insignia-competition.pdf',
              'scanned-iut-certificates.pdf', 'iarco-2026-participation.pdf',
-             'iarco-2026-sixth-place.pdf']:
+             'iarco-2026-sixth-place.pdf', 'glrc-2026-semifinal.pdf']:
     with urlopen(Request(base + 'assets/documents/' + path, method='HEAD'), timeout=10) as response:
         assert response.status == 200 and response.headers.get_content_type() == 'application/pdf', path
-print('PASS: pages, assets, and six source PDF downloads')
+print('PASS: pages, assets, and seven source PDF downloads')
 
 with sync_playwright() as playwright:
     browser = playwright.chromium.launch(executable_path=args.chromium, headless=True, args=['--no-sandbox'])
@@ -245,14 +245,15 @@ with sync_playwright() as playwright:
 
     page.goto(base + 'archive.html', wait_until='networkidle')
     records = page.evaluate('window.portfolioAchievements')
-    assert len(records) == 34 and len({record['id'] for record in records}) == 34
+    assert len(records) == 35 and len({record['id'] for record in records}) == 35
     sources = {(source['url'], source['page']) for record in records for source in record['sources'] if source.get('url')}
     expected_sources = {('assets/documents/lifelong-achievements.pdf', number) for number in range(1, 30)}
     expected_sources |= {('assets/documents/insignia-competition.pdf', 1), ('assets/documents/cv.pdf', 1),
                          ('assets/documents/iarco-2026-participation.pdf', 1),
-                         ('assets/documents/iarco-2026-sixth-place.pdf', 1)}
+                         ('assets/documents/iarco-2026-sixth-place.pdf', 1),
+                         ('assets/documents/glrc-2026-semifinal.pdf', 1)}
     assert sources == expected_sources, 'Every page of the supplied documents must remain accessible'
-    expect(page.locator('.archive-card')).to_have_count(34)
+    expect(page.locator('.archive-card')).to_have_count(35)
     for category in {record['category'] for record in records}:
         page.locator(f'.archive-category[data-category="{category}"]').click()
         expect(page.locator('.archive-card')).to_have_count(sum(record['category'] == category for record in records))
@@ -277,16 +278,28 @@ with sync_playwright() as playwright:
     page.locator('#archive-clear').click()
     page.locator('#archive-kind').select_option('participation')
     expect(page.locator('.archive-card')).to_have_count(sum(record['kind'] == 'participation' for record in records))
+    page.locator('#archive-search').fill('GLRC')
+    expect(page.locator('.archive-card')).to_have_count(1)
+    expect(page.locator('.archive-card-title')).to_have_text('Global Logic & Reasoning Competition 2026')
+    thumbnail = page.locator('.archive-card-preview img')
+    thumbnail.scroll_into_view_if_needed()
+    thumbnail.evaluate('(image) => image.decode()')
+    page.locator('.archive-card-title').click()
+    expect(page.locator('#certificate-result')).to_have_text('Semifinal participation')
+    expect(page.locator('#certificate-note')).to_contain_text('2 November 2026')
+    expect(page.locator('#certificate-original')).to_have_attribute('href', 'assets/documents/glrc-2026-semifinal.pdf#page=1')
+    page.locator('#certificate-preview img').evaluate('(image) => image.decode()')
+    page.keyboard.press('Escape')
     page.locator('#archive-search').fill('this-record-does-not-exist')
     expect(page.locator('#archive-empty')).to_be_visible()
     page.locator('#archive-empty-clear').click()
-    expect(page.locator('.archive-card')).to_have_count(34)
+    expect(page.locator('.archive-card')).to_have_count(35)
     page.locator('#archive-search').fill('soccerbot')
     page.locator('.archive-card-title').click()
     expect(page.locator('#certificate-result')).to_have_text('Champion')
     expect(page.locator('#certificate-original')).to_have_attribute('href', 'assets/documents/cv.pdf#page=1')
     page.locator('.certificate-close').click()
-    print('PASS: all 34 records, all document pages, categories, year/type/search filters, certificate sources, empty state, and CV-only record')
+    print('PASS: all 35 records, all document pages, categories, filters, GLRC preview, source switching, empty state, and CV-only record')
 
     for path in ['index.html', 'archive.html']:
         for width in [1440, 1024, 768, 390, 320]:

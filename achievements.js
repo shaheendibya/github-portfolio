@@ -78,6 +78,26 @@ window.portfolioAchievements = [
     ]
   },
   {
+    "id": "glrc-2026-semifinal",
+    "title": "Global Logic & Reasoning Competition 2026",
+    "result": "Semifinal participation",
+    "year": 2026,
+    "description": "Participated in the semifinal round of the Global Logic & Reasoning Competition (GLRC), tackling problems in deductive reasoning, probabilistic judgment, critical reading, and modeling under supervised exam conditions.",
+    "category": "academics",
+    "kind": "participation",
+    "note": "Certificate issued 2 November 2026 · Certificate ID: PF-2026-103E9BC84C6B.",
+    "sources": [
+      {
+        "label": "GLRC 2026 semifinal participation certificate",
+        "tabLabel": "Participation certificate",
+        "url": "assets/documents/glrc-2026-semifinal.pdf",
+        "page": 1,
+        "image": "assets/certificates/glrc-2026-semifinal.webp",
+        "thumbnail": "assets/certificates/glrc-2026-semifinal-thumb.webp"
+      }
+    ]
+  },
+  {
     "id": "achievement-02",
     "title": "Integration Bee 2023 — Junior",
     "result": "Participation",

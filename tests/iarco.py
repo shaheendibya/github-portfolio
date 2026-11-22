@@ -72,7 +72,7 @@ with sync_playwright() as playwright:
     assert re.search(r'Senior', evidence(placement), re.I)
     assert re.search(r'138\s*(?:/|out of)\s*200', evidence(placement))
     assert not re.search(r'57\s*(?:/|out of)\s*70|bootcamp|pending', evidence(placement), re.I)
-    expect(page.locator('.archive-documents a')).to_have_count(6)
+    expect(page.locator('.archive-documents a')).to_have_count(7)
     for pdf in [participation_pdf, placement_pdf]:
         expect(page.locator('.archive-documents').locator(f'a[href="{pdf}"]')).to_have_count(1)
     page.locator('#archive-kind').select_option('award')

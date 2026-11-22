@@ -44,7 +44,7 @@ EV Longitudinal Dynamics remains a CV-based page with `featured: false` until it
 - `projects.js`: shared content for seven featured projects and two preserved legacy pages, including credits, resources, covers, galleries, optional hardware component/tool inventories, and launch instructions where available. Soccerbot and RC Racing retain `featured: true` and use `homepageSection: "achievements"` to place their cards in the competition section.
 - `app.js`: one shared renderer for the five selected-work cards and two competition-build cards, selected-work filters, mobile navigation, and email copying.
 - `project.html`, `project.js`, and `project.css`: individual project pages, report/repository actions, native downloads, launch-command copying, enlarged-image dialogs, and featured previous/next navigation.
-- `achievements.js`: the archive's structured content, including 34 distinct records and original-document references.
+- `achievements.js`: the archive's structured content, including 35 distinct records and original-document references.
 - `archive.js`, `archive.css`, and `archive-events.css`: search, category/year/type filters, accessible certificate previews, source switching, direct record URLs, and event-specific photo galleries with component/tool inventories.
 - `style.css`: shared visual design and portfolio layouts.
 - `polish.css`, `detail-polish.css`, and `polish.js`: shared visual refinements, optional dark mode, reading progress, and motion enhancements. These load after the original styles and scripts.
@@ -55,7 +55,7 @@ EV Longitudinal Dynamics remains a CV-based page with `featured: false` until it
 - `hardware.css`: optional build component tables and tool lists on project pages.
 - `docs/EVENT-PHOTOS.json`: photo selections, hashes, exact/near duplicates, event-mapping notes, and supplied hardware inventory context.
 - `docs/RECOGNITION-PHOTOS.json`: the four follow-up photographs, source and published hashes, certificate pairings, and award-date context.
-- `assets/documents/`: the original CV, 29-page achievement collection, Insignia certificate, complete 11-page IUT scan rotated upright, and the separate original IARCO 2026 participation and sixth-place certificates.
+- `assets/documents/`: the original CV, 29-page achievement collection, Insignia certificate, complete 11-page IUT scan rotated upright, original IARCO 2026 participation and sixth-place certificates, and the original GLRC 2026 semifinal participation certificate.
 - `assets/certificates/`: optimized WebP certificate previews and thumbnails. Originals remain available as PDFs.
 - `assets/projects/`: project reports, authentic previews, CAD and Proteus source files, and the original review DOCX with its browser reading PDF.
 - `docs/PROJECT-SOURCES.json`: repository and document provenance for the original five report-backed projects.
@@ -66,7 +66,7 @@ The championship achievement views preserve 14 images selected from the supplied
 
 The follow-up `picss.zip` supplied four original photographs. The UPC showcase pairs the team and faculty sponsor photograph with the 2025 silver-medal certificate. The separate IUT Excellence showcase includes the team photograph, individual award portrait, and university recognition certificate dated 13 May 2026 for the same UPC result. After education, the Class II scholarship showcase pairs the childhood award photograph with its certificate: second position for scholarship year 2012, received from Helmut Kutin (owner-supplied context). The certificate was issued on 4 May 2013; no photograph date is inferred. Photos and certificate previews open in grouped, keyboard-accessible galleries and remain full-size image links without JavaScript. Original PDF links retain their correct pages. See [recognition photograph provenance](docs/RECOGNITION-PHOTOS.json).
 
-The archive includes 34 records: 29 with supporting certificates and five CV-sourced distinctions/qualifications. Every certificate page is preserved. Three pairs document the same achievements and are grouped as multiple sources: the University Physics Competition, ACCELERATE RC Car, and BrandEdge. Participation, service, training, qualifications, and awards remain separately labeled. BrandEdge has no stated year and appears as undated.
+Of the 35 archive records, 30 have supporting certificates and five are CV-sourced distinctions or qualifications. Every certificate page is preserved. Three pairs document the same achievements and are grouped as multiple sources: the University Physics Competition, ACCELERATE RC Car, and BrandEdge. Participation, service, training, qualifications, and awards remain separately labeled. BrandEdge has no stated year and appears as undated.
 
 Ten certificate pages in `lifelong-achievements.pdf` now use the replacement scans supplied in `Scanned iut certificates.pdf`, rotated upright without cropping or retouching. Their full-size previews and thumbnails were regenerated from the updated PDF. The collection retains its 29-page order and existing links; the other 19 pages are unchanged. The uploaded scan also contained a duplicate CaseMotion certificate with a blank recipient line; the named copy was used instead. Exact source-page mappings and checksums are recorded in [certificate provenance](docs/CERTIFICATE-SOURCES.json).
 
@@ -98,7 +98,7 @@ The test checks:
 - Five selected-work cards across five filter categories, two competition-build cards, seven featured detail pages, whole-card links, featured previous/next navigation, and both preserved legacy URLs.
 - Actual covers and gallery images, report/repository hero actions, team credits, launch instructions, MATLAB-command copying, and local PDF/native-file availability.
 - Download attributes for `.dwg`, `.pdsprj`, and `.docx`; enlarged-image dialogs, source captions, previous/next controls, Escape closing, and focus restoration.
-- Resource filtering, missing-project states, email clipboard success/fallback, all 34 archive records and original document pages, archive filters, certificate source switching, and CV-only records.
+- Resource filtering, missing-project states, email clipboard success/fallback, all 35 archive records and original document pages, archive filters, certificate source switching, and CV-only records.
 - Portfolio/archive layouts at 1440, 1024, 768, 390, and 320px; all seven featured project pages at 1440 and 320px; mobile navigation and JavaScript/resource errors.
 
 Override `--base-url` or `--chromium` for another local setup, for example `python3 tests/smoke.py --base-url http://127.0.0.1:8002/`. These checks exercise the website in Chromium; they do not execute the MATLAB, Proteus, or AutoCAD projects. Playwright is a development check; the website itself needs no Python or browser automation dependencies.
